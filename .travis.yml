@@ -5,7 +5,8 @@ before_script:
   - php ./bin/composer.phar install
 script: 
   - mkdir -p build/logs
-  - ./vendor/bin/phpunit --coverage-clover ./build/logs/clover.xml ./src/tests/*
+  - ./vendor/bin/phpunit -c phpunit.xml.dist
+#  - ./vendor/bin/phpunit --coverage-clover ./build/logs/clover.xml ./src/tests/*
 
 after_script:
   - php ./vendor/bin/coveralls -v
