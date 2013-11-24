@@ -2,7 +2,8 @@
 
 # same as Ruby lib
 repo_token: AN4bjtCkzgdxEQutONuqMYAHw3Qz9nI4J # should be kept secret!
-service_name: travis-ci # travis-ci or travis-pro
+# service_name: travis-ci # travis-ci or travis-pro
+service_name: TRAVIS # modificado para ver se o travis aceita
 
 # for php-coveralls
 src_dir: src
