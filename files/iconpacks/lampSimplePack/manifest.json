@@ -1,0 +1,11 @@
+{
+	"packName"			 : "simpleLampPack",
+	"target"			 : "simpleLamp",
+	
+	"dictionary" :
+	{
+		"lampOn" : "lampOn.jpg",
+		"lampOff" : "lampOff.png"
+	}
+
+}

@@ -1,0 +1,102 @@
+{
+    "scheme"  : "basicDoor",
+    "version" : 2,
+    "type" : "door",
+    "configs" : [
+        { 
+            "name" : "id",
+            "path" : "/configs/id",
+            "type" : "integer",
+            "allowedValues" : [
+                {
+                    "type" : "range",
+                    "values" : [0,255]
+                }
+            ]
+        },
+        {
+            "name" : "name",
+            "path" : "/configs/name",
+            "type" : "string",
+            "readOnly" : true
+        },
+        {
+            "name" : "scheme",
+            "path" : "/configs/scheme",
+            "type" : "string",
+            "readOnly" : true
+        }
+    ],
+    "status"  : [
+        {
+            "name" : "aberta",
+            "path" : "/status/aberta",
+            "type" : "boolean",
+            "readOnly" : true
+        },
+        {
+            "name" : "travada",
+            "path" : "/status/travada",
+            "type" : "boolean",
+            "readOnly" : true
+        }
+    ],
+    "services" : [
+        {
+            "name"  : "travar",
+            "path"  : "/services/travar",
+            "returnType" : "boolean",
+            "text"  : "@travar",
+            "undoService" : "destravar",
+            "parameters" : []
+        },
+        {
+            "name"  : "destravar",
+            "path"  : "/services/destravar",
+            "returnType" : "boolean",
+            "text"  : "@destravar",
+            "undoService" : "travar",
+            "parameters" : []
+        }
+    ],
+    "conditions"  : [
+        {
+            "name"  : "doorOpen",  
+            "on"    : [ 
+                {   
+                    "status" :"aberta", 
+                    "value" : 1
+                }
+            ]
+        },
+        {
+            "name"  : "doorClosedUnlocked",
+            "on"    : [
+                {   
+                    "status" :"aberta", 
+                    "value" : 0
+                },
+                {   
+                    "status" :"travada", 
+                    "value" : 0
+                }
+            ]
+        },
+        {
+            "name"  : "doorClosedLocked",
+            "on"    : [
+                {   
+                    "status" :"aberta", 
+                    "value" : 0
+                },
+                {   
+                    "status" :"travada", 
+                    "value" : 1
+                }
+            ] 
+        }
+    ]
+}
+
+
+

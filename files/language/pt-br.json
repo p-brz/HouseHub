@@ -1,0 +1,48 @@
+{
+	"@personal_data" : "Estes dados são pessoais de um usuário em especial, portanto indisponíveis",	
+
+	"@user_needs_login" : "Você precisa estar logado para visualizar este conteúdo",
+	"@empty" 	: "Resposta nula",
+	
+	"@error"	: "Houveram erros durante a requisição",
+	"@success"	: "Operação concluída com sucesso!",
+
+	"@bad_parameters" : "Os parâmetros necessários para tal chamada estão incorretos",
+	"@bad_types" : "Os tipos dos parâmetros não são os tipos corretos",
+	"@forbidden" : "Você não tem permissão para realizar esta tarefa",
+	
+	"@gather_object_error_1" : "O objeto não foi especificado",
+	"@gather_object_error_2" : "Não encontramos o objeto requisitado",
+	
+	"@login_null_username" : "O campo 'usuário' não foi informado ao servidor corretamente",
+	"@login_null_password" : "O campo 'senha' não foi informado ao servidor corretamente",
+	"@login_wrong" : "Usuário não encontrado",
+
+	"@service_not_found" : "O serviço requisitado não faz parte deste objeto",
+	"@object_not_found" : "O objeto requisitado não foi encontrado",
+	"@object_is_offline" : "O objeto está marcado como offline. Reconecte-o para atualizar",
+	"@offline_object" : "O objeto requisitado não responde. Confira a conexão do mesmo",
+	
+	"@category_bad_parameters" : "Categoria não informada",
+	"@category_forbidden" : "Você não pode visualizar esta categoria",
+	"@category_not_found" : "Categoria não encontrada",
+
+	"@add_category_bad_parameters" : "Os campos enviados não são os necessários para a operação",
+	"@category_not_collection" : "Os objetos não são uma coleção",
+
+	"@category_not_found" : "Categoria inexistente",
+	"@category_update_error" : "Erro ao atualizar a categoria",
+
+	"@admin_exists" : "Já existe um usuário administrador e não podem haver dois",
+
+	"@no_file" : "Você não enviou nenhum arquivo para o servidor",
+	"@bad_image_type" : "Você deve informar uma imagem que tenha extensão 'png' ou 'jpg' ou 'jpeg', 'gif'",
+	"@big_file" : "O arquivo enviado é muito grande. Este não deve conter mais de 2MB",
+	"@image_name_too_long" : "O nome dado à imagem não deve conter mais de 20 caracteres",
+	"@cannot_save" : "Não foi possível salvar a imagem",
+
+	"@direct_validate_fail" : "Como este objeto faz parte de um conjunto, ele não pode ser autorizado diretamente",
+	"@login_already_taken" : "Este nome de usuário já está sendo utilizado. Escolha outro"
+	
+
+}

@@ -1,0 +1,34 @@
+{
+	"@personal_data" : "The requested data is not visible",	
+
+	"@user_needs_login" : "You need to be authenticated to access this information",
+	"@empty" 	: "There was no response",
+	
+	"@error"	: "We find some errors during this method calling",
+	"@success"	: "Operation has been successful!",
+
+	"@bad_parameters" : "The given parameters are not correct",
+	"@forbidden" : "You do not have rights to use this service",
+	
+	"@gather_object_error_1" : "Object not found",
+	"@gather_object_error_2" : "The request object were not found",
+	
+	"@login_null_username" : "The field 'user' was not given by the client",
+	"@login_null_password" : "The field 'password' was not given by the client",
+	"@login_wrong" : "User not found, verify your information",
+
+	"@service_not_found" : "This service does not belongs to the given object",
+	
+	"@category_bad_parameters" : "There is no category data",
+	"@category_forbidden" : "You cannot view this category",
+	"@category_not_found" : "The given category were not found",
+
+	"@add_category_bad_parameters" : "The given paramaters do not match the method's parameters",
+	"@category_not_collection" : "The given objects are not an array",
+
+	"@category_not_found" : "This category does not exists",
+	"@category_update_error" : "There was an error while updating the category. Try again later"
+
+	
+
+}

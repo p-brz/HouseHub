@@ -1,0 +1,10 @@
+{
+    "en"    : {
+    	"lampOn" : "On",
+        "lampOff" : "Off"
+    },
+    "pt-br" : {
+        "lampOn" : "Ligada",
+        "lampOff" : "Desligada"
+     }
+}

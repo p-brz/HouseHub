@@ -1,0 +1,12 @@
+{
+    "en"    : {
+    	"doorOpen" : "Open door",
+        "doorClosedUnlocked" : "Closed door",
+        "doorClosedLocked" : "Locked door"
+    },
+    "pt-br" : {
+        "doorOpen" : "Porta aberta",
+        "doorClosedUnlocked" : "Porta fechada",
+        "doorClosedLocked" : "Porta trancada"
+     }
+}

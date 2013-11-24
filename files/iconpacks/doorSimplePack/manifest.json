@@ -1,0 +1,12 @@
+{
+	"packName"			 : "simpleDoorPack",
+	"target"			 : "simpleDoor",
+	
+	"dictionary" :
+	{
+		"doorOpen" 			 : "openDoorIcon.png",
+		"doorClosedUnlocked" : "closedUnlocked.png",
+		"doorClosedLocked"	 : "closedLocked.png"
+	}
+
+}

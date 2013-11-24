@@ -1,0 +1,79 @@
+{
+    "scheme"  : "basicLamp",
+    "version" : 2,
+    "type" : "lamp",
+    "configs" : [
+        { 
+            "name" : "id",
+            "path" : "/configs/id",
+            "type" : "integer",
+            "allowedValues" : [
+                {
+                    "type" : "range",
+                    "values" : [0,255]
+                }
+            ]
+        },
+        {
+            "name" : "name",
+            "path" : "/configs/name",
+            "type" : "string",
+            "readOnly" : true
+        },
+        {
+            "name" : "scheme",
+            "path" : "/configs/scheme",
+            "type" : "string",
+            "readOnly" : true
+        }
+    ],
+    "status"  : [
+        {
+            "name" : "ligada",
+            "path" : "/status/ligada",
+            "type" : "boolean",
+            "readOnly" : true
+        }
+    ],
+    "services" : [
+        {
+            "name"  : "ligar",
+            "path"  : "/services/travar",
+            "returnType" : "boolean",
+            "text"  : "@travar",
+            "undoService" : "destravar",
+            "parameters" : []
+        },
+        {
+            "name"  : "destravar",
+            "path"  : "/services/destravar",
+            "returnType" : "boolean",
+            "text"  : "@destravar",
+            "undoService" : "travar",
+            "parameters" : []
+        }
+    ],
+    "conditions"  : [
+        {
+            "name"  : "lampOn",
+            "on"    : [ 
+                {   
+                    "status" :"ligada", 
+                    "value" : 1
+                }
+            ]
+        },
+        {
+            "name"  : "lampOff",
+            "on"    : [
+                {   
+                    "status" :"ligada", 
+                    "value" : 0
+                }
+            ]
+        }
+    ]
+}
+
+
+
