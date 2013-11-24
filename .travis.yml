@@ -4,4 +4,8 @@ php:
 before_script:
   - php ./bin/composer.phar install
 script: 
-  - ./vendor/bin/phpunit ./src/tests/*
+  - mkdir -p build/logs
+  - ./vendor/bin/phpunit --coverage-clover ./build/logs/clover.xml ./src/tests/*
+
+after_script:
+  - php ./vendor/bin/coveralls -v
