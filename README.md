@@ -3,6 +3,10 @@
 ##    Sistema de controle de ambientes      ##
 ##############################################
 
+[![Build Status](https://travis-ci.org/souzabrizolara/HouseHub.png?branch=master)](https://travis-ci.org/souzabrizolara/HouseHub)
+[![Coverage Status](https://coveralls.io/repos/souzabrizolara/HouseHub/badge.png?branch=master)](https://coveralls.io/r/souzabrizolara/HouseHub?branch=master)
+
+
 1. Instalação
 
 Enquanto nós trabalhamos em uma página para instalação automática, você
