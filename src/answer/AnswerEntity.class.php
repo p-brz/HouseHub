@@ -10,6 +10,7 @@ class AnswerEntity{
 	private $message;
 	private $content;
 	
+        
 	public function __construct(){
 		$this->status = 0;
 		$this->message = 'empty';
@@ -23,7 +24,7 @@ class AnswerEntity{
 	public function setStatus($x) { $this->status = $x; } 
 	public function setMessage($x) { $this->message = $x; }
 	public function setContent($x) { $this->content = $x; }
-	 
+	
 	public function addContent($x) {
 		$this->content->addElement($x);
 	} 

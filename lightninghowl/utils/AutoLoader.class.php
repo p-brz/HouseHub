@@ -15,7 +15,10 @@ class AutoLoader{
 		
 		if(is_null(self::$classAssocArray)){
 			$path = self::fixPath(self::$manifestLocation);
-			$configText = file_get_contents($_SERVER['DOCUMENT_ROOT'].DIRECTORY_SEPARATOR.$path.DIRECTORY_SEPARATOR.'classManifest.json');
+                        $serverRoot = 'C:/xampp/htdocs';
+                        //$serverRoot = $_SERVER['DOCUMENT_ROOT'];
+                        $manifestLocation = $serverRoot.DIRECTORY_SEPARATOR.$path.DIRECTORY_SEPARATOR.'classManifest.json';
+			$configText = file_get_contents($manifestLocation);
 			self::$classAssocArray = json_decode($configText, true);
 		}
 		$classPath = isset(self::$classAssocArray[$className]) ? self::$classAssocArray[$className] : null;
