@@ -2,7 +2,7 @@
 
 namespace lightninghowl\utils;
 
-require_once \realpath(__DIR__ . '..\\..\\..') . DIRECTORY_SEPARATOR . 'HubConf.class.php';
+require_once __DIR__ . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'HubConf.class.php';
 
 class AutoLoader {
 
