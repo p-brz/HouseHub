@@ -128,6 +128,7 @@ function write_ini_file($assoc_arr, $path, $has_sections=FALSE) {
     if ($has_sections) { 
         foreach ($assoc_arr as $key=>$elem) { 
             $content .= "[".$key."]\n"; 
+            //TODO: extrair método (códigos duplicados)
             foreach ($elem as $key2=>$elem2) { 
                 if(is_array($elem2)) 
                 { 
@@ -136,8 +137,11 @@ function write_ini_file($assoc_arr, $path, $has_sections=FALSE) {
                         $content .= $key2."[] = \"".$elem2[$i]."\"\n"; 
                     } 
                 } 
-                else if($elem2=="") $content .= $key2." = \n"; 
-                else $content .= $key2." = \"".$elem2."\"\n"; 
+                else if ($elem2 == "") {
+                    $content .= $key2 . " = \n";
+                } else {
+                    $content .= $key2 . " = \"" . $elem2 . "\"\n";
+                }
             } 
         } 
     } 
@@ -150,8 +154,11 @@ function write_ini_file($assoc_arr, $path, $has_sections=FALSE) {
                     $content .= $key2."[] = \"".$elem[$i]."\"\n"; 
                 } 
             } 
-            else if($elem=="") $content .= $key2." = \n"; 
-            else $content .= $key2." = \"".$elem."\"\n"; 
+            else if ($elem == "") {
+                $content .= $key2 . " = \n";
+            } else {
+                $content .= $key2 . " = \"" . $elem . "\"\n";
+            }
         } 
     } 
 

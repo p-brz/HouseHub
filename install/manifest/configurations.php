@@ -5,8 +5,11 @@ function fixSeparator($path){
 
 function manifestDetails(){
 	// Definindo o prefixo de instalação baseado no root do servidor
-	$prefix = $_SERVER['DOCUMENT_ROOT'].DIRECTORY_SEPARATOR;
+	$prefix = filter_input(INPUT_SERVER, 'DOCUMENT_ROOT').DIRECTORY_SEPARATOR;
 	
+        echo "DIR: " . __DIR__ . "\n";
+        echo "prefix: " . $prefix . "\n";
+        
 	// Carregando as diretrizes
 	$d = DIRECTORY_SEPARATOR;
 	$hubFile = dirname(__FILE__).$d.'..'.$d.'..'.$d.'hub.ini';
@@ -17,6 +20,12 @@ function manifestDetails(){
 		$iniFile = parse_ini_file($hubFile);
 		
 		$projectRoot = $prefix.fixSeparator($iniFile['projectRoot']);
+                
+                
+                echo "Project Root = ".$projectRoot . "\n";
+                
+                
+                
 		$output = $projectRoot.$d.($iniFile['manifestPath']);
 		
 		$codePacks = $directives['contents'];

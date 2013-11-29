@@ -40,8 +40,11 @@ function strEndsWith($haystack, $needle)
     return $needle === "" || substr($haystack, -strlen($needle)) === $needle;
 }
 
-function launchClassManifest($contents, $output){
+function launchClassManifest($contents, $output){    
 	$manifestLocation = $output.DIRECTORY_SEPARATOR.'classManifest.json';
+        
+        echo "output: ".$output . " manifestLocation " . $manifestLocation . "\n";
+        
 	file_put_contents($manifestLocation, $contents);
 }
 
