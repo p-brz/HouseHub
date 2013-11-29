@@ -2,20 +2,23 @@
 
 namespace lightninghowl\utils;
 
+require_once \realpath(__DIR__ . '..\\..\\..') . DIRECTORY_SEPARATOR . 'HubConf.class.php';
+
 class AutoLoader {
+
     private static $classAssocArray;
-    private static $manifestLocation;
 
     public static function autoLoad($className) {
-        if (is_null(self::$manifestLocation)) {
-            $iniFile = parse_ini_file(self::fixPath(dirname(__FILE__) . '/../../hub.ini'));
-            self::$manifestLocation = self::fixPath($iniFile['projectRoot'] . '/' . $iniFile['manifestPath']);
-        }
+        $configurations = \HubConf::getConfigurations();
+        $projectRoot = $configurations['project_root'];
+
+        $manifestLocation = '';
+        $manifestLocation .= $projectRoot;
+        $manifestLocation .= DIRECTORY_SEPARATOR;
+        $manifestLocation .= $configurations['manifest_path'];
 
         if (is_null(self::$classAssocArray)) {
-            $path = self::fixPath(self::$manifestLocation);
-            $serverRoot = $_SERVER['DOCUMENT_ROOT'];
-            $manifestLocation = $serverRoot . DIRECTORY_SEPARATOR . $path . DIRECTORY_SEPARATOR . 'classManifest.json';
+            $manifestLocation = self::fixPath($manifestLocation) . DIRECTORY_SEPARATOR . 'classManifest.json';
             $configText = file_get_contents($manifestLocation);
             self::$classAssocArray = json_decode($configText, true);
         }

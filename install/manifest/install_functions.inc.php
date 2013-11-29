@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <?php
 
 function declareSystem(&$jsonManifest, $directory, $packageName) {

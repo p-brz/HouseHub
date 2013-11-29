@@ -16,6 +16,6 @@ class HubConf {
     private function __construct() {}
     
     public static function getConfigurations(){
-        return DefaultConfigurations::$configurations;
+        return self::$configurations;
     }
 }
