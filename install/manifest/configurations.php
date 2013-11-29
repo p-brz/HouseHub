@@ -35,7 +35,3 @@ function manifestDetails() {
         exit(0);
     }
 }
-
-function findDocumentRoot(){
-    
-}
