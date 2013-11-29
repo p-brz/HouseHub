@@ -21,4 +21,3 @@ function deleteDir($dirPath) {
     	echo '<br/>';
     }
 }
-?>

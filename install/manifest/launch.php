@@ -5,4 +5,3 @@ require_once("install_functions.inc.php");
 
 $classes = launch();
 dumpClasses($classes);
-?>

@@ -25,5 +25,3 @@ interface DbArgument{
 	 */
 	public function getPassword();
 }
-
-?>

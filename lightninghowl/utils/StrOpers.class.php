@@ -21,21 +21,12 @@ final class StrOpers{
 	}
 	
 	public static function strFixPath($path){
-		$retVal = $path;
-		
-		$retVal = str_replace('\\', DIRECTORY_SEPARATOR, $retVal);
-		$retVal = str_replace('/', DIRECTORY_SEPARATOR, $retVal);
-		
+		$retVal = str_replace('\\', DIRECTORY_SEPARATOR, str_replace('/', DIRECTORY_SEPARATOR, $path));
 		return $retVal;
 	}
 	
 	public static function strWebPath($path){
-		$retVal = $path;
-		
-		$retVal = str_replace('\\', DIRECTORY_SEPARATOR, $retVal);
-		
+		$retVal = str_replace('\\', DIRECTORY_SEPARATOR, $path);
 		return $retVal;
 	}
 }
-
-?>

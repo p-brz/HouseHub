@@ -1,11 +1,10 @@
 <?php
-
 namespace lightninghowl\database\arguments;
 
 /**
  * Set up a connection based on a MySQL database
  * 
- * @author Alison Bento "Lykaios" <alisonlks@outlook.com>
+ * @author Alison Bento "Lykaios"
  * @version 1.0.0
  * 
  */

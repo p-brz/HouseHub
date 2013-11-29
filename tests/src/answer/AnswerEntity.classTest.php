@@ -33,7 +33,6 @@ class AnswerEntityTest extends \PHPUnit_Framework_TestCase {
     
     /**
      * @covers househub\answer\AnswerEntity::getStatus
-     * @todo   Implement testGetStatus().
      */
     public function testGetStatus() {
         $objStatus = $this->object->getStatus();
@@ -42,65 +41,54 @@ class AnswerEntityTest extends \PHPUnit_Framework_TestCase {
 
     /**
      * @covers househub\answer\AnswerEntity::getMessage
-     * @todo   Implement testGetMessage().
      */
     public function testGetMessage() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
+        $objMessage = $this->object->getMessage();
+        $this->assertEquals('Message', $objMessage);
     }
 
     /**
      * @covers househub\answer\AnswerEntity::getContent
-     * @todo   Implement testGetContent().
      */
     public function testGetContent() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
+        $content = $this->object->getContent();
+        $this->assertEquals(array(), $content);
     }
 
     /**
      * @covers househub\answer\AnswerEntity::setStatus
-     * @todo   Implement testSetStatus().
      */
     public function testSetStatus() {
-        
+        $this->object->setStatus(0);
+        $this->assertEquals($this->object->getStatus(), 0);
     }
 
     /**
      * @covers househub\answer\AnswerEntity::setMessage
-     * @todo   Implement testSetMessage().
      */
     public function testSetMessage() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
+        $this->object->setMessage('newMessage');
+        $this->assertEquals('newMessage', $this->object->getMessage());
     }
 
     /**
      * @covers househub\answer\AnswerEntity::setContent
-     * @todo   Implement testSetContent().
      */
     public function testSetContent() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
+        $content = array('foo', 'bar');
+        $this->object->setContent($content);
+        $this->assertEquals($this->object->getContent(), $content);
     }
 
     /**
      * @covers househub\answer\AnswerEntity::addContent
-     * @todo   Implement testAddContent().
      */
     public function testAddContent() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
+        $content = array();
+        $this->object->setContent($content);
+        $content[] = 'foo';
+        $this->object->addContent('foo');
+        $this->assertEquals($this->object->getContent(), $content);
     }
 
 }

@@ -2,7 +2,7 @@
 
 namespace lightninghowl\utils\date;
 
-class DMAFormat implements DateMask{
+class DMYFormat implements DateMask{
 	
 	private $date;
 	

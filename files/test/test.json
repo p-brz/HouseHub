@@ -1,0 +1,7 @@
+{
+    "status": 1,
+    "message": "test",
+    "content": {
+        "foo": "bar"
+    }
+}

@@ -16,7 +16,7 @@ use PDO;
  * @static
  */
 final class DbDriver{
-	private static $connection;
+	private static $connection = null;
 	
 	private function __construct(){}
 	
@@ -27,9 +27,11 @@ final class DbDriver{
 	 * @param DbArgument $argument The argument to open the connection
 	 */
 	public static function open(DbArgument $argument){
-		$conn = new PDO($argument->getDSN(), $argument->getLogin(), $argument->getPassword());
-		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		return $conn;
+            if(is_null(DbDriver::$connection)){
+                DbDriver::$connection = new PDO($argument->getDSN(), $argument->getLogin(), $argument->getPassword());
+                DbDriver::$connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            }
+            return DbDriver::$connection;
 	}
 }
 

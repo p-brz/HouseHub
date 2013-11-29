@@ -3,7 +3,7 @@
 <phpunit colors="true">
     <testsuites>
         <testsuite name="HouseHub component test suite">
-            <directory>./src/tests/</directory>
+            <directory>./tests</directory>
         </testsuite>
     </testsuites>
 

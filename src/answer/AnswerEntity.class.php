@@ -26,7 +26,11 @@ class AnswerEntity{
 	public function setContent($x) { $this->content = $x; }
 	
 	public function addContent($x) {
-		$this->content->addElement($x);
+            if(is_array($this->content)){
+                $this->content[] = $x;
+            }else{
+                $this->content->addElement($x);
+            }
 	} 
 	
 }
