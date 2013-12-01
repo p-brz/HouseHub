@@ -1,5 +1,8 @@
 <?php
 
+$d = DIRECTORY_SEPARATOR;
+require_once __DIR__ . $d . '..'. $d . '..'. $d . 'HubConf.class.php';
+
 function fixSeparator($path) {
     return str_replace('\\', DIRECTORY_SEPARATOR, str_replace('/', DIRECTORY_SEPARATOR, $path));
 }
@@ -11,7 +14,13 @@ function fixSeparator($path) {
 function manifestDetails() {
     // Definindo o prefixo de instalação baseado no root do servidor
     if(php_sapi_name() == 'cli'){
-        //TODO
+        $configs = HubConf::getConfigurations(); 
+        $prefix = realpath($configs['project_root']. DIRECTORY_SEPARATOR . '..' ).DIRECTORY_SEPARATOR;
+        
+        
+//        echo $prefix;
+        
+        
     }else{
         $prefix = filter_input(INPUT_SERVER, 'DOCUMENT_ROOT') . DIRECTORY_SEPARATOR;
     }

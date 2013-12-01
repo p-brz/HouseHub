@@ -59,3 +59,17 @@ function dumpClasses($result, $spaceString = '') {
         echo $spaceString . '&nbsp;&nbsp;+ ' . $result . '<br/>';
     }
 }
+function dumpClassesCli($result, $spaceString = ' ') {
+    if (is_array($result)) {
+        echo "\n";
+        foreach ($result as $key => $entity) {
+
+            if (is_string($key))
+                echo $spaceString . '* ' . $key; //.'<br/>';
+            dumpClassesCli($entity, $spaceString . '  ' );
+        }
+//        echo "\n";
+    }else if (is_string($result)) {
+        echo $spaceString . '  + ' . $result . "\n";
+    }
+}
