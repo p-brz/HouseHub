@@ -11,14 +11,16 @@ function declareSystem(&$jsonManifest, $directory, $packageName) {
                 if (empty($packageName)) {
                     $package = $scan;
                 } else {
-                    $package = $packageName . DIRECTORY_SEPARATOR . $scan;
+//                    $package = $packageName . DIRECTORY_SEPARATOR . $scan;
+                    $package = $packageName . '\\' . $scan;
                 }
                 $classArray[$scan] = declareSystem($jsonManifest, realpath($evaluablePath), $package);
             } else if (is_file($evaluablePath)) {
                 if (strEndsWith($scan, '.class.php') || strEndsWith($scan, 'interface.php')) {
                     $pureLength = strlen($scan) - strlen('.class.php');
                     $className = substr($scan, 0, $pureLength);
-                    $jsonManifest[$packageName . DIRECTORY_SEPARATOR . $className] = $evaluablePath;
+//                    $jsonManifest[$packageName . DIRECTORY_SEPARATOR . $className] = $evaluablePath;
+                    $jsonManifest[$packageName . '\\' . $className] = $evaluablePath;
                     if (is_array($classArray)) {
                         $classArray[] = $className;
                     }

@@ -11,7 +11,7 @@ function fixSeparator($path) {
 function manifestDetails() {
     // Definindo o prefixo de instalação baseado no root do servidor
     if(php_sapi_name() == 'cli'){
-        
+        //TODO
     }else{
         $prefix = filter_input(INPUT_SERVER, 'DOCUMENT_ROOT') . DIRECTORY_SEPARATOR;
     }
