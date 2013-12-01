@@ -24,7 +24,7 @@ ini_set('display_errors', '1');
 
 
 if(php_sapi_name() == 'cli'){
-    $options = array("db-user:", "db-pass:","db-name:","adm_user:","adm_pass:","db-port::");
+    $options = array("db-user:", "db-pass::","db-name:","adm_user:","adm_pass:","db-port::");
     $args = getopt("", $options);
     install($args);
 }
@@ -36,7 +36,7 @@ else{
 function install($args){
         // var_dump($args);   
     $rootUser = $args['db-user'];
-    $rootPass = $args['db-pass'];
+    $rootPass = (isset($args['db-pass']) ? $args['db-pass'] : "");
     $database = $args['db-name'];
 
     $adminUser = $args['adm_user'];
