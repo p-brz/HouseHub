@@ -22,7 +22,8 @@ ini_set('display_errors', '1');
 
 
 
-
+echo 'php_sapi_name: ' . php_sapi_name();
+    
 if(php_sapi_name() == 'cli'){
     $options = array("db-user:", "db-pass::","db-name:","adm_user:","adm_pass:","db-port::");
     $args = getopt("", $options);
@@ -59,18 +60,20 @@ function install($args){
             createUser($database,$pdo);
             createDatabaseStructure($database, $pdo);
 
-            echo "Saving the access file \n";
+//            echo "Saving the access file \n";
             saveAccessFile($rootUser,$rootPass,$database,$port);
             updateSetupFile($database);
 
             // Reload the resources
             SystemReader::getInstance(true);
 
-            echo "Adding the admin user \n";
+//            echo "Adding the admin user \n";
             $createdAdmin = createAdminUser($adminUser,$adminPass);
 
             if($createdAdmin){
-                header("Location: ../../install_complete.php");	
+//                header("Location: ../../install_complete.php");
+                $d = DIRECTORY_SEPARATOR;
+                include_once __DIR__ . $d .'..'. $d.'..'. $d . 'install_complete.php';
             }else{
                 echo "Cannot hire admin \n";
             }
@@ -80,7 +83,7 @@ function install($args){
 }
 
 function updateSetupFile($database){
-    echo "Updating the file reference\n";
+//    echo "Updating the file reference\n";
     $d = DIRECTORY_SEPARATOR;
 //    $projectRoot = $_SERVER['DOCUMENT_ROOT'].$d.$sysRes->translate(SystemReader::INDEX_ROOTPATH);
     $configs = HubConf::getConfigurations();
@@ -103,7 +106,7 @@ function createDatabaseStructure($database, $pdo){
 }
 
 function createAdminUser($adminUser, $adminPass){
-    echo "Create User Admin \n";
+//    echo "Create User Admin \n";
     $driver = DatabaseConnector::getDriver();
     
     var_dump($driver);
@@ -121,7 +124,6 @@ function createAdminUser($adminUser, $adminPass){
 }
 
 function saveUser($user, $userDAO, $driver){
-    echo "AFF\n";
     $userId = $userDAO->insert($user);
     $update = new UpdateQuery();
     $update->setEntity(UserStructureTable::TABLE_NAME);
