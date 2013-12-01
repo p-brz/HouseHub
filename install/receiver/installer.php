@@ -1,15 +1,5 @@
 <?php
 
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-
-?>
-<?php
-
 use lightninghowl\utils\sql\SqlCriteria;
 use lightninghowl\utils\sql\SqlFilter;
 use househub\users\tables\UserStructureTable;
@@ -36,73 +26,61 @@ ini_set('display_errors', '1');
 if(php_sapi_name() == 'cli'){
     $options = array("db-user:", "db-pass:","db-name:","adm_user:","adm_pass:","db-port::");
     $args = getopt("", $options);
+    install($args);
 }
 else{
-    $args = $_POST;
-//    $rootUser = $_POST['mysql_user'];
-//    $rootPass = $_POST['mysql_pass'];
-//    $database = $_POST['mysql_database'];
-//
-//    $adminUser = $_POST['admin_user'];
-//    $adminPass = $_POST['admin_pass'];
-//
-//    if(isset($_POST['mysql_port'])){
-//            $port = empty($_POST['mysql_port']) ? 3306 : $_POST['mysql_port'];	
-//    }else{
-//            $port = 3306;
-//    }
+    //$args = $_POST;
+    install($_POST);
 }
 
-// var_dump($args);   
-$rootUser = $args['db-user'];
-$rootPass = $args['db-pass'];
-$database = $args['db-name'];
+function install($args){
+        // var_dump($args);   
+    $rootUser = $args['db-user'];
+    $rootPass = $args['db-pass'];
+    $database = $args['db-name'];
 
-$adminUser = $args['user'];
-$adminPass = $args['pass'];
+    $adminUser = $args['adm_user'];
+    $adminPass = $args['adm_pass'];
 
-if(isset($args['db-port']) && !empty($args['db-port'])){
-        $port =  $args['db-port'];	
-}else{
-        $port = 3306;
+    if(isset($args['db-port']) && !empty($args['db-port'])){
+            $port =  $args['db-port'];	
+    }else{
+            $port = 3306;
+    }
+
+    // The DSN
+    $dsn = "mysql:host=localhost;port=$port";
+
+
+    try{
+            $pdo = new PDO($dsn, $rootUser, $rootPass);
+
+            createDatabase($database,$pdo);
+            createUser($database,$pdo);
+            createDatabaseStructure($database, $pdo);
+
+            echo "Saving the access file \n";
+            saveAccessFile($rootUser,$rootPass,$database,$port);
+            updateSetupFile($database);
+
+            // Reload the resources
+            SystemReader::getInstance(true);
+
+            echo "Adding the admin user \n";
+            $createdAdmin = createAdminUser($adminUser,$adminPass);
+
+            if($createdAdmin){
+                header("Location: ../../install_complete.php");	
+            }else{
+                echo "Cannot hire admin \n";
+            }
+    }catch(Exception $e){
+            echo $e->getMessage();
+    }
 }
 
-// The DSN
-$dsn = "mysql:host=localhost;port=$port";
-
-
-try{
-	$pdo = new PDO($dsn, $rootUser, $rootPass);
-
-	createDatabase($database,$pdo);
-        
-	createUser($database,$pdo);
-
-        createDatabaseStructure($database, $pdo);
-
-	echo 'Saving the access file <br/>';
-	saveAccessFile();
-        	
-	updateSetupFile();
-	
-	// Reload the resources
-	SystemReader::getInstance(true);
-
-	echo 'Adding the admin user <br/>';
-        $createdAdmin = createAdminUser();
-        
-	if($createdAdmin){
-            header("Location: ../../install_complete.php");
-		
-	}else{
-            echo 'Cannot hire admin';
-	}
-}catch(Exception $e){
-	echo $e->getMessage();
-}
-
-function updateSetupFile(){
-    echo 'Updating the file reference <br/>';
+function updateSetupFile($database){
+    echo "Updating the file reference\n";
     $d = DIRECTORY_SEPARATOR;
 //    $projectRoot = $_SERVER['DOCUMENT_ROOT'].$d.$sysRes->translate(SystemReader::INDEX_ROOTPATH);
     $configs = HubConf::getConfigurations();
@@ -116,6 +94,7 @@ function updateSetupFile(){
 
 function createDatabaseStructure($database, $pdo){
     // The database script
+    $d = DIRECTORY_SEPARATOR;
     $file = dirname(__FILE__)."{$d}..{$d}database{$d}database_structure.sql";
     $sqlInstruction = file_get_contents($file);
 
@@ -124,8 +103,13 @@ function createDatabaseStructure($database, $pdo){
 }
 
 function createAdminUser($adminUser, $adminPass){
+    echo "Create User Admin \n";
     $driver = DatabaseConnector::getDriver();
+    
+    var_dump($driver);
+    
     $userDAO = new UserStructureDAO($driver);
+    
     $user = new UserStructure();
     $user->setName('Administrator');
     $user->setNickname('Administrator');
@@ -133,11 +117,11 @@ function createAdminUser($adminUser, $adminPass){
     $user->setUsername($adminUser);
     $user->setPassword($adminPass);
     
-    return saveUser();
+    return saveUser($user, $userDAO, $driver);
 }
 
-function saveUser($user, $userDAO){
-    echo 'AFF';
+function saveUser($user, $userDAO, $driver){
+    echo "AFF\n";
     $userId = $userDAO->insert($user);
     $update = new UpdateQuery();
     $update->setEntity(UserStructureTable::TABLE_NAME);
@@ -154,6 +138,8 @@ function saveUser($user, $userDAO){
 }
 
 function saveAccessFile($user, $pass, $database, $port){
+    $d = DIRECTORY_SEPARATOR;
+    
     $json = new JsonObject();
     $json->addElement(new JsonData("db_host", 'localhost'));
     $json->addElement(new JsonData("db_user", $user));
@@ -163,9 +149,15 @@ function saveAccessFile($user, $pass, $database, $port){
     $json->addElement(new JsonData("db_type", 'mysql'));
 
     $sysRes = SystemReader::getInstance();
-    $savePath = $sysRes->translate(SystemReader::INDEX_ROOTPATH).$d.$sysRes->translate(SystemReader::INDEX_DATABASE).$d.$database.'.json';
-    $savePath = StrOpers::strFixPath($_SERVER['DOCUMENT_ROOT'].$d.$savePath);
-
+    
+    $configs = HubConf::getConfigurations();
+    $projectRoot = $configs['project_root'];
+    
+    $savePath = $sysRes->translate(SystemReader::INDEX_DATABASE).$d.$database.'.json';
+        
+    $savePath = StrOpers::strFixPath($projectRoot.$d.$savePath);
+    
+    
     $content = $json->valueToString();
         
     file_put_contents($savePath, $content);

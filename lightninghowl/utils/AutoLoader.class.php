@@ -12,7 +12,6 @@ class AutoLoader {
 
     
     public static function autoLoad($className) {
-        echo "AutoLoader::autoLoad(".$className.")\n";
         
         
         $configurations = \HubConf::getConfigurations();
@@ -29,14 +28,14 @@ class AutoLoader {
             $configText = file_get_contents($manifestLocation);
             self::$classAssocArray = json_decode($configText, true);
             
-            var_dump(self::$classAssocArray);
+//            var_dump(self::$classAssocArray);
         }
         $classPath = isset(self::$classAssocArray[$className]) ? self::$classAssocArray[$className] : null;
 
         if (!is_null($classPath)) {
             require_once($classPath);
         } else {
-            echo 'Class ' . $className . ' not found';
+//            echo 'Class ' . $className . ' not found';
             throw  new Exception("Not found Class " . $className);
         }
     }

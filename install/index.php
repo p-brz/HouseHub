@@ -31,7 +31,7 @@
         create a dedicated user for it.
       </p>
       <!--<form class="form-signin" action="receiver/receive_install.php" method="POST">-->
-      <form class="form-signin" action="receiver/Installer.php" method="POST">
+      <form class="form-signin" action="receiver/installer.php" method="POST">
         <h3 class="form-signin-heading">Root - MySQL Authentication</h3>
         <input type="text" name="db-user" class="form-control" placeholder="MySQL User" autofocus>
         <input type="password" name="db-pass" class="form-control" placeholder="MySQL Password">
