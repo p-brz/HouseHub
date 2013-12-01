@@ -53,63 +53,75 @@ else{
 //    }
 }
 
- var_dump($args);   
-//$rootUser = $args['db-user'];
-//$rootPass = $args['db-pass'];
-//$database = $args['db-name'];
-//
-//$adminUser = $args['user'];
-//$adminPass = $args['pass'];
-//
-//if(isset($args['db-port']) && !empty($args['db-port'])){
-//        $port =  $args['db-port'];	
-//}else{
-//        $port = 3306;
-//}
-//
-//// The DSN
-//$dsn = "mysql:host=localhost;port=$port";
-//
-//
-//try{
-//	$pdo = new PDO($dsn, $rootUser, $rootPass);
-//
-//	createDatabase($database,$pdo);
-//        
-//	createUser($database,$pdo);
-//
-//        // The database script
-//        $file = dirname(__FILE__)."{$d}..{$d}database{$d}database_structure.sql";
-//        $sqlInstruction = file_get_contents($file);
-//
-//	$pdo->exec("USE {$database}");
-//	$pdo->exec($sqlInstruction);
-//
-//	echo 'Saving the access file <br/>';
-//	saveAccessFile();
-//        	
-//	echo 'Updating the file reference <br/>';
-//	$setupFile = $_SERVER['DOCUMENT_ROOT'].$d.$sysRes->translate(SystemReader::INDEX_ROOTPATH).$d.'setup.ini';
-//	$setup = parse_ini_file(StrOpers::strFixPath($setupFile));
-//	$setup[SystemReader::INDEX_DBCONF] = $database.'.json';
-//
-//	write_ini_file($setup, $setupFile);
-//	
-//	// Reload the resources
-//	SystemReader::getInstance(true);
-//
-//	echo 'Adding the admin user <br/>';
-//        $createdAdmin = createAdminUser();
-//        
-//	if($createdAdmin){
-//		header("Location: ../../install_complete.php");
-//		
-//	}else{
-//		echo 'Cannot hire admin';
-//	}
-//}catch(Exception $e){
-//	echo $e->getMessage();
-//}
+// var_dump($args);   
+$rootUser = $args['db-user'];
+$rootPass = $args['db-pass'];
+$database = $args['db-name'];
+
+$adminUser = $args['user'];
+$adminPass = $args['pass'];
+
+if(isset($args['db-port']) && !empty($args['db-port'])){
+        $port =  $args['db-port'];	
+}else{
+        $port = 3306;
+}
+
+// The DSN
+$dsn = "mysql:host=localhost;port=$port";
+
+
+try{
+	$pdo = new PDO($dsn, $rootUser, $rootPass);
+
+	createDatabase($database,$pdo);
+        
+	createUser($database,$pdo);
+
+        createDatabaseStructure($database, $pdo);
+
+	echo 'Saving the access file <br/>';
+	saveAccessFile();
+        	
+	updateSetupFile();
+	
+	// Reload the resources
+	SystemReader::getInstance(true);
+
+	echo 'Adding the admin user <br/>';
+        $createdAdmin = createAdminUser();
+        
+	if($createdAdmin){
+            header("Location: ../../install_complete.php");
+		
+	}else{
+            echo 'Cannot hire admin';
+	}
+}catch(Exception $e){
+	echo $e->getMessage();
+}
+
+function updateSetupFile(){
+    echo 'Updating the file reference <br/>';
+    $d = DIRECTORY_SEPARATOR;
+//    $projectRoot = $_SERVER['DOCUMENT_ROOT'].$d.$sysRes->translate(SystemReader::INDEX_ROOTPATH);
+    $configs = HubConf::getConfigurations();
+    $projectRoot = $configs['project_root'];
+    $setupFile = $projectRoot.$d.'setup.ini';
+    $setup = parse_ini_file(StrOpers::strFixPath($setupFile));
+    $setup[SystemReader::INDEX_DBCONF] = $database.'.json';
+
+    write_ini_file($setup, $setupFile);
+}
+
+function createDatabaseStructure($database, $pdo){
+    // The database script
+    $file = dirname(__FILE__)."{$d}..{$d}database{$d}database_structure.sql";
+    $sqlInstruction = file_get_contents($file);
+
+    $pdo->exec("USE {$database}");
+    $pdo->exec($sqlInstruction);
+}
 
 function createAdminUser($adminUser, $adminPass){
     $driver = DatabaseConnector::getDriver();
