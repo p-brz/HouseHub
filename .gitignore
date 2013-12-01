@@ -5,5 +5,5 @@ composer.lock
 # Ignorar arquivos build
 build/
 #ignorar netbeans
-nbproject/
+# nbproject/
 nbproject/private/
