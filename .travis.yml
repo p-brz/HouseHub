@@ -3,7 +3,8 @@ php:
   - 5.3
 before_script:
   - php ./bin/composer.phar install
-  - php ./install/manifest/launch.php
+#  - php ./install/manifest/launch.php
+  - php ./install/install.php --db-user=travis --db-pass= --db-name=househubdb --adm_user=adm --adm_pass=123456
 script: 
   - mkdir -p build/logs
   - ./vendor/bin/phpunit -c phpunit.xml.dist
