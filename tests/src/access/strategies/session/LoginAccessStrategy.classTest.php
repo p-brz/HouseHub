@@ -34,7 +34,6 @@ class LoginAccessStrategyTest extends \PHPUnit_Framework_TestCase {
      * @todo   Implement testRequestAccess().
      */
     public function testRequestAccess() {
-        // Remove the following lines when you implement this test.
         $parameters = array(
             "method" => "login",
             "username" => "adm",
