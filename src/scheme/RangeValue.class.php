@@ -12,7 +12,8 @@ class RangeValue implements AllowedValue{
 	}
 	
 	public function isValid($value){
-		return ($value >= $this->min || $value <= $this->max);
+//		return ($value >= $this->min || $value <= $this->max);
+		return ($value >= $this->min && $value <= $this->max);
 	}
 	
 }

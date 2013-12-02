@@ -1,7 +1,7 @@
 <?php
 
-require_once(dirname(__FILE__) . '/install_functions.inc.php');
-require_once(dirname(__FILE__) . '/configurations.php');
+require_once(dirname(__FILE__) . DIRECTORY_SEPARATOR.'install_functions.inc.php');
+require_once(dirname(__FILE__) . DIRECTORY_SEPARATOR.'configurations.php');
 
 // Loading all classes definitions
 function launch() {
@@ -9,7 +9,7 @@ function launch() {
     $projectRoot = $manifestDetails['root'];
     $output = $manifestDetails['output'];
     $codePacks = $manifestDetails['codePacks'];
-
+    
     $manifest = array();
     $classes = array();
     foreach ($codePacks as $codePack) {

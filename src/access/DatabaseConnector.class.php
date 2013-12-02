@@ -21,7 +21,8 @@ final class DatabaseConnector{
 		$path = $sysRes->translate(SystemReader::INDEX_ROOTPATH).'/'.$sysRes->translate(SystemReader::INDEX_DATABASE).'/'.$sysRes->translate(SystemReader::INDEX_DBCONF);
 		$path = StrOpers::strFixPath($path);
 		
-		$reader = new JsonReader($_SERVER['DOCUMENT_ROOT'].DIRECTORY_SEPARATOR.$path);
+//		$reader = new JsonReader($_SERVER['DOCUMENT_ROOT'].DIRECTORY_SEPARATOR.$path);
+		$reader = new JsonReader($path);
 		$argument = new MySQLArgument();
 		
 		$argument->setHost($reader->get('db_host'));

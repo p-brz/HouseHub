@@ -12,12 +12,32 @@ class JsonObject extends JsonBaseElement{
 
 	public function getElements(){
 		return $this->elements;
+	}        
+        
+        private function filterIndex($index){
+            if(is_numeric($index) && isset($this->elements[$index])){
+                return $index;
+            }
+            else if(is_string($index)){
+                $i = 0;
+                foreach($this->elements as $elem){
+                    if($elem->getName() == $index){
+                        return $i;
+                    }
+                    $i = $i +1;
+                }
+            }
+            return null;
+        }
+	public function getElement($index){
+            $newIndex = $this->filterIndex($index);
+            if(!is_null($newIndex)){
+                return $this->elements[$newIndex];
+            }
+            
+            return null;//não enontrou
 	}
-
-	public function getElement(int $index){
-		return $this->elements[$index];
-	}
-	public function setElement(int $index, JsonElement $element){
+	public function setElement($index, JsonElement $element){
 		$this->elements[$index] = $element;
 	}
 	
@@ -25,16 +45,22 @@ class JsonObject extends JsonBaseElement{
 		$this->elements[] = $element;
 	}
 	public function removeElement(JsonElement $element){ //TODO: testar tipo de $element?
-        $elementIndex = -1;
-        for($i =1; $i < count($this->elements) && $elementIndex < 0; $i++){
-            if($this->elements[$i] == $element){
-                $elementIndex = $i;
-            }
-        }
+//            $elementIndex = -1;
+//            for($i =1; $i < count($this->elements) && $elementIndex < 0; $i++){
+//                if($this->elements[$i] == $element){
+//                    $elementIndex = $i;
+//                }
+//            }
 
-        if($elementIndex > 0){
-            $this->elements = array_splice($this->elements, $elementIndex, 1);//Remove elemento
-        }
+//            if($elementIndex > 0){
+//                $this->elements = array_splice($this->elements, $elementIndex, 1);//Remove elemento
+//            }
+            $index = array_search($element, $this->elements);
+            if($index != false || $index == 0){
+                echo "Remove ". $element . " in ".  $index;
+                unset($this->elements[$index]);
+                $this->elements = array_values($this->elements);
+            }
 	}
 
     /**
@@ -60,6 +86,6 @@ class JsonObject extends JsonBaseElement{
     	
     	return $stringJson;
     }
-}$content = new JsonObject("content");
+}
 
 ?>

@@ -11,14 +11,16 @@ function declareSystem(&$jsonManifest, $directory, $packageName) {
                 if (empty($packageName)) {
                     $package = $scan;
                 } else {
-                    $package = $packageName . DIRECTORY_SEPARATOR . $scan;
+//                    $package = $packageName . DIRECTORY_SEPARATOR . $scan;
+                    $package = $packageName . '\\' . $scan;
                 }
                 $classArray[$scan] = declareSystem($jsonManifest, realpath($evaluablePath), $package);
             } else if (is_file($evaluablePath)) {
                 if (strEndsWith($scan, '.class.php') || strEndsWith($scan, 'interface.php')) {
                     $pureLength = strlen($scan) - strlen('.class.php');
                     $className = substr($scan, 0, $pureLength);
-                    $jsonManifest[$packageName . DIRECTORY_SEPARATOR . $className] = $evaluablePath;
+//                    $jsonManifest[$packageName . DIRECTORY_SEPARATOR . $className] = $evaluablePath;
+                    $jsonManifest[$packageName . '\\' . $className] = $evaluablePath;
                     if (is_array($classArray)) {
                         $classArray[] = $className;
                     }
@@ -55,5 +57,19 @@ function dumpClasses($result, $spaceString = '') {
         echo '</p>';
     }else if (is_string($result)) {
         echo $spaceString . '&nbsp;&nbsp;+ ' . $result . '<br/>';
+    }
+}
+function dumpClassesCli($result, $spaceString = ' ') {
+    if (is_array($result)) {
+        echo "\n";
+        foreach ($result as $key => $entity) {
+
+            if (is_string($key))
+                echo $spaceString . '* ' . $key; //.'<br/>';
+            dumpClassesCli($entity, $spaceString . '  ' );
+        }
+//        echo "\n";
+    }else if (is_string($result)) {
+        echo $spaceString . '  + ' . $result . "\n";
     }
 }

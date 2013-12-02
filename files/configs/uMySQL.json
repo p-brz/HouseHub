@@ -1,8 +1,0 @@
-{
-	"db_host":"localhost",
-	"db_user":"uhb_user",
-	"db_pass":"uhb_pass",
-	"db_name":"househub_db",
-	"db_port":"3306",
-	"db_type":"mysql"
-}

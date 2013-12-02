@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<phpunit colors="true">
+<phpunit colors="true" bootstrap="bootstrap.php">
     <testsuites>
         <testsuite name="HouseHub component test suite">
             <directory>./tests</directory>
@@ -10,8 +10,11 @@
     <filter>
         <whitelist>
             <directory>./src</directory>
+            <directory>./lightninghowl</directory>
             <exclude>
                 <directory>./build</directory>
+                <directory>./manifest</directory>
+                <directory>./files</directory>
                 <directory>./bin</directory>
                 <directory>./vendor</directory>
             </exclude>

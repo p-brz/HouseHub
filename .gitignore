@@ -4,4 +4,6 @@ composer.lock
 # Incluir? bin/composer.phar
 # Ignorar arquivos build
 build/
-/nbproject/private/
+#ignorar netbeans
+# nbproject/
+nbproject/private/
