@@ -46,5 +46,47 @@ class LoginAccessStrategyTest extends \PHPUnit_Framework_TestCase {
         $this->assertNotNull($answer->getContent()->getElement("user_rights"));
         $this->assertNotNull($answer->getContent()->getElement("phpsessid"));
     }
+    /**
+     * @covers househub\access\strategies\session\LoginAccessStrategy::requestAccess
+     * @todo   Implement testRequestAccess().
+     */
+    public function testRequestFail() {
+        $parameters = array(
+            "method" => "login",
+            "username" => "usuarioInexistente",
+            "password" => "123456"
+        );
+        $answer = $this->object->requestAccess($parameters); 
+        
+        $this->assertEquals(0, $answer->getStatus());
+//        $this->assertNotNull($answer->getContent()->getElement("user_rights"));
+//        $this->assertNotNull($answer->getContent()->getElement("phpsessid"));
+    }
+    /**
+     * @covers househub\access\strategies\session\LoginAccessStrategy::requestAccess
+     * @todo   Implement testRequestAccess().
+     */
+    public function testRequestWithoutUser() {
+        $parameters = array(
+            "method" => "login",
+            "password" => "123456"
+        );
+        $answer = $this->object->requestAccess($parameters); 
+        
+        $this->assertEquals(0, $answer->getStatus());
+    }
+    /**
+     * @covers househub\access\strategies\session\LoginAccessStrategy::requestAccess
+     * @todo   Implement testRequestAccess().
+     */
+    public function testRequestWithoutPass() {
+        $parameters = array(
+            "method" => "login",
+            "username" => "usuarioInexistente"
+        );
+        $answer = $this->object->requestAccess($parameters); 
+        
+        $this->assertEquals(0, $answer->getStatus());
+    }
 
 }
