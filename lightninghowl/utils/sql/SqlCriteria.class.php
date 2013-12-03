@@ -23,21 +23,20 @@ class SqlCriteria extends SqlExpression {
     }
 
     public function dump() {
-        if (is_array($this->expressions)) {
-            if (count($this->expressions) > 0) {
-                $string = '';
-                foreach ($this->expressions as $key => $expression) {
-                    $operator = $this->operators[$key];
-                    $string .= $operator . $expression->dump() . ' ';
-                }
-                $result = trim($string);
-                return "({$result})";
+        if (count($this->expressions) > 0) {
+            $string = '';
+            foreach ($this->expressions as $key => $expression) {
+                $operator = $this->operators[$key];
+                $string .= $operator . $expression->dump() . ' ';
             }
+            $result = trim($string);
+            return "({$result})";
         }
+        return '';
     }
 
-    public function setBlockStatus($property, $value) {
-        if (isset($value)) {
+    public function setBlockStatus($property, $value = null) {
+        if (!is_null($value)) {
             $this->properties[$property] = $value;
         } else {
             $this->properties[$property] = NULL;
@@ -48,6 +47,7 @@ class SqlCriteria extends SqlExpression {
         if (isset($this->properties[$property])) {
             return $this->properties[$property];
         }
+        return null;
     }
 
 }

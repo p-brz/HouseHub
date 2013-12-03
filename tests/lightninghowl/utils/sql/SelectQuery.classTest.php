@@ -17,11 +17,14 @@ class SelectQueryTest extends \PHPUnit_Framework_TestCase {
      * This method is called before a test is executed.
      */
     protected function setUp() {
-        $this->object = new SelectQuery;
+        $this->object = new SelectQuery();
         $this->object->setEntity('table t');
         $this->object->addColumn('column');
         $criteria = new SqlCriteria();
         $criteria->add(new SqlFilter('t.id', '=', 5));
+        $criteria->setBlockStatus('order', 't.id');
+        $criteria->setBlockStatus('limit', 1);
+        $criteria->setBlockStatus('offset', 1);
         $this->object->setCriteria($criteria);
     }
 
@@ -38,22 +41,33 @@ class SelectQueryTest extends \PHPUnit_Framework_TestCase {
      * @todo   Implement testAddColumn().
      */
     public function testAddColumn() {
+        $this->object = new SelectQuery();
+        $this->object->setEntity('table t');
+        $this->object->addColumn('column');
+        $criteria = new SqlCriteria();
+        $criteria->add(new SqlFilter('t.id', '=', 5));
+        $criteria->setBlockStatus('order', 't.id');
+        $criteria->setBlockStatus('limit', 1);
+        $criteria->setBlockStatus('offset', 1);
+        $this->object->setCriteria($criteria);
         $this->object->addColumn('test');
-        $this->assertEquals('SELECT column,test FROM table t WHERE (t.id = 5)', $this->object->getInstruction());
+        $this->assertEquals('SELECT column,test FROM table t WHERE (t.id = 5) ORDER BY t.id LIMIT 1 OFFSET 1', $this->object->getInstruction());
     }
 
     /**
      * @covers lightninghowl\utils\sql\SelectQuery::addJoin
-     * @todo   Implement testAddJoin().
+     * @covers lightninghowl\utils\sql\SelectQuery::addColumn
      */
     public function testAddJoin() {
+        
         $join = new InnerJoin();
         $join->setEntity('entity e');
         $criteria = new SqlCriteria();
         $criteria->add(new EntityFilter('t.id', '=', 'e.id'));
         $join->setCriteria($criteria);
         $this->object->addJoin($join);
-        $this->assertEquals('SELECT column FROM table t INNER JOIN entity e ON (t.id = e.id) WHERE (t.id = 5)', $this->object->getInstruction());
+        $expect = 'SELECT column FROM table t INNER JOIN entity e ON (t.id = e.id) WHERE (t.id = 5) ORDER BY t.id LIMIT 1 OFFSET 1';
+        $this->assertEquals($expect, $this->object->getInstruction());
     }
 
     /**
@@ -61,7 +75,7 @@ class SelectQueryTest extends \PHPUnit_Framework_TestCase {
      * @todo   Implement testGetInstruction().
      */
     public function testGetInstruction() {
-        $this->assertEquals('SELECT column FROM table t WHERE (t.id = 5)', $this->object->getInstruction());
+        $this->assertEquals('SELECT column FROM table t WHERE (t.id = 5) ORDER BY t.id LIMIT 1 OFFSET 1', $this->object->getInstruction());
     }
 
 }

@@ -2,10 +2,7 @@
 
 namespace lightninghowl\utils\encrypting;
 
-interface DecryptedData{
-	
-	public function decrypt($data);
-	
-}
+interface DecryptedData {
 
-?>
+    public function decrypt($data);
+}

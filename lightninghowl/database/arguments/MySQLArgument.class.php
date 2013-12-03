@@ -76,5 +76,3 @@ class MySQLArgument implements DbArgument{
 	public function setDbUser($x) { $this->dbUser = $x; } 
 	public function setDbPass($x) { $this->dbPass = $x; }
 }
-
-?>

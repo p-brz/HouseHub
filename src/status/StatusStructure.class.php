@@ -19,5 +19,3 @@ class StatusStructure{
 	public function setValue($x) { $this->value = $x; } 
 
 }
-
-?>

@@ -23,5 +23,3 @@ final class DeleteQuery extends SqlInstruction {
     }
 
 }
-
-?>

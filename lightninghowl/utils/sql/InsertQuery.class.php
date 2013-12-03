@@ -17,8 +17,6 @@ final class InsertQuery extends SqlInstruction {
                 $this->columnValues[$column] = $value ? 'TRUE' : 'FALSE';
             } else if ($value !== '') {
                 $this->columnValues[$column] = $value;
-            } else {
-                $this->columnValues[$column] = NULL;
             }
         }
     }

@@ -2,10 +2,7 @@
 
 namespace lightninghowl\utils\encrypting;
 
-interface EncryptedData{
-	
-	public function encrypt($data);
-	
-}
+interface EncryptedData {
 
-?>
+    public function encrypt($data);
+}

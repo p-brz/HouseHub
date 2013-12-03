@@ -16,5 +16,3 @@ class YMDFormat implements DateMask{
 	}
 	
 }
-
-?>

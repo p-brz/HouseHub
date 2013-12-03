@@ -2,11 +2,6 @@
 
 namespace lightninghowl\utils\sql;
 
-while (!file_exists(getcwd() . "/.htroot")) {
-    chdir('..');
-}
-require_once 'lightninghowl/utils/AutoLoader.class.php';
-
 class OuterJoin extends Join {
 
     const LEFT = 'LEFT';

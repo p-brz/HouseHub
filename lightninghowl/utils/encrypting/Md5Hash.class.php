@@ -9,5 +9,3 @@ class Md5Hash implements EncryptedData{
 	}
 	
 }
-
-?>

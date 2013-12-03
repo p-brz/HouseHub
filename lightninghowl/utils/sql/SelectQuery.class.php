@@ -6,6 +6,11 @@ final class SelectQuery extends SqlInstruction{
 	private $columns;
 	private $joins;
 	
+        public function __construct(){
+            $this->columns = array();
+            $this->joins = array();
+        }
+        
 	public function addColumn($column){
 		$this->columns[] = $column;
 	}
@@ -19,7 +24,7 @@ final class SelectQuery extends SqlInstruction{
 		$this->sql .= implode(',', $this->columns);
 		$this->sql .= ' FROM '.$this->entity;
 		
-		if($this->joins){
+		if(!empty($this->joins)){
 			foreach($this->joins as $join){
 				$this->sql .= ' '.$join->dump();
 			}
@@ -51,5 +56,3 @@ final class SelectQuery extends SqlInstruction{
 		return $this->sql;
 	}
 }
-
-?>

@@ -17,7 +17,7 @@ class MultiInsertTest extends \PHPUnit_Framework_TestCase {
      * This method is called before a test is executed.
      */
     protected function setUp() {
-        $this->object = new MultiInsert;
+        $this->object = new MultiInsert();
     }
 
     /**
@@ -47,9 +47,27 @@ class MultiInsertTest extends \PHPUnit_Framework_TestCase {
         $object = new MultiInsert();
         $object->setEntity('entity');
         $object->setColumns('id', 'name');
-        $object->addColumnValues(1, 'test');
-        $object->addColumnValues(2, 'sub');
-        $this->assertEquals('INSERT INTO entity (id, name) VALUES (1, \'test\'), (2, \'sub\')', $object->getInstruction());
+
+        $object->addColumnValues(1, true);
+        $object->addColumnValues(2, 2);
+        $object->addColumnValues(3, 'lol');
+        $this->assertEquals('INSERT INTO entity (id, name) VALUES (1, TRUE), (2, 2), (3, \'lol\')', $object->getInstruction());
+    }
+
+    /**
+     * @expectedException Exception
+     */
+    public function testAddColumValuesException() {
+        try {
+            $object = new MultiInsert();
+            $object->setEntity('entity');
+            $object->setColumns('id', 'name');
+
+            $object->addColumnValues(1, 1, 1);
+            $this->assertTrue(false);
+        } catch (Exception $ex) {
+            $this->assertTrue(true);
+        }
     }
 
     /**

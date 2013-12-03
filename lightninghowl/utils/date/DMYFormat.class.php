@@ -16,5 +16,3 @@ class DMYFormat implements DateMask{
 	}
 	
 }
-
-?>

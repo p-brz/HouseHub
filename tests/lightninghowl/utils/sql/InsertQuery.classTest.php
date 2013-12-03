@@ -4,7 +4,9 @@ namespace lightninghowl\utils\sql;
 
 use Exception;
 
-while(!file_exists(getcwd()."/.htroot")){chdir('..');}
+while (!file_exists(getcwd() . "/.htroot")) {
+    chdir('..');
+}
 require_once 'lightninghowl/utils/AutoLoader.class.php';
 
 /**
@@ -40,8 +42,10 @@ class InsertQueryTest extends \PHPUnit_Framework_TestCase {
     public function testSetRowData() {
         $object = new InsertQuery();
         $object->setEntity('table');
-        $object->setRowData('column', 'value');
-        $this->assertEquals("INSERT INTO table (column)VALUES ('value')", $object->getInstruction());
+        $object->setRowData('a', 'value');
+        $object->setRowData('b', true);
+        $object->setRowData('c', 1);
+        $this->assertEquals("INSERT INTO table (a, b, c)VALUES ('value', TRUE, 1)", $object->getInstruction());
     }
 
     /**
@@ -53,10 +57,10 @@ class InsertQueryTest extends \PHPUnit_Framework_TestCase {
         $object->setEntity('table');
         $object->setRowData('column', 'value');
         $criteria = new SqlCriteria();
-        try{
+        try {
             $object->setCriteria($criteria);
             $this->assertTrue(false);
-        }catch(Exception $e){
+        } catch (Exception $e) {
             echo $e->getMessage();
             $this->assertTrue(true);
         }
