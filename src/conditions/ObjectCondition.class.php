@@ -12,30 +12,43 @@ class ObjectCondition{
 
     public function getName(){return $this->name;}
     public function setName($name){$this->name = $name;}
-
+    
     public function addRestriction($statusName, $expectedValue){
         $this->restrictions[$statusName] = $expectedValue;
     }
     public function getRestriction($statusName){
-        return $this->restrictions[$statusName];
+        if(isset($this->restrictions[$statusName])){
+            return array($statusName,$this->restrictions[$statusName]);
+        }
+        
+        return null;
     }
     public function removeRestriction($statusName){
         unset($this->restrictions[$statusName]);
     }
 
+    /* Por hora as restrições envolvem apenas a igualdade.
+     * Ou seja, ela será valida quando todos os valores em $status forem iguais aos valores
+     * esperados nas restrictions.
+     * Futuramente, implementar operações mais complexas (operadores) 
+     */
     public function isValid($status){
-        $isValid = true;
-        $index = 0;
 
         foreach($this->restrictions as $statusName => $expectedValue){
-            if(isset($status[$index])){
-                $isValid = $isValid && ($status[$index]->getValue() == $expectedValue);
+            $state = $this->findStatus($statusName, $status);
+            if(is_null($state) || $state->getValue() != $expectedValue){
+                return false;
             }
-            else{
-                $isValid = false;
-            }
-            $index++;
         }
-        return $isValid;
+        return true;
+    }
+    
+    private function findStatus($name,$status){
+        foreach($status as $state){
+            if($state->getName() == $name){
+                return $state;
+            }
+        }
+        return null;
     }
 }

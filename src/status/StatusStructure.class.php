@@ -8,6 +8,13 @@ class StatusStructure{
 	private $name;
 	private $value;
 	
+        public function __construct($name="", $value="",$id=-1,$objectId=-1) {
+            $this->id = $id;
+            $this->objectId = $objectId;
+            $this->name = $name;
+            $this->value = $value;
+        }
+        
 	public function getId() { return $this->id; } 
 	public function getObjectId() { return $this->objectId; }
 	public function getName() { return $this->name; } 

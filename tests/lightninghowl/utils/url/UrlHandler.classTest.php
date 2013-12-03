@@ -37,8 +37,8 @@ class UrlHandlerTest extends \PHPUnit_Framework_TestCase {
      * @todo   Implement testSetTimeout().
      */
     public function testSetTimeout() {
-        $this->handler->setTimeout(30);
-        $this->assertEquals(30, $this->handler->getTimeout());
+        $this->object->setTimeout(30);
+        $this->assertEquals(30, $this->object->getTimeout());
     }
 
     /**
@@ -46,8 +46,8 @@ class UrlHandlerTest extends \PHPUnit_Framework_TestCase {
      * @todo   Implement testGetTimeout().
      */
     public function testGetTimeout() {
-        $this->handler->setTimeout(30);
-        $this->assertEquals(30, $this->handler->getTimeout());
+        $this->object->setTimeout(30);
+        $this->assertEquals(30, $this->object->getTimeout());
     }
 
     /**
@@ -91,22 +91,27 @@ class UrlHandlerTest extends \PHPUnit_Framework_TestCase {
 
     /**
      * lightninghowl\utils\url\UrlHandler::run
-     * @todo   Implement testRun().
      */
-    public function testRun() {
+    public function testRunGet() {
         $handler = new UrlHandler('http://localhost', 'GET');
-        $this->assertEquals(null, $handler->getContent());
-        $this->assertEquals(null, $handler->getStatus());
+        $this->assertEmpty($handler->getContent());
+        $this->assertEmpty($handler->getStatus());
         $handler->run();
-        $this->assertTrue(!is_null($handler->getContent()));
-        $this->assertTrue(!is_null($handler->getStatus()));
-        
-        $handler = new UrlHandler('http://localhost', 'POST');
-        $this->assertEquals(null, $handler->getContent());
-        $this->assertEquals(null, $handler->getStatus());
+        $this->assertNotEmpty($handler->getContent());
+        $this->assertNotEmpty($handler->getStatus());
+    }
+    
+    /**
+     * lightninghowl\utils\url\UrlHandler::run
+     */
+    public function testRunPost(){
+        var_dump(__DIR__);
+        $handler = new UrlHandler('http://localhost/', 'POST');
+        $this->assertEmpty($handler->getContent());
+        $this->assertEmpty($handler->getStatus());
         $handler->run();
-        $this->assertTrue(!is_null($handler->getContent()));
-        $this->assertTrue(!is_null($handler->getStatus()));
+        $this->assertNotEmpty($handler->getContent());
+        $this->assertNotEmpty($handler->getStatus());
     }
 
 }
