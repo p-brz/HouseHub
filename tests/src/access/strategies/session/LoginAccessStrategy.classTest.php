@@ -30,7 +30,7 @@ class LoginAccessStrategyTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @todo   Implement testRequestAccess().
+     * @group cookie
      */
     public function testRequestAccess() {
         $parameters = array(
@@ -46,7 +46,6 @@ class LoginAccessStrategyTest extends \PHPUnit_Framework_TestCase {
         $this->assertNotNull($answer->getContent()->getElement("phpsessid"));
     }
     /**
-     * @todo   Implement testRequestAccess().
      */
     public function testRequestFail() {
         $parameters = array(
@@ -61,7 +60,7 @@ class LoginAccessStrategyTest extends \PHPUnit_Framework_TestCase {
 //        $this->assertNotNull($answer->getContent()->getElement("phpsessid"));
     }
     /**
-     * @todo   Implement testRequestAccess().
+     * 
      */
     public function testRequestWithoutUser() {
         $parameters = array(
@@ -73,7 +72,6 @@ class LoginAccessStrategyTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals(0, $answer->getStatus());
     }
     /**
-     * @todo   Implement testRequestAccess().
      */
     public function testRequestWithoutPass() {
         $parameters = array(

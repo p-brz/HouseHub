@@ -4,12 +4,15 @@
     <testsuites>
         <testsuite name="HouseHub component test suite">
             <directory>./tests</directory>
-            <exclude>
-                <directory>./tests/src/access/strategies/session</directory>
-            </exclude>
         </testsuite>
     </testsuites>
-
+    
+    <groups>
+      <exclude>
+        <group>cookie</group>
+      </exclude>
+    </groups>
+    
     <filter>
         <whitelist>
             <directory>./src</directory>

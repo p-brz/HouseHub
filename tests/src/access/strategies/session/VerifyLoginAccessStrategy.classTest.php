@@ -29,7 +29,7 @@ class VerifyLoginAccessStrategyTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @todo   Implement testRequestAccess().
+     * @group cookie
      */
     public function testRequestAccess() {
         //Fazer login
@@ -42,7 +42,7 @@ class VerifyLoginAccessStrategyTest extends \PHPUnit_Framework_TestCase {
         $loginAccess->requestAccess($parameters); 
         
         $answer = $this->object->requestAccess(array("method"=>"verify_login"));
-        
+        $this->assertEquals(1,$answer->getStatus());
     }
     /**
      */
