@@ -4,7 +4,6 @@ namespace househub\readers;
 
 use Exception;
 
-//require_once(dirname(__FILE__) . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'HubConf.class.php');
 
 final class SystemReader extends Dictionary {
 

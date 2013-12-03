@@ -7,5 +7,3 @@ interface DateMask{
 	public function getMask();
 	
 }
-
-?>

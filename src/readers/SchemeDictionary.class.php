@@ -17,7 +17,7 @@ class SchemeDictionary extends Dictionary{
 		
 		$schemeLanguage = $scheme->getSchemeName().'Language.json';
 		
-		$file = $_SERVER['DOCUMENT_ROOT'].'/'.$schemePath.'/'.$schemeLanguage;
+		$file = filter_input(INPUT_SERVER, 'DOCUMENT_ROOT').'/'.$schemePath.'/'.$schemeLanguage;
 		$languageReader = new JsonReader(StrOpers::strFixPath($file));
 		
 		$arrayLanguage = $languageReader->get($systemLanguage);
@@ -25,5 +25,3 @@ class SchemeDictionary extends Dictionary{
 	}
 	
 }
-
-?>

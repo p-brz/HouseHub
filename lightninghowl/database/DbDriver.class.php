@@ -34,5 +34,3 @@ final class DbDriver{
             return DbDriver::$connection;
 	}
 }
-
-?>

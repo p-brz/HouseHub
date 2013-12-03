@@ -2,29 +2,15 @@
 
 namespace househub\objects\home;
 
-use househub\readers\SchemeDictionary;
-
 use househub\abstracts\AbstractHomeJsonParser;
-
 use househub\json\JsonData;
-
-use househub\objects\parsers\ObjectVisualIconpackJsonParser;
-
-use househub\objects\parsers\ObjectVisualNameJsonParser;
-
-use lightninghowl\utils\StrOpers;
-
-use househub\status\parsers\StatusStructureJsonParser;
-
-use househub\json\JsonArray;
-
-use househub\services\parsers\ServiceStructureJsonParser;
-
-use househub\objects\parsers\ObjectVisualJsonParser;
-
-use househub\objects\parsers\ObjectStructureJsonParser;
-
 use househub\json\JsonObject;
+use househub\objects\parsers\ObjectStructureJsonParser;
+use househub\objects\parsers\ObjectVisualIconpackJsonParser;
+use househub\objects\parsers\ObjectVisualNameJsonParser;
+use househub\readers\SchemeDictionary;
+use househub\services\parsers\ServiceStructureJsonParser;
+use househub\status\parsers\StatusStructureJsonParser;
 
 class HomeObjectJsonParser extends AbstractHomeJsonParser{
 	
@@ -120,5 +106,3 @@ class HomeObjectJsonParser extends AbstractHomeJsonParser{
 	}
 	
 }
-
-?>

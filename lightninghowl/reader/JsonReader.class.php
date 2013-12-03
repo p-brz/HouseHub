@@ -9,12 +9,7 @@ class JsonReader {
     public function __construct($file) {
         $this->informations = array();
         if(!is_file($file)){
-            $jsonFile = dirname(__FILE__).DIRECTORY_SEPARATOR.$file;
-            if(!is_file($jsonFile)){
-                $this->informations = null;
-            }else{
-                $this->decode($jsonFile);
-            }
+            $this->informations = null;
         }else{
             $jsonFile = $file;
             $this->decode($jsonFile);
@@ -32,11 +27,8 @@ class JsonReader {
             return $this->informations;
         } else if (isset($this->informations[$property])) {
             return $this->informations[$property];
-        } else {
-            return null;
         }
+        return null;
     }
 
 }
-
-?>

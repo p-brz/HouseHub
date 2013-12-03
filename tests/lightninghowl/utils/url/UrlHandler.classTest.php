@@ -21,7 +21,7 @@ class UrlHandlerTest extends \PHPUnit_Framework_TestCase {
      * This method is called before a test is executed.
      */
     protected function setUp() {
-        $this->object = new UrlHandler('http://www.google.com.br', 'GET');
+        $this->object = new UrlHandler('http://localhost', 'GET');
     }
 
     /**
@@ -53,9 +53,10 @@ class UrlHandlerTest extends \PHPUnit_Framework_TestCase {
      * @todo   Implement testGetContent().
      */
     public function testGetContent() {
-        $this->assertEquals(null, $this->object->getContent());
-        $this->object->run();
-        $this->assertEquals('200', $this->object->getStatus());
+        $handler = new UrlHandler('http://localhost', 'GET');
+        $this->assertEquals(null, $handler->getContent());
+        $handler->run();
+        $this->assertTrue(!is_null($handler->getContent()));
     }
 
     /**
@@ -74,10 +75,7 @@ class UrlHandlerTest extends \PHPUnit_Framework_TestCase {
      * @todo   Implement testGetStatus().
      */
     public function testGetStatus() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
+        
     }
 
     /**
@@ -85,10 +83,10 @@ class UrlHandlerTest extends \PHPUnit_Framework_TestCase {
      * @todo   Implement testAddField().
      */
     public function testAddField() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
+        $handler = new UrlHandler('http://localhost', 'GET');
+        $handler->addField('foo', 'bar');
+        $url = $handler->run();
+        $this->assertEquals('http://localhost/?foo=bar', $url);
     }
 
     /**
@@ -96,10 +94,12 @@ class UrlHandlerTest extends \PHPUnit_Framework_TestCase {
      * @todo   Implement testRun().
      */
     public function testRun() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
+        $handler = new UrlHandler('http://localhost', 'GET');
+        $this->assertEquals(null, $handler->getContent());
+        $this->assertEquals(null, $handler->getStatus());
+        $handler->run();
+        $this->assertTrue(!is_null($handler->getContent()));
+        $this->assertTrue(!is_null($handler->getStatus()));
     }
 
 }

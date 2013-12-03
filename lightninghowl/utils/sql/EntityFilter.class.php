@@ -12,4 +12,3 @@ class EntityFilter extends SqlFilter{
 	}
 	
 }
-?>
