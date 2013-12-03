@@ -2,35 +2,13 @@
 // COMPLETE!
 namespace househub\access\strategies\object;
 
-use lightninghowl\utils\StrOpers;
-
-use househub\objects\home\HomeObjectManager;
-
-use househub\objects\home\JsonToHomeObjectParser;
-
-use househub\users\session\SessionManager;
-
 use househub\access\DatabaseConnector;
-
-use househub\status\parsers\JsonToStatusParser;
-
-use househub\services\parsers\JsonToServiceParser;
-
-use househub\objects\parsers\JsonToObjectStructureParser;
-
-use househub\intents\home\HomeIntentManager;
-
-use househub\objects\home\HomeObject;
-
-use lightninghowl\utils\url\UrlHandler;
-
-use househub\intents\IntentStructure;
-
-use househub\objects\ObjectStructure;
-
-use househub\intents\dao\IntentStructureDAO;
-
 use househub\access\strategies\AbstractAccessStrategy;
+use househub\intents\home\HomeIntentManager;
+use househub\objects\home\HomeObjectManager;
+use househub\objects\home\JsonToHomeObjectParser;
+use househub\users\session\SessionManager;
+use lightninghowl\utils\url\UrlHandler;
 
 class ValidateAccessStrategy extends AbstractAccessStrategy{
 	

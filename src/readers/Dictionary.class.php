@@ -2,9 +2,6 @@
 
 namespace househub\readers;
 
-while(!file_exists(getcwd()."/.htroot")){chdir('..');}
-require_once 'lightninghowl/utils/AutoLoader.class.php';
-
 /**
  * Responsible for translating indexes to strings
  * @author Alison de Araújo Bento "Lykaios" <alisonlks@outlook.com>

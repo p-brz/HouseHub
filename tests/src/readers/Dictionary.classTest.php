@@ -43,6 +43,7 @@ class DictionaryTest extends \PHPUnit_Framework_TestCase {
     public function testTranslate() {
         $this->object->setSource(array('item' => 'x'));
         $this->assertEquals('x', $this->object->translate('item'));
+        $this->assertEquals('none', $this->object->translate('none'));
     }
 
 }

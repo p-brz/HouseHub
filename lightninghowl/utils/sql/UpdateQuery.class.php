@@ -17,9 +17,7 @@ final class UpdateQuery extends SqlInstruction{
 			else if($value !== ''){
 				$this->columnValues[$column] = $value;
 			}
-			else{
-				$this->columnValues[$column] = NULL;
-			}
+			
 		}
 	}
 	
@@ -38,5 +36,3 @@ final class UpdateQuery extends SqlInstruction{
 		return $this->sql;
 	}
 }
-
-?>

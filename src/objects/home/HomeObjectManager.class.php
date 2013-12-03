@@ -1,58 +1,25 @@
 <?php
 namespace househub\objects\home;
 
-use househub\objects\tables\ObjectStructureTable;
-
-use househub\status\dao\StatusStructureDAO;
-
-use househub\services\dao\ServiceStructureDAO;
-
-use househub\objects\tables\ObjectVisualIconpackTable;
-
-use househub\objects\dao\ObjectVisualIconpackDAO;
-
-use househub\objects\tables\ObjectVisualNameTable;
-
-use househub\objects\dao\ObjectVisualNameDAO;
-
-use househub\scheme\SchemeLoader;
-
-use househub\scheme\SchemeParser;
-
-use househub\scheme\SchemeJsonFileReader;
-
-use lightninghowl\utils\StrOpers;
-
-use househub\readers\SystemReader;
-
-use househub\objects\ObjectStructure;
-
-use lightninghowl\utils\sql\SelectQuery;
-
-use househub\objects\tables\ObjectSubObjectsTable;
-
-use househub\status\builders\StatusStructureBuilder;
-
-use househub\status\tables\StatusStructureTable;
-
-use househub\services\builders\ServiceStructureBuilder;
-
-use househub\services\tables\ServiceStructureTable;
-
-use lightninghowl\utils\sql\SqlExpression;
-
-use househub\objects\tables\ObjectVisualTable;
-
-use lightninghowl\utils\sql\SqlFilter;
-
-use lightninghowl\utils\sql\SqlCriteria;
-
-use househub\objects\dao\ObjectVisualDAO;
-
 use househub\objects\dao\ObjectStructureDAO;
-
+use househub\objects\dao\ObjectVisualNameDAO;
 use househub\objects\home\HomeObject;
-
+use househub\objects\tables\ObjectStructureTable;
+use househub\objects\tables\ObjectVisualNameTable;
+use househub\readers\SystemReader;
+use househub\scheme\SchemeJsonFileReader;
+use househub\scheme\SchemeLoader;
+use househub\services\builders\ServiceStructureBuilder;
+use househub\services\dao\ServiceStructureDAO;
+use househub\services\tables\ServiceStructureTable;
+use househub\status\builders\StatusStructureBuilder;
+use househub\status\dao\StatusStructureDAO;
+use househub\status\tables\StatusStructureTable;
+use lightninghowl\utils\sql\SelectQuery;
+use lightninghowl\utils\sql\SqlCriteria;
+use lightninghowl\utils\sql\SqlExpression;
+use lightninghowl\utils\sql\SqlFilter;
+use lightninghowl\utils\StrOpers;
 use PDO;
 
 class HomeObjectManager{
@@ -62,7 +29,7 @@ class HomeObjectManager{
 		
 		$object->setStructure($this->loadStructure($identifier, $driver));
 		$object->setVisualName($this->loadVisualName($identifier, $userId, $driver));
-		$object->setVisualIconpack($this->loadVisualIconpack($identifier, $userId, $driver));
+//		$object->setVisualIconpack($this->loadVisualIconpack($identifier, $userId, $driver));
 		$object->setServices($this->loadServices($identifier, $driver));
 		$object->setStatus($this->loadStatus($identifier, $driver));
 		$object->setSubObjects($this->loadSubObjects($identifier, $userId, $driver));
@@ -116,34 +83,34 @@ class HomeObjectManager{
 		return $visualName;
 	}
 	
-	public function loadVisualIconpack($identifier, $userId, $driver){
-		if(!is_numeric($identifier) || !is_numeric($userId)){
-			return null;
-		}
-		
-		$visualIconpack = null;
-		$visualDAO = new ObjectVisualIconpackDAO($driver);
-		
-		$criteria = new SqlCriteria();
-		$criteria->add(new SqlFilter(ObjectVisualIconpackTable::COLUMN_OBJECT_ID, '=', $identifier), SqlExpression::AND_OPERATOR);
-		
-		$subCriteria = new SqlCriteria();
-		$subCriteria->add(new SqlFilter(ObjectVisualIconpackTable::COLUMN_USER_ID, '=', 0), SqlExpression::OR_OPERATOR);
-		$subCriteria->add(new SqlFilter(ObjectVisualIconpackTable::COLUMN_USER_ID, '=', $userId), SqlExpression::OR_OPERATOR);
-		
-		$criteria->add($subCriteria);
-		$visuals = $visualDAO->listAll($criteria);
-		
-		foreach($visuals as $singleVisual){
-			if($visualIconpack == null){
-				$visualIconpack = $singleVisual;
-			}else if($visualIconpack->getUserId() == 0 && $singleVisual->getUserId() > 0){
-				$visualIconpack = $singleVisual;
-			}
-		}
-		
-		return $visualIconpack;
-	}
+//	public function loadVisualIconpack($identifier, $userId, $driver){
+//		if(!is_numeric($identifier) || !is_numeric($userId)){
+//			return null;
+//		}
+//		
+//		$visualIconpack = null;
+//		$visualDAO = new ObjectVisualIconpackDAO($driver);
+//		
+//		$criteria = new SqlCriteria();
+//		$criteria->add(new SqlFilter(ObjectVisualIconpackTable::COLUMN_OBJECT_ID, '=', $identifier), SqlExpression::AND_OPERATOR);
+//		
+//		$subCriteria = new SqlCriteria();
+//		$subCriteria->add(new SqlFilter(ObjectVisualIconpackTable::COLUMN_USER_ID, '=', 0), SqlExpression::OR_OPERATOR);
+//		$subCriteria->add(new SqlFilter(ObjectVisualIconpackTable::COLUMN_USER_ID, '=', $userId), SqlExpression::OR_OPERATOR);
+//		
+//		$criteria->add($subCriteria);
+//		$visuals = $visualDAO->listAll($criteria);
+//		
+//		foreach($visuals as $singleVisual){
+//			if($visualIconpack == null){
+//				$visualIconpack = $singleVisual;
+//			}else if($visualIconpack->getUserId() == 0 && $singleVisual->getUserId() > 0){
+//				$visualIconpack = $singleVisual;
+//			}
+//		}
+//		
+//		return $visualIconpack;
+//	}
 	
 	public function loadServices($identifier, PDO $driver){
 		$services = array();

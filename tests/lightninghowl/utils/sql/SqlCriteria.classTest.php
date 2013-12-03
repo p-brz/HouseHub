@@ -28,19 +28,11 @@ class SqlCriteriaTest extends \PHPUnit_Framework_TestCase {
         
     }
 
-    /**
-     * @covers lightninghowl\utils\sql\SqlCriteria::add
-     * @todo   Implement testAdd().
-     */
     public function testAdd() {
         $this->object->add(new SqlFilter('id', '=', 1));
         $this->assertEquals('(id = 1)', $this->object->dump());
     }
 
-    /**
-     * @covers lightninghowl\utils\sql\SqlCriteria::dump
-     * @todo   Implement testDump().
-     */
     public function testDump() {
         $object = new SqlCriteria();
         $object->setBlockStatus('limit', 1);
@@ -48,17 +40,10 @@ class SqlCriteriaTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals('(object = 3)', $object->dump());
     }
 
-    /**
-     * @covers lightninghowl\utils\sql\SqlCriteria::dump
-     */
     public function testDump1() {
         $this->assertEquals('', $this->object->dump());
     }
     
-    /**
-     * @covers lightninghowl\utils\sql\SqlCriteria::setBlockStatus
-     * @todo   Implement testSetBlockStatus().
-     */
     public function testSetBlockStatus() {
         $this->object->setBlockStatus('LIMIT', 1);
         $this->object->setBlockStatus('order');
@@ -67,10 +52,6 @@ class SqlCriteriaTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals(null, $this->object->getProperty('order'));
     }
 
-    /**
-     * @covers lightninghowl\utils\sql\SqlCriteria::getProperty
-     * @todo   Implement testGetProperty().
-     */
     public function testGetProperty() {
         $this->object->setBlockStatus('limit', 1);
         $int = $this->object->getProperty('limit');

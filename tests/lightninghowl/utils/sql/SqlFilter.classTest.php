@@ -28,12 +28,21 @@ class SqlFilterTest extends \PHPUnit_Framework_TestCase {
         
     }
 
-    /**
-     * @covers lightninghowl\utils\sql\SqlFilter::dump
-     * @todo   Implement testDump().
-     */
     public function testDump() {
-        $this->assertEquals('column = 2', $this->object->dump());
+        $filter = new SqlFilter('column', '=', array('test', 1));
+        $this->assertEquals('column = (\'test\',1)', $filter->dump());
+        
+        $filterA = new SqlFilter('column', '=', 'test');
+        $this->assertEquals('column = \'test\'', $filterA->dump());
+        
+        $filterB = new SqlFilter('column', '=', 2);
+        $this->assertEquals('column = 2', $filterB->dump());
+        
+        $filterC = new SqlFilter('column', '=', null);
+        $this->assertEquals('column = NULL', $filterC->dump());
+        
+        $filterD = new SqlFilter('column', '=', true);
+        $this->assertEquals('column = TRUE', $filterD->dump());
     }
 
 }

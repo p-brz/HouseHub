@@ -4,7 +4,6 @@ namespace lightninghowl\utils;
 
 final class StrOpers{
 	
-	private function __construct(){}
 	
 	public static function varFancyDump($var){
 		echo '<pre>';
