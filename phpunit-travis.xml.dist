@@ -19,6 +19,7 @@
     <groups>
       <exclude>
         <group>cookie</group>
+        <group>no-travis</group>
       </exclude>
     </groups>
     

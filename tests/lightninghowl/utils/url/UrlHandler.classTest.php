@@ -91,6 +91,7 @@ class UrlHandlerTest extends \PHPUnit_Framework_TestCase {
 
     /**
      * lightninghowl\utils\url\UrlHandler::run
+     * @group no-travis
      */
     public function testRunGet() {
         $handler = new UrlHandler('http://localhost', 'GET');
@@ -103,6 +104,7 @@ class UrlHandlerTest extends \PHPUnit_Framework_TestCase {
     
     /**
      * lightninghowl\utils\url\UrlHandler::run
+     * @group no-travis
      */
     public function testRunPost(){
         var_dump(__DIR__);
