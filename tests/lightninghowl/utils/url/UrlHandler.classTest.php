@@ -14,14 +14,14 @@ class UrlHandlerTest extends \PHPUnit_Framework_TestCase {
     /**
      * @var UrlHandler
      */
-    protected $handler;
+    protected $object;
 
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
     protected function setUp() {
-        $this->handler = new UrlHandler('http://localhost', 'GET');
+        $this->object = new UrlHandler('http://localhost', 'GET');
     }
 
     /**
@@ -55,9 +55,9 @@ class UrlHandlerTest extends \PHPUnit_Framework_TestCase {
      * @todo   Implement testGetContent().
      */
     public function testGetContent() {
-        $this->assertEquals(null, $this->handler->getContent());
-        $this->handler->run();
-        $this->assertNotNull($this->handler->getContent());
+        $this->assertEquals(null, $this->object->getContent());
+        $this->object->run();
+        $this->assertNotNull($this->object->getContent());
     }
 
     /**
@@ -65,8 +65,8 @@ class UrlHandlerTest extends \PHPUnit_Framework_TestCase {
      * @todo   Implement testGetHeader().
      */
     public function testGetHeader() {
-        $this->handler->run();
-        $this->assertNotNull($this->handler->getHeader());
+        $this->object->run();
+        $this->assertNotNull($this->object->getHeader());
     }
 
     /**
@@ -74,9 +74,9 @@ class UrlHandlerTest extends \PHPUnit_Framework_TestCase {
      * @todo   Implement testGetStatus().
      */
     public function testGetStatus() {
-        $this->handler->run();
-        $this->assertNotNull($this->handler->getStatus());
-        $this->assertTrue($this->handler->getStatus()!=0);
+        $this->object->run();
+        $this->assertNotNull($this->object->getStatus());
+        $this->assertTrue($this->object->getStatus()!=0);
     }
 
     /**
@@ -84,8 +84,8 @@ class UrlHandlerTest extends \PHPUnit_Framework_TestCase {
      * @todo   Implement testAddField().
      */
     public function testAddField() {
-        $this->handler->addField('foo', 'bar');
-        $url = $this->handler->run();
+        $this->object->addField('foo', 'bar');
+        $url = $this->object->run();
         $this->assertEquals('http://localhost?foo=bar', $url);
     }
 

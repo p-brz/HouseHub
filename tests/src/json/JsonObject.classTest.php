@@ -70,6 +70,18 @@ class JsonObjectTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals($expected, $this->object->getElement(2));
         $this->assertEquals($expected, $this->object->getElement("expected"));
     }
+    /**
+     *  househub\json\JsonObject::getElement
+     */
+    public function testGetElementNotFound() {
+        $this->assertNull($this->object->getElement(0));
+    }
+    /**
+     *  househub\json\JsonObject::getElement
+     */
+    public function testGetElementNotFound2() {
+        $this->assertNull($this->object->getElement("Inexistente"));
+    }
 
     /**
      * househub\json\JsonObject::setElement

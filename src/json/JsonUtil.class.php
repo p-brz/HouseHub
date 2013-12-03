@@ -9,16 +9,20 @@ class JsonUtil{
             $stringJson = "null";
         }
         else if(is_bool($value)){
+            $stringJson = ($value ? "true" : "false");
+//            $stringJson = ($value ? "1" : "0");
+        }
+        else if(is_numeric($value)){
             //$stringJson = ($value ? "true" : "false");
-            $stringJson = ($value ? "1" : "0");
+            $stringJson = "" . $value;
         }
         else if(is_array($value)){
             $stringJson = "[ ";
             if(!empty($value)){
-                $stringJson .= JsonUtil.parseValueToString($value[0]);
+                $stringJson .= JsonUtil::parseValueToString($value[0]);
 		        for($i =1; $i < count($value); $i++){
                     $stringJson .= ", ";
-                    $stringJson .= JsonUtil.parseValueToString($value[$i]);
+                    $stringJson .= JsonUtil::parseValueToString($value[$i]);
                 }
             }
             $stringJson .= " ]";

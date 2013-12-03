@@ -14,27 +14,35 @@ class JsonArray extends JsonBaseElement{
 		return $this->elements;
 	}
 
-	public function getElement(int $index){
+	public function getElement($index){
 		return $this->elements[$index];
 	}
-	public function setElement(int $index, $value){
+	public function setElement($index, $value){
 		$this->elements[$index] = $value;
 	}
 	
 	public function addElement($value){ //TODO: testar tipo de $element?
 		$this->elements[] = $value;
 	}
+//	public function removeElement($value){ //TODO: testar tipo de $element?
+//            $elementIndex = -1;
+//            for($i =0; $i < count($this->elements) && $elementIndex < 0; $i++){
+//                if($this->elements[$i] == $value){
+//                    $elementIndex = $i;
+//                }
+//            }
+//            
+//            if($elementIndex >= 0){
+//                $this->elements = array_splice($this->elements, $elementIndex, 1);//Remove elemento
+//            }
+//	}
 	public function removeElement($value){ //TODO: testar tipo de $element?
-        $elementIndex = -1;
-        for($i =1; $i < count($this->elements) && $elementIndex < 0; $i++){
-            if($this->elements[$i] == $value){
-                $elementIndex = $i;
+            $elementIndex = array_search($value, $this->elements);
+            
+            if(is_numeric($elementIndex)){
+                array_splice($this->elements, $elementIndex, 1);//Remove elemento
+                
             }
-        }
-
-        if($elementIndex > 0){
-            $this->elements = array_splice($this->elements, $elementIndex, 1);//Remove elemento
-        }
 	}
 
     /**
@@ -43,7 +51,7 @@ class JsonArray extends JsonBaseElement{
     public function valueToString(){
         $stringJson = "[ ";
         if(!empty($this->elements)){
-	        for($i =0; $i < count($this->elements); $i++){
+            for($i =0; $i < count($this->elements); $i++){
                 $element = $this->elements[$i];
                 if($i > 0){
                     $stringJson .= ", ";
