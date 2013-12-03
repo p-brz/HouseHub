@@ -137,7 +137,7 @@ class JsonObjectTest extends \PHPUnit_Framework_TestCase {
         $expectedJson = array("objName" => array("propriedade" => "valor", "outroElemento" => "outroValor"));
         $expected = json_encode($expectedJson);
         
-        $this->assertJsonStringEqualsJsonString($expected, "{" . $this->object->toString() . "}");
+        $this->assertJsonStringEqualsJsonString($expected, "{" . (string)$this->object . "}");
     }
 
 }

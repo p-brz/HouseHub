@@ -16,7 +16,7 @@ class SchemeService{
 	public function getReturnType() { return $this->returnType; } 
 	public function getText() { return $this->text; } 
 	public function getUndoService() { return $this->undoService; } 
-	public function getParameters() { return $this-parameters; } 
+	public function getParameters() { return $this->parameters; } 
 	
 	public function setName($x)         { $this->name = $x; } 
 	public function setPath($x)         { $this->path = $x; } 
@@ -25,7 +25,7 @@ class SchemeService{
 	public function setUndoService($x)  { $this->undoService = $x; } 
 	public function setParameters($x)   { $this->parameters = $x; } 
 
-    public function addParameter($p){ $this->parameters[] = $x;}
+    public function addParameter($x){ $this->parameters[] = $x;}
     //TODO: remover parametro
 }
 
