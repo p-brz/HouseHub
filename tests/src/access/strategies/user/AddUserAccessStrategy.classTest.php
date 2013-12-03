@@ -21,9 +21,11 @@ class AddUserAccessStrategyTest extends \PHPUnit_Framework_TestCase {
      * @group cookie
      */
     protected function setUp() {
-        $this->object = new AddUserAccessStrategy;
+        $this->object = new AddUserAccessStrategy();
         $this->loginHelper = new LoginHelper();
-        $this->loginHelper->doLogin();
+        if(!$this->loginHelper->isLogged()){        
+            $this->loginHelper->doLogin();
+        }
     }
 
     /**
@@ -31,7 +33,6 @@ class AddUserAccessStrategyTest extends \PHPUnit_Framework_TestCase {
      * This method is called after a test is executed.
      */
     protected function tearDown() {
-        
     }
 
     /**
@@ -40,9 +41,25 @@ class AddUserAccessStrategyTest extends \PHPUnit_Framework_TestCase {
      */
     public function testRequestAccess() {
         // Remove the following lines when you implement this test.
-        $parameters = array();
+        $parameters = array(
+            AddUserAccessStrategy::LOGIN_ARG => "user",
+            AddUserAccessStrategy::PASS_ARG => "123456",
+            AddUserAccessStrategy::NAME_ARG => "",
+            AddUserAccessStrategy::NICK_ARG => "",
+            AddUserAccessStrategy::GENDER_ARG => ""
+        );
 //        $parameters['']...
         $this->object->requestAccess($parameters);
+    }
+    /**
+     * househub\access\strategies\user\AddUserAccessStrategy::requestAccess
+     * @group cookie
+     */
+    public function testRequestAccessNoLogin() {
+        $this->loginHelper->doLogoff();
+        $parameters = array();
+//        $parameters['']...
+        $answer = $this->object->requestAccess($parameters);
     }
 
 }

@@ -25,111 +25,143 @@ use househub\access\DatabaseConnector;
 use PDO;
 
 class AddUserAccessStrategy extends AbstractAccessStrategy{
-	
-	public function requestAccess($parameters){
-		$answer = $this->initializeAnswer();
-		$driver = DatabaseConnector::getDriver();
-		
-		$sessManager = SessionManager::getInstance();
-		$userId = $sessManager->getSessionVariable('user_id');
-		if(is_null($userId) || $userId != 0){
-			$answer->setMessage('@forbidden');
-		}else{
-			
-			$hasErrors = false;
-			
-			$name = '';
-			$nickname = '';
-			$gender = '';
-			$login = '';
-			$password = '';
-			
-			if(!isset($parameters['name'])){
-				$hasErrors = true;
-				
-			}else if(strlen($parameters['name']) > 100){
-				$hasErrors = true;
-								
-			}else{
-				$name = urldecode($parameters['name']);
-			}
-			
-			if(!isset($parameters['nickname'])){
-				$hasErrors = true;
-				
-			}else if(strlen($parameters['nickname']) > 20){
-				$hasErrors = true;
-								
-			}else{
-				$nickname = urldecode($parameters['nickname']);
-			}
-			
-			if(!isset($parameters['gender'])){
-				$hasErrors = true;
-				
-			}else{
-				$gender = urldecode($parameters['gender']);
-			}
-			
-			if(!isset($parameters['login'])){
-				$hasErrors = true;
-				
-			}else if(strlen($parameters['login']) > 25){
-				$hasErrors = true;
-								
-			}else{
-				$login = strtolower(urldecode($parameters['login']));
-			}
-			
-			if(!isset($parameters['password'])){
-				$hasErrors = true;
-				
-			}else if(strlen($parameters['password']) > 12){
-				$hasErrors = true;
-								
-			}else{
-				$password = urldecode($parameters['password']);
-			}
-			
-			if($hasErrors){
-				$answer->setMessage('@error');
-			}else{
-				
-				$select = new SelectQuery();
-				$select->addColumn(UserStructureTable::COLUMN_ID);
-				$select->setEntity(UserStructureTable::TABLE_NAME);
-				
-				$criteria = new SqlCriteria();
-				$criteria->add(new SqlFilter('LCASE('.UserStructureTable::COLUMN_USERNAME.')', 'like', $login));
-				$select->setCriteria($criteria);
-				
-				$statement = $driver->query($select->getInstruction());
-				
-				if($statement->rowCount() > 0){
-					$answer->setMessage('@login_already_taken');
-				}else{
-					$encoded = new Sha1Hash();
-					$pass = $encoded->encrypt($password);
-					$insertQuery = new InsertQuery();
-					$insertQuery->setEntity(UserStructureTable::TABLE_NAME);
-					$insertQuery->setRowData(UserStructureTable::COLUMN_NAME, $name);
-					$insertQuery->setRowData(UserStructureTable::COLUMN_NICKNAME, $nickname);
-					$insertQuery->setRowData(UserStructureTable::COLUMN_GENDER, $gender);
-					$insertQuery->setRowData(UserStructureTable::COLUMN_USERNAME, $login);
-					$insertQuery->setRowData(UserStructureTable::COLUMN_PASSWORD, $pass);
-	
-					$driver->exec($insertQuery->getInstruction());
-					
-					$answer->setStatus(1);
-					$answer->setMessage('@success');
-				}
-			}
-		}
-		
-		return $answer;
-		
-	}
-	
+    const NAME_ARG   = "name";
+    const NICK_ARG   = "nickname";
+    const GENDER_ARG = "gender";
+    const LOGIN_ARG  = "login";
+    const PASS_ARG   = "password";
+    
+    private $dbDriver;
+    
+    public function __construct($driver = null) {
+        $this->dbDriver = (is_null($driver)? DatabaseConnector::getDriver() : $driver);
+    }
+
+
+    public function requestAccess($parameters){
+        $answer = $this->initializeAnswer();
+        
+        if($this->checkSession()){
+            if($this->checkParameters($parameters)){
+                $this->createUser($parameters, $answer);
+            }
+            else{
+                $answer->setMessage('@error');
+            }
+        }else{
+            $answer->setMessage('@forbidden');
+        }
+
+        return $answer;
+    }
+
+    protected function checkSession(){
+        $sessManager = SessionManager::getInstance();
+        $userId = $sessManager->getSessionVariable('user_id');
+        return (!is_null($userId) && $userId != 0);
+    }
+    
+    protected function checkParameters(&$parameters){        
+        if($this->checkName($parameters)
+                && $this->checkNickname($parameters)
+                && $this->checkGender($parameters)
+                && $this->checkLogin($parameters)
+                && $this->checkPassword($parameters))
+        {
+            
+            $parameters[self::NAME_ARG]  = urldecode($parameters[self::NAME_ARG]);
+            $parameters[self::NICK_ARG]  = urldecode($parameters[self::NICK_ARG]);
+            $parameters[self::GENDER_ARG]= urldecode($parameters[self::GENDER_ARG]);
+            $parameters[self::LOGIN_ARG] = strtolower(urldecode($parameters[self::LOGIN_ARG]));
+            $parameters[self::PASS_ARG]  = urldecode($parameters[self::PASS_ARG]);
+            
+            return true;
+        }
+        return false;
+    }
+    public function checkName($parameters){
+        return isset($parameters[self::NAME_ARG]) && (strlen($parameters[self::NAME_ARG]) <= 100);
+    }
+    public function checkNickname($parameters){
+        return isset($parameters[self::NICK_ARG]) && (strlen($parameters[self::NICK_ARG]) <= 20);
+    }
+    public function checkGender($parameters){
+        return isset($parameters[self::GENDER_ARG]);
+    }
+    public function checkLogin($parameters){
+        return isset($parameters[self::LOGIN_ARG]) && (strlen($parameters[self::LOGIN_ARG]) <= 25);
+    }
+    public function checkPassword($parameters){
+        return isset($parameters[self::PASS_ARG]) && (strlen($parameters[self::PASS_ARG]) <= 12);
+    }
+//    protected function createUser($parameters){
+//        if(!$this->existUser($parameters[self::LOGIN_ARG])){
+//            $insertQuery = $this->makeInsertQuery($parameters);
+//            $driver->exec($insertQuery->getInstruction());
+//
+//            $answer->setStatus(1);
+//            $answer->setMessage('@success');
+//        }
+//        else{
+//            $answer->setMessage('@login_already_taken');
+//        }
+//    }
+//    
+//    protected function makeInsertQuery($parameters){
+//        $insertQuery = new InsertQuery();
+//        $insertQuery->setEntity(UserStructureTable::TABLE_NAME);
+//        $insertQuery->setRowData(UserStructureTable::COLUMN_NAME    , $parameters[self::NAME_ARG]);
+//        $insertQuery->setRowData(UserStructureTable::COLUMN_NICKNAME, $parameters[self::NICK_ARG]);
+//        $insertQuery->setRowData(UserStructureTable::COLUMN_GENDER  , $parameters[self::GENDER_ARG]);
+//        $insertQuery->setRowData(UserStructureTable::COLUMN_USERNAME, $parameters[self::LOGIN_ARG_ARG]);
+//
+//        $encoded = new Sha1Hash();
+//        $passEncoded = $encoded->encrypt($parameters[self::PASS_ARG]);
+//        $insertQuery->setRowData(UserStructureTable::COLUMN_PASSWORD, $passEncoded);
+//        
+//        return $insertQuery;
+//    }
+    protected function createUser($parameters){
+        if(!$this->existUser($parameters[self::LOGIN_ARG])){
+            $newUser = $this->makeUser($parameters);
+            
+            $userDAO = new UserStructureDAO($this->dbDriver);
+            $userDAO->insert($newUser);
+
+            $answer->setStatus(1);
+            $answer->setMessage('@success');
+        }
+        else{
+            $answer->setMessage('@login_already_taken');
+        }
+    }
+    
+    protected function makeUser($parameters){
+        $newUser = new UserStructure();
+        $newUser->setName($parameters[self::NAME_ARG]);
+        $newUser->setNickname($parameters[self::NICK_ARG]);
+        $newUser->setGender($parameters[self::GENDER_ARG]);
+        $newUser->setUsername($parameters[self::LOGIN_ARG_ARG]);
+        $newUser->setPassword($parameters[self::PASS_ARG]);        
+        return $newUser;
+    }
+    
+    protected function existUser($login){
+        $driver = DatabaseConnector::getDriver();
+            
+        $select = new SelectQuery();
+        $select->addColumn(UserStructureTable::COLUMN_ID);
+        $select->setEntity(UserStructureTable::TABLE_NAME);
+
+        $criteria = new SqlCriteria();
+        $criteria->add(new SqlFilter('LCASE('.UserStructureTable::COLUMN_USERNAME.')', 'like', $login));
+        $select->setCriteria($criteria);
+
+        $statement = $driver->query($select->getInstruction());
+        
+        return ($statement->rowCount() > 0);
+    }
+
 }
 
 ?>

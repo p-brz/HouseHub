@@ -40,6 +40,11 @@ class LoginHelper {
         }
     }
     
+    public function doLogoff(){
+        $_SESSION['user_id'] = null;//gambiarra!?
+    }
+
+
     public function getSessId() {
         return $this->sessId;
     }

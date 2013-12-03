@@ -26,13 +26,8 @@ class HomeIntentManagerTest extends \PHPUnit_Framework_TestCase {
         $this->pdo = \househub\access\DatabaseConnector::getDriver();
         $this->pdo->beginTransaction();
     }
-
-    /**
-     * Tears down the fixture, for example, closes a network connection.
-     * This method is called after a test is executed.
-     */
+    
     protected function tearDown() {
-        
         $this->pdo->rollBack();
     }
 
