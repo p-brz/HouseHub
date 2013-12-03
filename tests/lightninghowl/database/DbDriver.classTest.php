@@ -35,16 +35,21 @@ class DbDriverTest extends \PHPUnit_Framework_TestCase {
     }
     
     /**
-     * @covers lightninghowl\database\DbDriver::open
-     * @todo   Implement testOpen().
+     * lightninghowl\database\DbDriver::open
      */
     public function testOpen() {
+//        $argument = new arguments\MySQLArgument();
+//        $argument->setDbName('househubtest');
+//        $argument->setDbUser('app');
+//        $argument->setDbPass('123456abc');
+//        $argument->setHost('localhost');
+//        $argument->setPort(3306);
         $argument = new arguments\MySQLArgument();
-        $argument->setDbName('househubtest');
-        $argument->setDbUser('app');
-        $argument->setDbPass('123456abc');
-        $argument->setHost('localhost');
-        $argument->setPort(3306);
+        $argument->setDbName($GLOBALS['DB_NAME']);
+        $argument->setDbUser($GLOBALS['DB_USER']);
+        $argument->setDbPass($GLOBALS['DB_PASS']);
+        $argument->setHost($GLOBALS['DB_HOST']);
+        $argument->setPort($GLOBALS['DB_PORT']);
         
         $pdo = DbDriver::open($argument);
         $this->assertTrue(true);

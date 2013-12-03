@@ -21,8 +21,6 @@ class SchemeTest extends \PHPUnit_Framework_TestCase {
         $rootDir = __DIR__ . $d . "..". $d . "..". $d . ".." . $d;
         $directory =  realpath($rootDir . $d . "files" . $d . "schemes");
         
-        echo $directory;
-        
         $jsonReader = new SchemeJsonFileReader($directory);
         
         $this->object = $jsonReader->getScheme("basicDoor");
@@ -136,7 +134,6 @@ class SchemeTest extends \PHPUnit_Framework_TestCase {
 
     /**
      * househub\scheme\Scheme::setStatus
-     * @todo   Implement testSetStatus().
      */
     public function testSetStatus() {
         $this->object->setStatus(array());
@@ -145,7 +142,6 @@ class SchemeTest extends \PHPUnit_Framework_TestCase {
 
     /**
      * househub\scheme\Scheme::setServices
-     * @todo   Implement testSetServices().
      */
     public function testSetServices() {
         $this->object->setServices(array());
@@ -154,7 +150,6 @@ class SchemeTest extends \PHPUnit_Framework_TestCase {
 
     /**
      * househub\scheme\Scheme::setConditions
-     * @todo   Implement testSetConditions().
      */
     public function testSetConditions() {
         $this->object->setConditions(array());

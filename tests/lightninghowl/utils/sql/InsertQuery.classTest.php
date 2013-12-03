@@ -36,7 +36,7 @@ class InsertQueryTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers lightninghowl\utils\sql\InsertQuery::setRowData
+     *  lightninghowl\utils\sql\InsertQuery::setRowData
      * @todo   Implement testSetRowData().
      */
     public function testSetRowData() {
@@ -49,8 +49,7 @@ class InsertQueryTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers lightninghowl\utils\sql\InsertQuery::setCriteria
-     * @todo   Implement testSetCriteria().
+     *  lightninghowl\utils\sql\InsertQuery::setCriteria
      */
     public function testSetCriteria() {
         $object = new InsertQuery();
@@ -59,15 +58,15 @@ class InsertQueryTest extends \PHPUnit_Framework_TestCase {
         $criteria = new SqlCriteria();
         try {
             $object->setCriteria($criteria);
-            $this->assertTrue(false);
+            $this->fail();
         } catch (Exception $e) {
-            echo $e->getMessage();
+//            echo $e->getMessage();
             $this->assertTrue(true);
         }
     }
 
     /**
-     * @covers lightninghowl\utils\sql\InsertQuery::getInstruction
+     *  lightninghowl\utils\sql\InsertQuery::getInstruction
      * @todo   Implement testGetInstruction().
      */
     public function testGetInstruction() {

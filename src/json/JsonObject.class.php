@@ -57,7 +57,6 @@ class JsonObject extends JsonBaseElement{
 //            }
             $index = array_search($element, $this->elements);
             if($index != false || $index == 0){
-                echo "Remove ". $element . " in ".  $index;
                 unset($this->elements[$index]);
                 $this->elements = array_values($this->elements);
             }
