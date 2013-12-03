@@ -37,8 +37,8 @@ class UrlHandlerTest extends \PHPUnit_Framework_TestCase {
      * @todo   Implement testSetTimeout().
      */
     public function testSetTimeout() {
-        $this->object->setTimeout(30);
-        $this->assertEquals(30, $this->object->getTimeout());
+        $this->handler->setTimeout(30);
+        $this->assertEquals(30, $this->handler->getTimeout());
     }
 
     /**
@@ -46,8 +46,8 @@ class UrlHandlerTest extends \PHPUnit_Framework_TestCase {
      * @todo   Implement testGetTimeout().
      */
     public function testGetTimeout() {
-        $this->object->setTimeout(30);
-        $this->assertEquals(30, $this->object->getTimeout());
+        $this->handler->setTimeout(30);
+        $this->assertEquals(30, $this->handler->getTimeout());
     }
 
     /**

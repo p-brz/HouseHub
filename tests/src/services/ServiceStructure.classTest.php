@@ -78,7 +78,7 @@ class ServiceStructureTest extends \PHPUnit_Framework_TestCase {
      * @todo   Implement testSetName().
      */
     public function testSetName() {
-        $this->object->setId('asdf');
+        $this->object->setName('asdf');
         $this->assertEquals('asdf', $this->object->getName());
     }
 

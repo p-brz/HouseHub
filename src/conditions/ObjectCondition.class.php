@@ -39,5 +39,3 @@ class ObjectCondition{
         return $isValid;
     }
 }
-
-?>
