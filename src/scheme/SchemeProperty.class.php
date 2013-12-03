@@ -27,7 +27,7 @@ class SchemeProperty{
     public function setPath($path){  $this->path = $path;}
     public function setType($type){  $this->type = $type;}
     public function setAllowedValues($allowedValues){  $this->allowedValues = $allowedValues;}
-    public function setReadOnly(bool $readOnly){$this->isReadOnly = $readOnly;}
+    public function setReadOnly($readOnly){$this->isReadOnly = $readOnly;}
 	
 }
 

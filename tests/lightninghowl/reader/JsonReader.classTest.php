@@ -36,18 +36,33 @@ class JsonReaderTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals(array('foo' => 'bar'), $this->object->get('content'));
     }
 
+    /**
+     * @test
+     */
     public function testGetB() {
         $this->object = new JsonReader('');
-        $this->assertEquals(null, $this->object->get());
-        $this->assertEquals(null, $this->object->get('foo'));
-        $this->assertEquals(null, $this->object->get('bar'));
+        $this->assertNull($this->object->get());
+        $this->assertNull($this->object->get('foo'));
+        $this->assertNull($this->object->get('bar'));
+    }
+    /**
+     * @test
+     */
+    public function testGetC() {
+        $this->assertNull($this->object->get('tar'));
     }
 
     
+    /**
+     * @test
+     */
     public function testConstruct(){
         $this->assertEquals('bar', $this->object->get('foo'));
     }
     
+    /**
+     * @test
+     */
     public function testConstruct1(){
         $path = 'is not a file';
         $reader = new JsonReader($path);
