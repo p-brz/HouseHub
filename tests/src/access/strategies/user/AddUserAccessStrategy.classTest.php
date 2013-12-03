@@ -40,7 +40,8 @@ class AddUserAccessStrategyTest extends \PHPUnit_Framework_TestCase {
      */
     public function testRequestAccess() {
         // Remove the following lines when you implement this test.
-        $parameters = "";
+        $parameters = array();
+//        $parameters['']...
         $this->object->requestAccess($parameters);
     }
 

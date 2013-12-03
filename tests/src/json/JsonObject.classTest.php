@@ -66,7 +66,6 @@ class JsonObjectTest extends \PHPUnit_Framework_TestCase {
         $this->object->addElement($expected);
         
         $this->object->addElement($values[2]);
-        var_dump($this->object->getElements());
         
         $this->assertEquals($expected, $this->object->getElement(2));
         $this->assertEquals($expected, $this->object->getElement("expected"));
@@ -119,20 +118,26 @@ class JsonObjectTest extends \PHPUnit_Framework_TestCase {
      * househub\json\JsonObject::valueToString
      */
     public function testValueToString() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
+        $this->object->addElement(new JsonData("propriedade", "valor"));
+        $this->object->addElement(new JsonData("outroElemento", "outroValor"));
+        
+        $expected = array("propriedade" => "valor", "outroElemento" => "outroValor");
+        
+        $this->assertJsonStringEqualsJsonString(json_encode($expected),$this->object->valueToString());
     }
 
     /**
      * househub\json\JsonObject::toString
      */
     public function testToString() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
+        $this->object->setName("objName");
+        $this->object->addElement(new JsonData("propriedade", "valor"));
+        $this->object->addElement(new JsonData("outroElemento", "outroValor"));
+        
+        $expectedJson = array("objName" => array("propriedade" => "valor", "outroElemento" => "outroValor"));
+        $expected = json_encode($expectedJson);
+        
+        $this->assertJsonStringEqualsJsonString($expected, "{" . $this->object->toString() . "}");
     }
 
 }

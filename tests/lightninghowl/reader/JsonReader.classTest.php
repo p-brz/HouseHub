@@ -11,35 +11,62 @@ namespace lightninghowl\reader;
 class JsonReaderTest extends \PHPUnit_Framework_TestCase {
 
     /**
-     * @covers lightninghowl\reader\JsonReader::get
+     * @var JsonReader
+     */
+    private $object;
+    
+    public function setUp(){
+        $jsonPath = __DIR__ . DIRECTORY_SEPARATOR . 'test.json';
+
+        $this->object = new JsonReader($jsonPath);
+    }
+
+
+    /**
+     * lightninghowl\reader\JsonReader::get
      */
     public function testGetA() {
+        
         $d = DIRECTORY_SEPARATOR;
         $rootDir = realpath(__DIR__ . $d . '..' . $d . '..' . $d . '..' . $d);
         $jsonPath = $rootDir . $d . 'files' . $d . 'test' . $d . 'test.json';
-
-        $object = new JsonReader($jsonPath);
-        $this->assertEquals(1, $object->get('status'));
-        $this->assertEquals('test', $object->get('message'));
-        $this->assertEquals(array('foo' => 'bar'), $object->get('content'));
+        $this->object = new JsonReader($jsonPath);
+        $this->assertEquals(1, $this->object->get('status'));
+        $this->assertEquals('test', $this->object->get('message'));
+        $this->assertEquals(array('foo' => 'bar'), $this->object->get('content'));
     }
 
+    /**
+     * @test
+     */
     public function testGetB() {
-        $object = new JsonReader('');
-        $this->assertEquals(null, $object->get());
-        $this->assertEquals(null, $object->get('foo'));
-        $this->assertEquals(null, $object->get('bar'));
+        $this->object = new JsonReader('');
+        $this->assertNull($this->object->get());
+        $this->assertNull($this->object->get('foo'));
+        $this->assertNull($this->object->get('bar'));
+    }
+    /**
+     * @test
+     */
+    public function testGetC() {
+        $this->assertNull($this->object->get('tar'));
     }
 
     
+    /**
+     * @test
+     */
     public function testConstruct(){
-        $reader = new JsonReader(__DIR__ . DIRECTORY_SEPARATOR . 'test.json');
-        $this->assertEquals('bar', $reader->get('foo'));
+        $this->assertEquals('bar', $this->object->get('foo'));
     }
     
+    /**
+     * @test
+     */
     public function testConstruct1(){
-        $reader = new JsonReader('test.json');
-        $this->assertEquals('bar', $reader->get('foo'));
-        $this->assertEquals(null, $reader->get('bar'));
+        $path = 'is not a file';
+        $reader = new JsonReader($path);
+        $this->assertNull($reader->get('foo'));
+        $this->assertNull($reader->get('bar'));
     }
 }
