@@ -7,8 +7,9 @@ before_script:
   - php ./install/install.php --db-user=travis --db-name=househubdb --adm_user=adm --adm_pass=123456
 script: 
   - mkdir -p build/logs
-  - ./vendor/bin/phpunit -c phpunit.xml.dist
 #  - ./vendor/bin/phpunit --coverage-clover ./build/logs/clover.xml ./src/tests/*
+#  - ./vendor/bin/phpunit -c phpunit.xml.dist
+  - ./vendor/bin/phpunit -c phpunit-travis.xml.dist
 
 after_script:
   - php ./vendor/bin/coveralls -v
