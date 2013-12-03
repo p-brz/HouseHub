@@ -225,54 +225,69 @@ class HomeObjectManager{
 		return $scheme;
 	}
 	
-	public function saveObject(HomeObject $object, PDO $driver, $saveThisOnly = false){
-		$homeObject = $object;
-		$structure = $homeObject->getStructure();
-		
-		$objectDAO = new ObjectStructureDAO($driver);
-		$objectId = $objectDAO->insert($structure);
-		$structure->setId($objectId);
-		
-		$services = $homeObject->getServices();
-		if(!empty($services) && !is_null($services)){
-			$serviceDAO = new ServiceStructureDAO($driver);
-			foreach($services as $key=>$service){
-				$service->setObjectId($objectId);
-				$serviceId = $serviceDAO->insert($service);
-				$service->setId($serviceId);
-				$services[$key] = $service;
-			}
-		}
-		
-		$status = $homeObject->getStatus();
-		if(!empty($status) && !is_null($status)){
-			$statusDAO = new StatusStructureDAO($driver);
-			foreach($status as $key=>$singleStatus){
-				$singleStatus->setObjectId($objectId);
-				$statusId = $statusDAO->insert($singleStatus);
-				$singleStatus->setId($statusId);
-				$status[$key] = $singleStatus;
-			}	
-		}
-		
-		
-		if(!$saveThisOnly){
-			$subObjects = $homeObject->getSubObjects();
-			foreach($subObjects as $key=>$subObject){
-				$subObject->getStructure()->setParentId($objectId);
-				$subObject->getStructure()->setParentIndex($key);
-				
-				$obj = $this->saveObject($subObject, $driver, true);
-				$subObjects[$key] = $obj;	
-			}
-			$homeObject->setSubObjects($subObjects);
-		}
-		
-		$homeObject->setStructure($structure);
-		$homeObject->setServices($services);
-		$homeObject->setStatus($status);
-		
-		return $homeObject;
+	public function saveObject(HomeObject $homeObject, PDO $driver, $saveThisOnly = false){
+            $this->saveObject($homeObject, $driver);
+            $this->saveServices($homeObject, $driver);
+            $this->saveStatus($homeObject, $driver);
+
+            if(!$saveThisOnly){
+                $this->saveSubobjects($homeObject, $driver);
+            }
+
+            return $homeObject;
 	}
+    
+    protected function saveObjectStructure(&$homeObject, $driver){
+        $structure = $homeObject->getStructure();
+
+        $objectDAO = new ObjectStructureDAO($driver);
+        $objectId = $objectDAO->insert($structure);
+        $structure->setId($objectId);
+        $homeObject->setStructure($structure);
+    }    
+    protected function saveServices(&$homeObject, $driver){
+        $objectId = $homeObject->getStructure()->getId();
+        
+        $services = $homeObject->getServices();
+        if(!empty($services) && !is_null($services)){
+                $serviceDAO = new ServiceStructureDAO($driver);
+                foreach($services as $key=>$service){
+                        $service->setObjectId($objectId);
+                        $serviceId = $serviceDAO->insert($service);
+                        $service->setId($serviceId);
+                        $services[$key] = $service;
+                }
+        }
+        $homeObject->setServices($services);
+    }
+    protected function saveStatus(&$homeObject, $driver){
+        $objectId = $homeObject->getStructure()->getId();
+        
+        $status = $homeObject->getStatus();
+        if(!empty($status) && !is_null($status)){
+                $statusDAO = new StatusStructureDAO($driver);
+                foreach($status as $key=>$singleStatus){
+                        $singleStatus->setObjectId($objectId);
+                        $statusId = $statusDAO->insert($singleStatus);
+                        $singleStatus->setId($statusId);
+                        $status[$key] = $singleStatus;
+                }	
+        }
+        $homeObject->setStatus($status);
+    }
+    
+    protected function saveSubobjects(&$homeObject, $driver){
+        $objectId = $homeObject->getStructure()->getId();
+        
+        $subObjects = $homeObject->getSubObjects();
+        foreach($subObjects as $key=>$subObject){
+                $subObject->getStructure()->setParentId($objectId);
+                $subObject->getStructure()->setParentIndex($key);
+
+                $obj = $this->saveObject($subObject, $driver, true);
+                $subObjects[$key] = $obj;	
+        }
+        $homeObject->setSubObjects($subObjects);
+    }
 }
 ?>
