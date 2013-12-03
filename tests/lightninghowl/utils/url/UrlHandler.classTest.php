@@ -2,7 +2,7 @@
 
 namespace lightninghowl\utils\url;
 
-require_once realpath(dirname(__FILE__).'/../../../../lightninghowl/utils/AutoLoader.class.php');
+require_once realpath(dirname(__FILE__) . '/../../../../lightninghowl/utils/AutoLoader.class.php');
 //$d = DIRECTORY_SEPARATOR;
 //require_once dirname(__FILE__).$d . '..' . $d . '..' . $d . '..' . $d . 'lightninghowl'. $d .'utils' . $d . 'AutoLoader.class.php';
 
@@ -37,7 +37,8 @@ class UrlHandlerTest extends \PHPUnit_Framework_TestCase {
      * @todo   Implement testSetTimeout().
      */
     public function testSetTimeout() {
-        $this->assertTrue(true);
+        $this->object->setTimeout(30);
+        $this->assertEquals(30, $this->object->getTimeout());
     }
 
     /**
@@ -45,7 +46,8 @@ class UrlHandlerTest extends \PHPUnit_Framework_TestCase {
      * @todo   Implement testGetTimeout().
      */
     public function testGetTimeout() {
-        $this->assertTrue(true);
+        $this->object->setTimeout(30);
+        $this->assertEquals(30, $this->object->getTimeout());
     }
 
     /**
@@ -92,11 +94,19 @@ class UrlHandlerTest extends \PHPUnit_Framework_TestCase {
      * @todo   Implement testRun().
      */
     public function testRun() {
-        $this->assertEquals('',$this->handler->getContent());
-        $this->assertNull($this->handler->getStatus());
-        $this->handler->run();
-        $this->assertNotNull($this->handler->getContent());
-        $this->assertNotNull($this->handler->getStatus());
+        $handler = new UrlHandler('http://localhost', 'GET');
+        $this->assertEquals(null, $handler->getContent());
+        $this->assertEquals(null, $handler->getStatus());
+        $handler->run();
+        $this->assertTrue(!is_null($handler->getContent()));
+        $this->assertTrue(!is_null($handler->getStatus()));
+        
+        $handler = new UrlHandler('http://localhost', 'POST');
+        $this->assertEquals(null, $handler->getContent());
+        $this->assertEquals(null, $handler->getStatus());
+        $handler->run();
+        $this->assertTrue(!is_null($handler->getContent()));
+        $this->assertTrue(!is_null($handler->getStatus()));
     }
 
 }

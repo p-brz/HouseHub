@@ -49,7 +49,7 @@ class StrOpersTest extends \PHPUnit_Framework_TestCase {
      * @todo   Implement testStrFixPath().
      */
     public function testStrFixPath() {
-        $this->assertEquals('C:'.DIRECTORY_SEPARATOR.'test', StrOpers::strFixPath('C:/test'));
+        $this->assertEquals('C:' . DIRECTORY_SEPARATOR . 'test', StrOpers::strFixPath('C:/test'));
     }
 
     /**
@@ -60,4 +60,10 @@ class StrOpersTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals('localhost/home', StrOpers::strWebPath('localhost/home'));
     }
 
+    public function testVarFancyDump(){
+        $var = array('foo' => 'bar');
+        StrOpers::varFancyDump($var);
+        $this->assertTrue(true);
+    }
+    
 }

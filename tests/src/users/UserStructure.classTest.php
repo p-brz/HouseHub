@@ -25,7 +25,6 @@ class UserStructureTest extends \PHPUnit_Framework_TestCase {
         $this->object->setPassword('Pass');
         $this->object->setRegistrationDate('2012-02-01 00:00:00');
         $this->object->setUsername('User');
-        
     }
 
     /**
@@ -89,10 +88,7 @@ class UserStructureTest extends \PHPUnit_Framework_TestCase {
      * @todo   Implement testGetRegistrationDate().
      */
     public function testGetRegistrationDate() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
+        $this->assertEquals('2012-02-01 00:00:00', $this->object->getRegistrationDate());
     }
 
     /**
@@ -100,10 +96,8 @@ class UserStructureTest extends \PHPUnit_Framework_TestCase {
      * @todo   Implement testSetId().
      */
     public function testSetId() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
+        $this->object->setId(2);
+        $this->assertEquals(2, $this->object->getId());
     }
 
     /**
@@ -111,10 +105,8 @@ class UserStructureTest extends \PHPUnit_Framework_TestCase {
      * @todo   Implement testSetName().
      */
     public function testSetName() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
+        $this->object->setName('Bar');
+        $this->assertEquals('Bar', $this->object->getName());
     }
 
     /**
@@ -122,10 +114,8 @@ class UserStructureTest extends \PHPUnit_Framework_TestCase {
      * @todo   Implement testSetNickname().
      */
     public function testSetNickname() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
+        $this->object->setNickname('Lorem');
+        $this->assertEquals('Lorem', $this->object->getNickname());
     }
 
     /**
@@ -133,10 +123,8 @@ class UserStructureTest extends \PHPUnit_Framework_TestCase {
      * @todo   Implement testSetGender().
      */
     public function testSetGender() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
+        $this->object->setGender('F');
+    $this->assertEquals('F', $this->object->getGender());
     }
 
     /**
@@ -144,10 +132,8 @@ class UserStructureTest extends \PHPUnit_Framework_TestCase {
      * @todo   Implement testSetUsername().
      */
     public function testSetUsername() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
+        $this->object->setUsername('myUser');
+        $this->assertEquals('myUser', $this->object->getUsername());
     }
 
     /**
@@ -155,10 +141,8 @@ class UserStructureTest extends \PHPUnit_Framework_TestCase {
      * @todo   Implement testSetPassword().
      */
     public function testSetPassword() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
+        $this->object->setPassword('myPass');
+        $this->assertEquals('myPass', $this->object->getPassword());
     }
 
     /**
@@ -166,10 +150,8 @@ class UserStructureTest extends \PHPUnit_Framework_TestCase {
      * @todo   Implement testSetRegistrationDate().
      */
     public function testSetRegistrationDate() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
+        $this->object->setRegistrationDate('2011-01-01 00:00:00');
+        $this->assertEquals('2011-01-01 00:00:00', $this->object->getRegistrationDate());
     }
 
 }
