@@ -30,7 +30,6 @@ class LoginAccessStrategyTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers househub\access\strategies\session\LoginAccessStrategy::requestAccess
      * @todo   Implement testRequestAccess().
      */
     public function testRequestAccess() {
@@ -47,7 +46,6 @@ class LoginAccessStrategyTest extends \PHPUnit_Framework_TestCase {
         $this->assertNotNull($answer->getContent()->getElement("phpsessid"));
     }
     /**
-     * @covers househub\access\strategies\session\LoginAccessStrategy::requestAccess
      * @todo   Implement testRequestAccess().
      */
     public function testRequestFail() {
@@ -63,7 +61,6 @@ class LoginAccessStrategyTest extends \PHPUnit_Framework_TestCase {
 //        $this->assertNotNull($answer->getContent()->getElement("phpsessid"));
     }
     /**
-     * @covers househub\access\strategies\session\LoginAccessStrategy::requestAccess
      * @todo   Implement testRequestAccess().
      */
     public function testRequestWithoutUser() {
@@ -76,7 +73,6 @@ class LoginAccessStrategyTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals(0, $answer->getStatus());
     }
     /**
-     * @covers househub\access\strategies\session\LoginAccessStrategy::requestAccess
      * @todo   Implement testRequestAccess().
      */
     public function testRequestWithoutPass() {

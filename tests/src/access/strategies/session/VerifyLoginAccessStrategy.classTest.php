@@ -29,7 +29,6 @@ class VerifyLoginAccessStrategyTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers househub\access\strategies\session\VerifyLoginAccessStrategy::requestAccess
      * @todo   Implement testRequestAccess().
      */
     public function testRequestAccess() {
@@ -46,7 +45,6 @@ class VerifyLoginAccessStrategyTest extends \PHPUnit_Framework_TestCase {
         
     }
     /**
-     * @covers househub\access\strategies\session\VerifyLoginAccessStrategy::requestAccess
      */
     public function testVerifyLoginFail() {
         // Remove the following lines when you implement this test.

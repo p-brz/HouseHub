@@ -30,7 +30,6 @@ class JsonObjectTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers househub\json\JsonObject::getElements
      */
     public function testGetElementsEmpty() {
         $elements = $this->object->getElements();
@@ -38,7 +37,6 @@ class JsonObjectTest extends \PHPUnit_Framework_TestCase {
 //        var_dump(empty($elements));
     }
     /**
-     * @covers househub\json\JsonObject::getElements
      */
     public function testGetElements() {
         $expected = array(
@@ -75,8 +73,7 @@ class JsonObjectTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers househub\json\JsonObject::setElement
-     * @todo   Implement testSetElement().
+     * househub\json\JsonObject::setElement
      */
     public function testSetElement() {
         $this->object->addElement(new JsonData());
@@ -86,8 +83,7 @@ class JsonObjectTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers househub\json\JsonObject::addElement
-     * @todo   Implement testAddElement().
+     * househub\json\JsonObject::addElement
      */
     public function testAddElement() {
         $this->object->addElement(new JsonData());
@@ -97,7 +93,7 @@ class JsonObjectTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers househub\json\JsonObject::removeElement
+     * househub\json\JsonObject::removeElement
      */
     public function testRemoveElement() {
         $expected = new JsonData("expected","value");
@@ -108,7 +104,7 @@ class JsonObjectTest extends \PHPUnit_Framework_TestCase {
         $this->assertFalse(in_array($expected, $this->object->getElements()));
     }
     /**
-     * @covers househub\json\JsonObject::removeElement
+     * househub\json\JsonObject::removeElement
      */
     public function testRemoveElementFalse() {
         $expected = new JsonData("expected","value");
@@ -120,8 +116,7 @@ class JsonObjectTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers househub\json\JsonObject::valueToString
-     * @todo   Implement testValueToString().
+     * househub\json\JsonObject::valueToString
      */
     public function testValueToString() {
         // Remove the following lines when you implement this test.
@@ -131,8 +126,7 @@ class JsonObjectTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers househub\json\JsonObject::toString
-     * @todo   Implement testToString().
+     * househub\json\JsonObject::toString
      */
     public function testToString() {
         // Remove the following lines when you implement this test.

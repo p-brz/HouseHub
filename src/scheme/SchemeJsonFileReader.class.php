@@ -3,7 +3,7 @@
 namespace househub\scheme;
 
 class SchemeJsonFileReader implements SchemeReader{
-	private $filepath;
+    private $filepath;
 	
     public function __construct($directory){
         $this->filepath = $directory;
@@ -27,7 +27,7 @@ class SchemeJsonFileReader implements SchemeReader{
     }
 
 //TODO: getters and setter (configReader)
-	public function getScheme($name){
+    public function getScheme($name){
         if(!empty($name) && !empty($this->filepath)){
             $configs = $this->loadJson($this->filepath . DIRECTORY_SEPARATOR. $name . ".json");
 			

@@ -32,7 +32,6 @@ class AnswerEntityTest extends \PHPUnit_Framework_TestCase {
     }
     
     /**
-     * @covers househub\answer\AnswerEntity::getStatus
      */
     public function testGetStatus() {
         $objStatus = $this->object->getStatus();
@@ -40,7 +39,6 @@ class AnswerEntityTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers househub\answer\AnswerEntity::getMessage
      */
     public function testGetMessage() {
         $objMessage = $this->object->getMessage();
@@ -48,7 +46,6 @@ class AnswerEntityTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers househub\answer\AnswerEntity::getContent
      */
     public function testGetContent() {
         $content = $this->object->getContent();
@@ -56,7 +53,6 @@ class AnswerEntityTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers househub\answer\AnswerEntity::setStatus
      */
     public function testSetStatus() {
         $this->object->setStatus(0);
@@ -64,7 +60,6 @@ class AnswerEntityTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers househub\answer\AnswerEntity::setMessage
      */
     public function testSetMessage() {
         $this->object->setMessage('newMessage');
@@ -72,7 +67,6 @@ class AnswerEntityTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers househub\answer\AnswerEntity::setContent
      */
     public function testSetContent() {
         $content = array('foo', 'bar');
@@ -81,7 +75,6 @@ class AnswerEntityTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers househub\answer\AnswerEntity::addContent
      */
     public function testAddContent() {
         $content = array();

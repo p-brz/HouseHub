@@ -31,7 +31,7 @@ class DateTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers lightninghowl\utils\date\Date::getDay
+     * lightninghowl\utils\date\Date::getDay
      * @todo   Implement testGetDay().
      */
     public function testGetDay() {
@@ -39,7 +39,7 @@ class DateTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers lightninghowl\utils\date\Date::getMouth
+     * lightninghowl\utils\date\Date::getMouth
      * @todo   Implement testGetMouth().
      */
     public function testGetMouth() {
@@ -47,7 +47,7 @@ class DateTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers lightninghowl\utils\date\Date::getYear
+     * lightninghowl\utils\date\Date::getYear
      * @todo   Implement testGetYear().
      */
     public function testGetYear() {
@@ -55,7 +55,7 @@ class DateTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers lightninghowl\utils\date\Date::getHours
+     * lightninghowl\utils\date\Date::getHours
      * @todo   Implement testGetHours().
      */
     public function testGetHours() {
@@ -63,7 +63,7 @@ class DateTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers lightninghowl\utils\date\Date::getMinutes
+     * lightninghowl\utils\date\Date::getMinutes
      * @todo   Implement testGetMinutes().
      */
     public function testGetMinutes() {
@@ -71,7 +71,7 @@ class DateTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers lightninghowl\utils\date\Date::getSeconds
+     * lightninghowl\utils\date\Date::getSeconds
      * @todo   Implement testGetSeconds().
      */
     public function testGetSeconds() {
@@ -79,7 +79,7 @@ class DateTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers lightninghowl\utils\date\Date::setDay
+     * lightninghowl\utils\date\Date::setDay
      * @todo   Implement testSetDay().
      */
     public function testSetDay() {
@@ -87,7 +87,7 @@ class DateTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers lightninghowl\utils\date\Date::setMouth
+     * lightninghowl\utils\date\Date::setMouth
      * @todo   Implement testSetMouth().
      */
     public function testSetMouth() {
@@ -95,7 +95,7 @@ class DateTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers lightninghowl\utils\date\Date::setYear
+     * lightninghowl\utils\date\Date::setYear
      * @todo   Implement testSetYear().
      */
     public function testSetYear() {
@@ -103,7 +103,7 @@ class DateTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers lightninghowl\utils\date\Date::setHours
+     * lightninghowl\utils\date\Date::setHours
      * @todo   Implement testSetHours().
      */
     public function testSetHours() {
@@ -111,7 +111,7 @@ class DateTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers lightninghowl\utils\date\Date::setMinutes
+     * lightninghowl\utils\date\Date::setMinutes
      * @todo   Implement testSetMinutes().
      */
     public function testSetMinutes() {
@@ -119,7 +119,7 @@ class DateTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers lightninghowl\utils\date\Date::setSeconds
+     * lightninghowl\utils\date\Date::setSeconds
      * @todo   Implement testSetSeconds().
      */
     public function testSetSeconds() {
