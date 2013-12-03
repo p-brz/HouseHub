@@ -1,0 +1,2 @@
+while(!file_exists(getcwd()."/.htroot")){chdir('..');}
+require_once 'lightninghowl/utils/AutoLoader.class.php';

@@ -2,6 +2,8 @@
 
 namespace lightninghowl\utils\sql;
 
+
+
 abstract class SqlExpression{
 	
 	const AND_OPERATOR = 'AND ';
@@ -9,5 +11,3 @@ abstract class SqlExpression{
 	
 	abstract public function dump();
 }
-
-?>
