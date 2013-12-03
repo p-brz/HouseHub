@@ -37,7 +37,6 @@ class SchemeParserTest extends \PHPUnit_Framework_TestCase {
 
     /**
      * househub\scheme\SchemeParser::convertToScheme
-     * @todo   Implement testConvertToScheme().
      */
     public function testConvertToScheme() {
         // Remove the following lines when you implement this test.

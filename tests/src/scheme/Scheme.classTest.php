@@ -17,7 +17,15 @@ class SchemeTest extends \PHPUnit_Framework_TestCase {
      * This method is called before a test is executed.
      */
     protected function setUp() {
-        $this->object = new Scheme;
+        $d = DIRECTORY_SEPARATOR;
+        $rootDir = __DIR__ . $d . "..". $d . "..". $d . ".." . $d;
+        $directory =  realpath($rootDir . $d . "files" . $d . "schemes");
+        
+        echo $directory;
+        
+        $jsonReader = new SchemeJsonFileReader($directory);
+        
+        $this->object = $jsonReader->getScheme("basicDoor");
     }
 
     /**
@@ -33,21 +41,14 @@ class SchemeTest extends \PHPUnit_Framework_TestCase {
      * @todo   Implement testGetSchemeName().
      */
     public function testGetSchemeName() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
+        $this->assertEquals("basicDoor",$this->object->getSchemeName());
     }
 
     /**
      * househub\scheme\Scheme::getSchemeVersion
-     * @todo   Implement testGetSchemeVersion().
      */
     public function testGetSchemeVersion() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
+        $this->assertEquals(2,$this->object->getSchemeVersion());
     }
 
     /**
@@ -55,32 +56,27 @@ class SchemeTest extends \PHPUnit_Framework_TestCase {
      * @todo   Implement testGetObjectType().
      */
     public function testGetObjectType() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
+        $this->assertEquals("door",$this->object->getObjectType());
     }
 
     /**
      * househub\scheme\Scheme::getConfigs
-     * @todo   Implement testGetConfigs().
      */
     public function testGetConfigs() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
+        $configs = $this->object->getConfigs();
+        $this->assertNotNull($configs);
+        $this->assertCount(3,$configs);
+        $this->assertContainsOnlyInstancesOf('\\househub\\scheme\\SchemeProperty',$configs);
     }
 
     /**
      * househub\scheme\Scheme::getStatus
-     * @todo   Implement testGetStatus().
      */
     public function testGetStatus() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
+        $status = $this->object->getStatus();
+        $this->assertNotNull($status);
+        $this->assertCount(2,$status);
+        $this->assertContainsOnlyInstancesOf('\\househub\\scheme\\SchemeProperty',$status);
     }
 
     /**
@@ -88,21 +84,20 @@ class SchemeTest extends \PHPUnit_Framework_TestCase {
      * @todo   Implement testGetServices().
      */
     public function testGetServices() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
+        $services = $this->object->getServices();
+        $this->assertNotNull($services);
+        $this->assertCount(2,$services);
+        $this->assertContainsOnlyInstancesOf('\\househub\\scheme\\SchemeService',$services);
     }
 
     /**
      * househub\scheme\Scheme::getConditions
-     * @todo   Implement testGetConditions().
      */
     public function testGetConditions() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
+        $conditions = $this->object->getConditions();
+        $this->assertNotNull($conditions);
+        $this->assertCount(3,$conditions);
+        $this->assertContainsOnlyInstancesOf('\\househub\\conditions\\ObjectCondition',$conditions);
     }
 
     /**
@@ -110,32 +105,24 @@ class SchemeTest extends \PHPUnit_Framework_TestCase {
      * @todo   Implement testSetSchemeName().
      */
     public function testSetSchemeName() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
+        $this->object->setSchemeName("NovoNome");
+        $this->assertEquals("NovoNome",$this->object->getSchemeName());
     }
 
     /**
      * househub\scheme\Scheme::setSchemeVersion
-     * @todo   Implement testSetSchemeVersion().
      */
     public function testSetSchemeVersion() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
+        $this->object->setSchemeVersion(3);
+        $this->assertEquals(3,$this->object->getSchemeVersion());
     }
 
     /**
      * househub\scheme\Scheme::setObjectType
-     * @todo   Implement testSetObjectType().
      */
     public function testSetObjectType() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
+        $this->object->setObjectType("lamp");
+        $this->assertEquals("lamp",$this->object->getObjectType());
     }
 
     /**
@@ -143,10 +130,8 @@ class SchemeTest extends \PHPUnit_Framework_TestCase {
      * @todo   Implement testSetConfigs().
      */
     public function testSetConfigs() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
+        $this->object->setConfigs(array());
+        $this->assertEquals(array(),$this->object->getConfigs());
     }
 
     /**
@@ -154,10 +139,8 @@ class SchemeTest extends \PHPUnit_Framework_TestCase {
      * @todo   Implement testSetStatus().
      */
     public function testSetStatus() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
+        $this->object->setStatus(array());
+        $this->assertEquals(array(),$this->object->getStatus());
     }
 
     /**
@@ -165,10 +148,8 @@ class SchemeTest extends \PHPUnit_Framework_TestCase {
      * @todo   Implement testSetServices().
      */
     public function testSetServices() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
+        $this->object->setServices(array());
+        $this->assertEquals(array(),$this->object->getServices());
     }
 
     /**
@@ -176,10 +157,8 @@ class SchemeTest extends \PHPUnit_Framework_TestCase {
      * @todo   Implement testSetConditions().
      */
     public function testSetConditions() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
+        $this->object->setConditions(array());
+        $this->assertEquals(array(),$this->object->getConditions());
     }
 
 }
