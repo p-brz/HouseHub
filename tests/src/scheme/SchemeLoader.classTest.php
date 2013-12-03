@@ -34,11 +34,11 @@ class SchemeLoaderTest extends \PHPUnit_Framework_TestCase {
         $rootDir = __DIR__ . $d . "..". $d . "..". $d . ".." . $d;
         $directory =  realpath($rootDir . $d . "files" . $d . "schemes");
         
-        echo $directory;
-        
         $jsonReader = new SchemeJsonFileReader($directory);
+        $localJsonReader = new SchemeJsonFileReader(__DIR__);
         
         $this->object->addSchemeReader($jsonReader);
+        $this->object->addSchemeReader($localJsonReader);
         $this->assertContains($jsonReader, $this->object->getReaders());
         return $this->object;
     }
@@ -48,6 +48,14 @@ class SchemeLoaderTest extends \PHPUnit_Framework_TestCase {
      */
     public function testLoadScheme(SchemeLoader $schemeLoader) {
         $scheme = $schemeLoader->loadScheme("basicDoor");
+        $this->assertNotNull($scheme);
+        $this->assertInstanceOf('\househub\scheme\Scheme',$scheme);
+    }
+    /**
+     * @depends testAddSchemeReader
+     */
+    public function testLoadScheme2(SchemeLoader $schemeLoader) {
+        $scheme = $schemeLoader->loadScheme("schemeTest");
         $this->assertNotNull($scheme);
         $this->assertInstanceOf('\househub\scheme\Scheme',$scheme);
     }

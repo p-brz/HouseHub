@@ -66,7 +66,7 @@ class SchemeParser{
 
     protected function makeProperty($confProperty){
         $propName = $confProperty["name"];
-        $propPath = $confProperty["path"];
+        $propPath = (isset($confProperty["path"]) ? $confProperty["path"] : false);
         $propType = $confProperty["type"];
         $propReadOnly = (isset($confProperty["readOnly"]) ? $confProperty["readOnly"] : false);
         $propIsReadOnly = (!is_null($propReadOnly) ? $propReadOnly : false);
@@ -134,7 +134,7 @@ class SchemeParser{
             $schemeService->setPath($confServ["path"]);
             $schemeService->setReturnType($confServ["returnType"]);
             $schemeService->setText($confServ["text"]);
-            $schemeService->setUndoService($confServ["undoService"]);
+            $schemeService->setUndoService((isset($confServ["undoService"])? $confServ["undoService"] : null));
 
             foreach($confServ["parameters"] as $parameter){
                 $schemeService->addParameter($this->makeProperty($parameter));

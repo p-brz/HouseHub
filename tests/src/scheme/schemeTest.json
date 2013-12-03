@@ -1,0 +1,37 @@
+{
+    "scheme"  : "schemeTest",
+    "version" : 1,
+    "type" : "testObj",
+    "configs" : [
+        { 
+            "name" : "someproperty",
+            "path" : "/configs/id",
+            "type" : "string",
+            "allowedValues" : [
+                {
+                    "type" : "enum",
+                    "values" : ["algo","outro"]
+                }
+            ]
+        }
+    ],
+    "status"  : [],
+    "services" : [
+        {
+            "name"  : "someService",
+            "path"  : "/services/someService",
+            "returnType" : "boolean",
+            "text"  : "@someService",
+            "parameters" : [        
+                { 
+                    "name" : "someParameter",
+                    "type" : "string"
+                }
+            ]
+        }
+    ],
+    "conditions"  : []
+}
+
+
+
