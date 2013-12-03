@@ -26,18 +26,21 @@ class LoginHelper {
         $answer = $this->verifyLoginStrategy->requestAccess(array(
             "method" => "verify_login"
         ));
+        return ($answer->getStatus() == 1);
     }
     
-    public function doLogin() {
+    public function doLogin($login="adm",$pass ="123456") {
         $parameters = array(
             "method" => "login",
-            "username" => "adm",
-            "password" => "123456"
+            "username" => $login,
+            "password" => $pass
         );
         $answer = $this->loginStrategy->requestAccess($parameters); 
         if($answer->getStatus() == 1){
             $this->sessId = $answer->getContent()->getElement("phpsessid");
         }
+        
+        return $answer->getStatus() == 1;
     }
     
     public function doLogoff(){

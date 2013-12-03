@@ -14,15 +14,10 @@ use househub\access\strategies\AbstractAccessStrategy;
 
 use househub\users\tables\UserStructureTable;
 
-use lightninghowl\utils\sql\InsertQuery;
-
-use lightninghowl\utils\encrypting\Sha1Hash;
-
 use househub\users\session\SessionManager;
+use househub\users\dao\UserStructureDAO;
 
 use househub\access\DatabaseConnector;
-
-use PDO;
 
 class AddUserAccessStrategy extends AbstractAccessStrategy{
     const NAME_ARG   = "name";
@@ -54,11 +49,11 @@ class AddUserAccessStrategy extends AbstractAccessStrategy{
 
         return $answer;
     }
-
+    
     protected function checkSession(){
         $sessManager = SessionManager::getInstance();
         $userId = $sessManager->getSessionVariable('user_id');
-        return (!is_null($userId) && $userId != 0);
+        return (!is_null($userId) && is_numeric($userId) && $userId >= 0);
     }
     
     protected function checkParameters(&$parameters){        
@@ -121,7 +116,7 @@ class AddUserAccessStrategy extends AbstractAccessStrategy{
 //        
 //        return $insertQuery;
 //    }
-    protected function createUser($parameters){
+    protected function createUser($parameters,&$answer){
         if(!$this->existUser($parameters[self::LOGIN_ARG])){
             $newUser = $this->makeUser($parameters);
             
@@ -141,7 +136,7 @@ class AddUserAccessStrategy extends AbstractAccessStrategy{
         $newUser->setName($parameters[self::NAME_ARG]);
         $newUser->setNickname($parameters[self::NICK_ARG]);
         $newUser->setGender($parameters[self::GENDER_ARG]);
-        $newUser->setUsername($parameters[self::LOGIN_ARG_ARG]);
+        $newUser->setUsername($parameters[self::LOGIN_ARG]);
         $newUser->setPassword($parameters[self::PASS_ARG]);        
         return $newUser;
     }

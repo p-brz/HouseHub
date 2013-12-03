@@ -9,56 +9,59 @@ final class SessionManager{
 	
 	private function __construct(){}
 	
+        /**
+         * @return SessionManager
+         */
 	public static function getInstance(){
-		if(!isset(self::$instance)){
-			self::$instance = new SessionManager();
-		}
-		
-		return self::$instance;
+            if(!isset(self::$instance)){
+                self::$instance = new SessionManager();
+            }
+
+            return self::$instance;
 	}
 	
 	public function startSession(){
-		if(!$this->isSessionStarted()){
-			session_start();
-		}
+            if(!$this->isSessionStarted()){
+                    session_start();
+            }
 	}
 	
 	public function destroySession(){
-		if(!$this->isSessionStarted()){
-			session_start();
-		}
-		
-		session_destroy();
-		
-		session_unset();
+            if(!$this->isSessionStarted()){
+                    session_start();
+            }
+
+            session_destroy();
+
+            session_unset();
 	}
 	
 	public function isSessionStarted(){
-		return (session_id() != '');
+            return (session_id() != '');
 	}
 	
 	public function getSessionVariable($varName){
-		if(session_id() == '') session_start();
-		
-		$returnValue = null;
-		
-		$hash = new Sha1Hash();
-		$index = $hash->encrypt($varName);
-		
-		if(isset($_SESSION[$index])){
-			$returnValue = $_SESSION[$index];
-		}
-		
-		return $returnValue;
+            if(session_id() == '') session_start();
+
+            $returnValue = null;
+
+            $hash = new Sha1Hash();
+            $index = $hash->encrypt($varName);
+
+            if(isset($_SESSION[$index])){
+                    $returnValue = $_SESSION[$index];
+            }
+
+            return $returnValue;
 	}
 	
 	public function setSessionVariable($varName, $varValue){
-		if(session_id() == '') session_start();
-		
-		$hash = new Sha1Hash();
-		$index = $hash->encrypt($varName);
-		
-		$_SESSION[$index] = $varValue;
+            if(session_id() == '') session_start();
+
+            $hash = new Sha1Hash();
+            $index = $hash->encrypt($varName);
+
+            $_SESSION[$index] = $varValue;
 	}
 	
 }
