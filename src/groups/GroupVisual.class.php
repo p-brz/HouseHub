@@ -59,5 +59,3 @@ class GroupVisual{
 	public function setGroupImageId($x) { $this->groupImageId = $x; } 
 	public function setSetDate($x) { $this->setDate = $x; } 
 }
-
-?>
