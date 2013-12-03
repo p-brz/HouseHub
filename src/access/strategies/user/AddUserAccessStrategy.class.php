@@ -89,33 +89,7 @@ class AddUserAccessStrategy extends AbstractAccessStrategy{
     public function checkPassword($parameters){
         return isset($parameters[self::PASS_ARG]) && (strlen($parameters[self::PASS_ARG]) <= 12);
     }
-//    protected function createUser($parameters){
-//        if(!$this->existUser($parameters[self::LOGIN_ARG])){
-//            $insertQuery = $this->makeInsertQuery($parameters);
-//            $driver->exec($insertQuery->getInstruction());
-//
-//            $answer->setStatus(1);
-//            $answer->setMessage('@success');
-//        }
-//        else{
-//            $answer->setMessage('@login_already_taken');
-//        }
-//    }
-//    
-//    protected function makeInsertQuery($parameters){
-//        $insertQuery = new InsertQuery();
-//        $insertQuery->setEntity(UserStructureTable::TABLE_NAME);
-//        $insertQuery->setRowData(UserStructureTable::COLUMN_NAME    , $parameters[self::NAME_ARG]);
-//        $insertQuery->setRowData(UserStructureTable::COLUMN_NICKNAME, $parameters[self::NICK_ARG]);
-//        $insertQuery->setRowData(UserStructureTable::COLUMN_GENDER  , $parameters[self::GENDER_ARG]);
-//        $insertQuery->setRowData(UserStructureTable::COLUMN_USERNAME, $parameters[self::LOGIN_ARG_ARG]);
-//
-//        $encoded = new Sha1Hash();
-//        $passEncoded = $encoded->encrypt($parameters[self::PASS_ARG]);
-//        $insertQuery->setRowData(UserStructureTable::COLUMN_PASSWORD, $passEncoded);
-//        
-//        return $insertQuery;
-//    }
+    
     protected function createUser($parameters,&$answer){
         if(!$this->existUser($parameters[self::LOGIN_ARG])){
             $newUser = $this->makeUser($parameters);

@@ -45,7 +45,17 @@ class AddUserAccessStrategyTest extends \PHPUnit_Framework_TestCase {
      */
     public function testRequestAccess() {
         if($this->loginHelper->doLogin()){
-
+            $answer = $this->addUser();
+            
+            $this->assertEquals(1,$answer->getStatus());
+            $this->assertEquals("@success",$answer->getMessage());
+        }
+        else{
+            $this->fail("user is not logged");
+        }
+    }
+    
+    protected function addUser(){
             $parameters = array(
                 AddUserAccessStrategy::LOGIN_ARG => "userLogin",
                 AddUserAccessStrategy::PASS_ARG => "123456",
@@ -53,22 +63,16 @@ class AddUserAccessStrategyTest extends \PHPUnit_Framework_TestCase {
                 AddUserAccessStrategy::NICK_ARG => "userNick",
                 AddUserAccessStrategy::GENDER_ARG => "?"
             );
-    //        $parameters['']...
-            $answer = $this->object->requestAccess($parameters);
-
-            var_dump($answer);
             
-            $this->assertEquals(1,$answer->getStatus());
-        }
-        else{
-            $this->fail("user is not logged");
-        }
+            $answer = $this->object->requestAccess($parameters);
+            return $answer;
     }
+
     /**
      * househub\access\strategies\user\AddUserAccessStrategy::requestAccess
      * @group cookie
      */
-    public function testRequestAccessNoLogin() {
+    public function testRequestAccessFailNoLogin() {
         $this->loginHelper->doLogoff();
         $parameters = array();
 //        $parameters['']...
@@ -76,5 +80,39 @@ class AddUserAccessStrategyTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals(0,$answer->getStatus());
         $this->assertEquals("@forbidden",$answer->getMessage());
     }
+    /**
+     * househub\access\strategies\user\AddUserAccessStrategy::requestAccess
+     * @group cookie
+     */
+    public function testRequestAccessFailIncorrectParameters() {
+        if($this->loginHelper->doLogin()){
 
+            $parameters = array();
+            $answer = $this->object->requestAccess($parameters);
+            
+            $this->assertEquals(0,$answer->getStatus());
+            $this->assertEquals("@error",$answer->getMessage());
+        }
+        else{
+            $this->fail("user is not logged");
+        }
+    }
+/**
+     * househub\access\strategies\user\AddUserAccessStrategy::requestAccess
+     * @group cookie
+     */
+    public function testRequestAccessFailDoubleLogin() {
+        if($this->loginHelper->doLogin()){
+            $answer = $this->addUser();
+            $this->assertEquals(1,$answer->getStatus());
+            $this->assertEquals("@success",$answer->getMessage());
+            
+            $secondAnswer = $this->addUser();
+            $this->assertEquals(0,$secondAnswer->getStatus());
+            $this->assertEquals("@login_already_taken",$secondAnswer->getMessage());
+        }
+        else{
+            $this->fail("user is not logged");
+        }
+    }
 }
