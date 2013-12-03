@@ -45,6 +45,7 @@ class VerifyLoginAccessStrategyTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals(1,$answer->getStatus());
     }
     /**
+     * @group cookie
      */
     public function testVerifyLoginFail() {
         // Remove the following lines when you implement this test.
