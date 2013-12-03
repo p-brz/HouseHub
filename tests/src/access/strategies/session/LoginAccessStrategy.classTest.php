@@ -40,7 +40,7 @@ class LoginAccessStrategyTest extends \PHPUnit_Framework_TestCase {
         );
         $answer = $this->object->requestAccess($parameters); 
         
-        var_dump($answer->getContent()->getElement("user_rights"));
+//        var_dump($answer->getContent()->getElement("user_rights"));
         
         $this->assertNotNull($answer->getContent()->getElement("user_rights"));
         $this->assertNotNull($answer->getContent()->getElement("phpsessid"));

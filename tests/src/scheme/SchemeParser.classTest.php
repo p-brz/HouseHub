@@ -38,11 +38,18 @@ class SchemeParserTest extends \PHPUnit_Framework_TestCase {
     /**
      * househub\scheme\SchemeParser::convertToScheme
      */
-    public function testConvertToScheme() {
+    public function testConvertToSchemeNull() {
         // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
+        $scheme = $this->object->convertToScheme(null);
+        $this->assertNull($scheme);
+    }
+    /**
+     * househub\scheme\SchemeParser::convertToScheme
+     */
+    public function testConvertToSchemeEmpty() {
+        // Remove the following lines when you implement this test.
+        $scheme = $this->object->convertToScheme("");
+        $this->assertNull($scheme);
     }
 
 }
