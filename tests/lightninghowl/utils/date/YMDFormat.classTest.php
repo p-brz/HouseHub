@@ -32,7 +32,7 @@ class YMDFormatTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers lightninghowl\utils\date\YMDFormat::getMask
+     * lightninghowl\utils\date\YMDFormat::getMask
      * @todo   Implement testGetMask().
      */
     public function testGetMask() {

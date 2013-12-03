@@ -33,7 +33,7 @@ class UrlHandlerTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers lightninghowl\utils\url\UrlHandler::setTimeout
+     * lightninghowl\utils\url\UrlHandler::setTimeout
      * @todo   Implement testSetTimeout().
      */
     public function testSetTimeout() {
@@ -41,7 +41,7 @@ class UrlHandlerTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers lightninghowl\utils\url\UrlHandler::getTimeout
+     * lightninghowl\utils\url\UrlHandler::getTimeout
      * @todo   Implement testGetTimeout().
      */
     public function testGetTimeout() {
@@ -49,7 +49,7 @@ class UrlHandlerTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers lightninghowl\utils\url\UrlHandler::getContent
+     * lightninghowl\utils\url\UrlHandler::getContent
      * @todo   Implement testGetContent().
      */
     public function testGetContent() {
@@ -60,7 +60,7 @@ class UrlHandlerTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers lightninghowl\utils\url\UrlHandler::getHeader
+     * lightninghowl\utils\url\UrlHandler::getHeader
      * @todo   Implement testGetHeader().
      */
     public function testGetHeader() {
@@ -71,7 +71,7 @@ class UrlHandlerTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers lightninghowl\utils\url\UrlHandler::getStatus
+     * lightninghowl\utils\url\UrlHandler::getStatus
      * @todo   Implement testGetStatus().
      */
     public function testGetStatus() {
@@ -79,7 +79,7 @@ class UrlHandlerTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers lightninghowl\utils\url\UrlHandler::addField
+     * lightninghowl\utils\url\UrlHandler::addField
      * @todo   Implement testAddField().
      */
     public function testAddField() {
@@ -90,7 +90,7 @@ class UrlHandlerTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers lightninghowl\utils\url\UrlHandler::run
+     * lightninghowl\utils\url\UrlHandler::run
      * @todo   Implement testRun().
      */
     public function testRun() {

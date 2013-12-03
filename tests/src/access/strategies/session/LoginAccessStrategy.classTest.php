@@ -30,11 +30,9 @@ class LoginAccessStrategyTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers househub\access\strategies\session\LoginAccessStrategy::requestAccess
-     * @todo   Implement testRequestAccess().
+     * @group cookie
      */
     public function testRequestAccess() {
-        // Remove the following lines when you implement this test.
         $parameters = array(
             "method" => "login",
             "username" => "adm",
@@ -42,10 +40,47 @@ class LoginAccessStrategyTest extends \PHPUnit_Framework_TestCase {
         );
         $answer = $this->object->requestAccess($parameters); 
         
-        var_dump($answer->getContent()->getElement("user_rights"));
+//        var_dump($answer->getContent()->getElement("user_rights"));
         
         $this->assertNotNull($answer->getContent()->getElement("user_rights"));
         $this->assertNotNull($answer->getContent()->getElement("phpsessid"));
+    }
+    /**
+     */
+    public function testRequestFail() {
+        $parameters = array(
+            "method" => "login",
+            "username" => "usuarioInexistente",
+            "password" => "123456"
+        );
+        $answer = $this->object->requestAccess($parameters); 
+        
+        $this->assertEquals(0, $answer->getStatus());
+//        $this->assertNotNull($answer->getContent()->getElement("user_rights"));
+//        $this->assertNotNull($answer->getContent()->getElement("phpsessid"));
+    }
+    /**
+     * 
+     */
+    public function testRequestWithoutUser() {
+        $parameters = array(
+            "method" => "login",
+            "password" => "123456"
+        );
+        $answer = $this->object->requestAccess($parameters); 
+        
+        $this->assertEquals(0, $answer->getStatus());
+    }
+    /**
+     */
+    public function testRequestWithoutPass() {
+        $parameters = array(
+            "method" => "login",
+            "username" => "usuarioInexistente"
+        );
+        $answer = $this->object->requestAccess($parameters); 
+        
+        $this->assertEquals(0, $answer->getStatus());
     }
 
 }

@@ -30,7 +30,7 @@ class DMYFormatTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers lightninghowl\utils\date\DMYFormat::getMask
+     * lightninghowl\utils\date\DMYFormat::getMask
      * @todo   Implement testGetMask().
      */
     public function testGetMask() {

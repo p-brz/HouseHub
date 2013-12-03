@@ -31,7 +31,7 @@ class Md5HashTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers lightninghowl\utils\encrypting\Md5Hash::encrypt
+     * lightninghowl\utils\encrypting\Md5Hash::encrypt
      * @todo   Implement testEncrypt().
      */
     public function testEncrypt() {

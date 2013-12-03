@@ -21,6 +21,10 @@ class SchemeLoader{
         }
         return null;
     }
+    
+    public function getReaders(){
+        return $this->schemeReaders;
+    }
 
 }
 

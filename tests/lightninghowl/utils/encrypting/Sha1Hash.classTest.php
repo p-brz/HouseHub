@@ -31,7 +31,7 @@ class Sha1HashTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers lightninghowl\utils\encrypting\Sha1Hash::encrypt
+     * lightninghowl\utils\encrypting\Sha1Hash::encrypt
      * @todo   Implement testEncrypt().
      */
     public function testEncrypt() {

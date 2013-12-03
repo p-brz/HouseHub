@@ -6,6 +6,8 @@ composer.lock
 build/
 #ignorar manifest
 manifest/classManifest.json
+#ignorar arquivos de config gerados
+files/configs/
 #ignorar netbeans
 # nbproject/
 nbproject/private/

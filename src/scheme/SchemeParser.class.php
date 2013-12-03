@@ -1,7 +1,7 @@
 <?php
 namespace househub\scheme;
 
-use lightninghowl\utils\StrOpers;
+//use lightninghowl\utils\StrOpers;
 
 use househub\scheme\Scheme;
 
@@ -17,7 +17,7 @@ class SchemeParser{
         return SchemeParser::$instance;
     }
 
-	public function convertToScheme($schemeArray){
+    public function convertToScheme($schemeArray){
         return $this->makeScheme($schemeArray);
     }
 

@@ -5,7 +5,6 @@ namespace househub\scheme;
 class Scheme{
     private $schemeName;
     private $schemeVersion;
-    private $defaultName;
     private $objType;
     private $configs;
     private $status;

@@ -29,7 +29,7 @@ class StrOpersTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers lightninghowl\utils\StrOpers::strEndsWith
+     * lightninghowl\utils\StrOpers::strEndsWith
      * @todo   Implement testStrEndsWith().
      */
     public function testStrEndsWith() {
@@ -37,7 +37,7 @@ class StrOpersTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers lightninghowl\utils\StrOpers::strStartsWith
+     * lightninghowl\utils\StrOpers::strStartsWith
      * @todo   Implement testStrStartsWith().
      */
     public function testStrStartsWith() {
@@ -45,7 +45,7 @@ class StrOpersTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers lightninghowl\utils\StrOpers::strFixPath
+     * lightninghowl\utils\StrOpers::strFixPath
      * @todo   Implement testStrFixPath().
      */
     public function testStrFixPath() {
@@ -53,7 +53,7 @@ class StrOpersTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers lightninghowl\utils\StrOpers::strWebPath
+     * lightninghowl\utils\StrOpers::strWebPath
      * @todo   Implement testStrWebPath().
      */
     public function testStrWebPath() {
