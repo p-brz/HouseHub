@@ -17,4 +17,3 @@ class UserVisual{
 	public function setSetDate($x) { $this->setDate = $x; } 
 	
 }
-?>

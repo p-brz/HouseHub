@@ -28,5 +28,3 @@ class UserStructure{
 	public function setRegistrationDate($x) { $this->registrationDate = $x; }
 	
 }
-
-?>
