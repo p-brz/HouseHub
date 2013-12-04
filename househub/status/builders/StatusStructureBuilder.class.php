@@ -5,9 +5,6 @@ namespace househub\status\builders;
 use househub\status\tables\StatusStructureTable;
 use househub\status\StatusStructure;
 
-while(!file_exists(getcwd()."/.htroot")){chdir('..');}
-require_once 'lightninghowl/utils/AutoLoader.class.php';
-
 class StatusStructureBuilder {
 
     public function build($resource) {

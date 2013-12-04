@@ -2,7 +2,7 @@
 
 namespace househub\conditions;
 
-use househub\scheme;
+use househub\status\StatusStructure;
 
 class ObjectConditionTest extends \PHPUnit_Framework_TestCase {
 
@@ -80,9 +80,9 @@ class ObjectConditionTest extends \PHPUnit_Framework_TestCase {
      */
     public function testIsValid() {
         $status = array();
-        $status[] = new \househub\status\StatusStructure("status1", "statusValue");
-        $status[] = new \househub\status\StatusStructure("status2", "otherValue");
-        $status[] = new \househub\status\StatusStructure("status3", "anotherValue");
+        $status[] = new StatusStructure("status1", "statusValue");
+        $status[] = new StatusStructure("status2", "otherValue");
+        $status[] = new StatusStructure("status3", "anotherValue");
         $this->object->addRestriction("status1", "statusValue");
         $this->object->addRestriction("status3", "anotherValue");
         $this->assertTrue($this->object->isValid($status));
@@ -92,10 +92,10 @@ class ObjectConditionTest extends \PHPUnit_Framework_TestCase {
      */
     public function testIsValid2() {
         $status = array();
-        $status[] = new \househub\status\StatusStructure("status1", "statusValue");
-        $status[] = new \househub\status\StatusStructure("status2", "otherValue");
-        $status[] = new \househub\status\StatusStructure("status3", "anotherValue");
-        $status[] = new \househub\status\StatusStructure("status4", "lastValue");
+        $status[] = new StatusStructure("status1", "statusValue");
+        $status[] = new StatusStructure("status2", "otherValue");
+        $status[] = new StatusStructure("status3", "anotherValue");
+        $status[] = new StatusStructure("status4", "lastValue");
         $this->object->addRestriction("status3", "anotherValue");
         $this->object->addRestriction("status1", "statusValue");
         $this->object->addRestriction("status4", "lastValue");
@@ -107,9 +107,9 @@ class ObjectConditionTest extends \PHPUnit_Framework_TestCase {
      */
     public function testIsNotValid() {
         $status = array();
-        $status[] = new \househub\status\StatusStructure("status1", "statusValue");
-        $status[] = new \househub\status\StatusStructure("status2", "otherValue");
-        $status[] = new \househub\status\StatusStructure("status3", "anotherValue");
+        $status[] = new StatusStructure("status1", "statusValue");
+        $status[] = new StatusStructure("status2", "otherValue");
+        $status[] = new StatusStructure("status3", "anotherValue");
         $this->object->addRestriction("status1", "statusValue");
         $this->object->addRestriction("status2", "otherValue");
         $this->object->addRestriction("status3", "diferentValue");
@@ -120,7 +120,7 @@ class ObjectConditionTest extends \PHPUnit_Framework_TestCase {
      */
     public function testIsNotValid2() {
         $status = array();
-        $status[] = new \househub\status\StatusStructure("status1", "statusValue");
+        $status[] = new StatusStructure("status1", "statusValue");
         $this->object->addRestriction("status1", "statusValue");
         $this->object->addRestriction("status2", "otherValue");
         $this->object->addRestriction("status3", "diferentValue");
