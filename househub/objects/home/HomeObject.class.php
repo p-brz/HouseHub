@@ -17,6 +17,9 @@ class HomeObject{
     private $subObjects;
     private $scheme;
 
+    public function getId(){
+        return (!is_null($this->structure) ? $this->structure->getId() : null);
+    }
     public function getStructure() { return $this->structure; } 
     public function getVisualName() { return $this->visualName; } 
     public function getVisualIconpack() { return $this->visualIconpack; } 
@@ -25,6 +28,12 @@ class HomeObject{
     public function getSubObjects() { return $this->subObjects; }
     public function getScheme() { return $this->scheme; } 
 
+    
+    public function setId($id){
+        if(!is_null($this->structure)){
+            $this->structure->setId($id);
+        }
+    }
     public function setStructure($x) { $this->structure = $x; } 
     public function setVisualName($x) { $this->visualName = $x; } 
     public function setVisualIconpack($x) { $this->visualIconpack = $x; } 

@@ -1,12 +1,14 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+namespace tests\househub\access\strategies;
+//
+//$d = DIRECTORY_SEPARATOR;
+//require_once (__DIR__ . $d . "session". $d . "LoginAccessStrategy.class.php");
+//require_once (__DIR__ . $d."session". $d . "LoginAccessStrategy.class.php");
 
-namespace househub\access\strategies\session;
+use househub\access\strategies\session\LoginAccessStrategy;
+use househub\access\strategies\session\VerifyLoginAccessStrategy;
+
 /**
  * Description of doLogin
  *

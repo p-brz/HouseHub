@@ -191,6 +191,10 @@ class HomeObjectManager{
     }
 
     public function saveObject(HomeObject $homeObject, PDO $driver, $saveThisOnly = false){
+        if(is_null($homeObject) || is_null($homeObject->getStructure())){
+            return null;
+        }
+        
         $savedStructure = $this->saveObjectStructure($homeObject->getStructure(), $driver);
         
         $savedServices = 
@@ -199,7 +203,7 @@ class HomeObjectManager{
                 $this->saveStatus  ($savedStructure->getId(), $homeObject->getStatus()  , $driver);
 
         if(!is_null($homeObject->getVisualName())){
-            
+            //TODO
         }
         
         if(!$saveThisOnly){
@@ -217,16 +221,11 @@ class HomeObjectManager{
     }
     
     public function saveObjectStructure(ObjectStructure $structure, $driver){
-//        $structure = $homeObject->getStructure();
-
         $objectDAO = new ObjectStructureDAO($driver);
         $objectId = $objectDAO->insert($structure);
-//        $structure->setId($objectId);
         
         $savedStructure = $objectDAO->load($objectId);
         
-        
-//        $homeObject->setStructure($structure);
         return $savedStructure;
     }    
     public function saveServices($objectId, $services, $driver){
