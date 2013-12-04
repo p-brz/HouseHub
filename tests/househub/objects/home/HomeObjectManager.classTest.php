@@ -206,9 +206,6 @@ class HomeObjectManagerTest extends \PHPUnit_Framework_TestCase {
      * @todo   Implement testLoadScheme().
      */
     public function testLoadScheme() {
-//        $structure = new ObjectStructure();
-//        $structure->setAddress("http://192.168.0.100");
-//        $structure->setSchemeName("basicDoor");
         $structure = $this->makeStructure();
         $structure->setSchemeName("basicDoor");
         $scheme = $this->object->loadScheme($structure);
