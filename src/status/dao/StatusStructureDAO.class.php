@@ -13,6 +13,8 @@ use househub\status\StatusStructure;
 
 use lightninghowl\utils\sql\SqlCriteria;
 
+use lightninghowl\utils\sql\SelectQuery;
+
 use PDO;
 
 class StatusStructureDAO{
@@ -33,7 +35,7 @@ class StatusStructureDAO{
 		$select->setEntity(StatusStructureTable::TABLE_NAME);
 		
 		$criteria = new SqlCriteria();
-		$criteria->add(new SqlFilter(ServiceStructureTable::COLUMN_ID, '=', $identifier));
+		$criteria->add(new SqlFilter(StatusStructureTable::COLUMN_ID, '=', $identifier));
 		$select->setCriteria($criteria);
 		
 		$statement = $this->driver->query($select->getInstruction());
@@ -72,7 +74,7 @@ class StatusStructureDAO{
 		
 		$this->driver->exec($insert->getInstruction());
 		
-		return $this->driver->lastInsertId();
+		return (int)$this->driver->lastInsertId();
 	}
 	
 	public function update(StatusStructure $status){

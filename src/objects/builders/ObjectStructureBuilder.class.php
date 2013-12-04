@@ -11,7 +11,7 @@ class ObjectStructureBuilder{
 	public function build($resource){
 		$structure = new ObjectStructure();
 		
-		if(isset($resource[ObjectStructureTable::COLUMN_ID])) $structure->setId($resource[ObjectStructureTable::COLUMN_ID]);
+		if(isset($resource[ObjectStructureTable::COLUMN_ID])) $structure->setId((int)$resource[ObjectStructureTable::COLUMN_ID]);
 		if(isset($resource[ObjectStructureTable::COLUMN_TYPE])) $structure->setType($resource[ObjectStructureTable::COLUMN_TYPE]);
 		if(isset($resource[ObjectStructureTable::COLUMN_ADDRESS])) $structure->setAddress($resource[ObjectStructureTable::COLUMN_ADDRESS]);
 		if(isset($resource[ObjectStructureTable::COLUMN_SCHEME_NAME])) $structure->setSchemeName($resource[ObjectStructureTable::COLUMN_SCHEME_NAME]);

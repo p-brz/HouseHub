@@ -30,27 +30,27 @@ class ObjectStructureDAO{
 	}
 	
 	public function load($identifier){
-		if(!is_numeric($identifier)){
-			return null;
-		}
-		
-		$objectStructure = null;
-		
-		$select = new SelectQuery();
-		$select->addColumn('*');
-		$select->setEntity(ObjectStructureTable::TABLE_NAME);
-		
-		$criteria = new SqlCriteria();
-		$criteria->add(new SqlFilter(ObjectStructureTable::COLUMN_ID, '=', intval($identifier)));
-		$select->setCriteria($criteria);
-		
-		$statement = $this->driver->query($select->getInstruction());
-		$builder = new ObjectStructureBuilder();
-		while($rs = $statement->fetch(PDO::FETCH_ASSOC)){
-			$objectStructure = $builder->build($rs);
-		}
-		
-		return $objectStructure;
+            if(!is_numeric($identifier)){
+                    return null;
+            }
+
+            $objectStructure = null;
+
+            $select = new SelectQuery();
+            $select->addColumn('*');
+            $select->setEntity(ObjectStructureTable::TABLE_NAME);
+
+            $criteria = new SqlCriteria();
+            $criteria->add(new SqlFilter(ObjectStructureTable::COLUMN_ID, '=', intval($identifier)));
+            $select->setCriteria($criteria);
+
+            $statement = $this->driver->query($select->getInstruction());
+            $builder = new ObjectStructureBuilder();
+            while($rs = $statement->fetch(PDO::FETCH_ASSOC)){
+                    $objectStructure = $builder->build($rs);
+            }
+
+            return $objectStructure;
 	}
 	
 	public function listAll(SqlCriteria $criteria){
@@ -84,7 +84,7 @@ class ObjectStructureDAO{
 		
 		$this->driver->exec($insert->getInstruction());
 		
-		return $this->driver->lastInsertId();
+		return (int)$this->driver->lastInsertId();
 	}
 	
 	public function update(ObjectStructure $structure){

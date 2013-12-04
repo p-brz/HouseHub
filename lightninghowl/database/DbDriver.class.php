@@ -18,8 +18,6 @@ use PDO;
 final class DbDriver{
 	private static $connection = null;
 	
-	private function __construct(){}
-	
 	/**
 	 * Open the database connection
 	 * 
