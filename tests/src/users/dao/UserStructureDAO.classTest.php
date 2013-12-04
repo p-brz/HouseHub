@@ -28,15 +28,10 @@ class UserStructureDAOTest extends \PHPUnit_Framework_TestCase {
         
     }
 
-    /**
-     * househub\users\dao\UserStructureDAO::insert
-     * @todo   Implement testInsert().
-     */
     public function testInsert() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
+        $driver = \househub\access\DatabaseConnector::getDriver();
+        $user = new \househub\users\UserStructure();
+        $user->setName('test');
     }
 
 }

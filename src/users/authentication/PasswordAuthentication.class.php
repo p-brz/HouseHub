@@ -48,7 +48,14 @@ class PasswordAuthentication implements Authentication{
 		
 		return $user;
 	}
-	
-}
+	public function getUser() {
+            return $this->user;
+        }
 
-?>
+        public function getPassword() {
+            return $this->password;
+        }
+
+
+        
+}

@@ -10,5 +10,3 @@ interface Authentication{
 	public function authenticate(PDO $driver);
 	
 }
-
-?>

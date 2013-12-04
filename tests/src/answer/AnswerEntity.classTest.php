@@ -86,5 +86,4 @@ class AnswerEntityTest extends \PHPUnit_Framework_TestCase {
         $this->object->addContent('foo');
         $this->assertEquals($this->object->getContent(), $content);
     }
-
 }

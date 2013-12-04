@@ -1,0 +1,19 @@
+{
+    "contents":
+            [
+                {
+                    "directory": "lightninghowl",
+                    "blocks":
+                            [
+                                {"input": "", "parent": "lightninghowl"}
+                            ]
+                },
+                {
+                    "directory": "src",
+                    "blocks":
+                            [
+                                {"input": "", "parent": "househub"}
+                            ]
+                }
+            ]
+}
