@@ -29,15 +29,22 @@ class LauncherTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
+     * Testa se todas os access disponíveis no StrategyGuide estão válidos
      *  househub\access\Launcher::launch
      * @dataProvider provider
      */
-    public function testLaunch($strategyName) {
+    public function testLaunchStrategyGuide($strategyName) {
         $parameters = array(
             "method" => $strategyName
         );
 
+        //Habilita output buffering para impedir exibição do eco gerado por launch
+        ob_start();
+        
         $answer = $this->object->launch($parameters);
+        
+        ob_end_clean();
+        
         $this->assertNotNull($answer);
     }
 
@@ -49,12 +56,10 @@ class LauncherTest extends \PHPUnit_Framework_TestCase {
         $arguments = array();
 
         foreach ($strategiesNames as $strategy) {
-            if(!empty($strategy)){
+            if($strategy){
                 $arguments[] = array($strategy);
             }
         }
-
-        var_dump($arguments);
         
         return $arguments;
     }

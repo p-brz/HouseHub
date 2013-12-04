@@ -2,14 +2,17 @@
 
 namespace househub\status\dao;
 
-use lightninghowl\utils\sql\InsertQuery;
 use househub\status\builders\StatusStructureBuilder;
-use lightninghowl\utils\sql\SqlFilter;
-use househub\status\tables\StatusStructureTable;
 use househub\status\StatusStructure;
-use lightninghowl\utils\sql\SqlCriteria;
+use househub\status\tables\StatusStructureTable;
+use lightninghowl\utils\sql\DeleteQuery;
+use lightninghowl\utils\sql\InsertQuery;
 use lightninghowl\utils\sql\SelectQuery;
+use lightninghowl\utils\sql\SqlCriteria;
+use lightninghowl\utils\sql\SqlFilter;
+use lightninghowl\utils\sql\UpdateQuery;
 use PDO;
+use RuntimeException;
 
 class StatusStructureDAO {
 
@@ -71,7 +74,7 @@ class StatusStructureDAO {
         return (int) $this->driver->lastInsertId();
     }
 
-    public function update(StatusStructure $status) {
+    public function update(StatusStructure $status, $strict = false) {
         $update = new UpdateQuery();
 
         $update->setEntity(StatusStructureTable::TABLE_NAME);
@@ -83,7 +86,13 @@ class StatusStructureDAO {
         $criteria->add(new SqlFilter(StatusStructureTable::COLUMN_ID, '=', $status->getId()));
         $update->setCriteria($criteria);
 
-        return $this->driver->exec($update->getInstruction());
+        $updateCount = $this->driver->exec($update->getInstruction());
+        if($updateCount != 1 && $strict){
+            throw new RuntimeException("Cannot update the status " 
+                    . $singleStatus . " of object with id " . $objectId);
+        }
+        
+        return $updateCount;
     }
 
     public function delete(StatusStructure $status) {

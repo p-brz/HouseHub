@@ -180,11 +180,8 @@ class HomeObjectManager{
             //TODO: refatorar isto! Remover referencia a _SERVER
             $sysRes = SystemReader::getInstance();
             
-            $path = '';
-            $path .= $sysRes->translate(SystemReader::INDEX_ROOTPATH);
+            $path = $sysRes->translate(SystemReader::INDEX_ROOTPATH);
             $path .= DIRECTORY_SEPARATOR.$sysRes->translate(SystemReader::INDEX_SCHEMES);
-            
-            echo 'Path: ' . $path;
             
             //TODO: refatorar isto! criar ponto de acesso a um SchemeLoader estatico
             $jsonReader = new SchemeJsonFileReader(StrOpers::strFixPath($path));
@@ -256,13 +253,12 @@ class HomeObjectManager{
                 $statusDAO = new StatusStructureDAO($driver);
                 foreach($status as $key=>$singleStatus){
                         $singleStatus->setObjectId($objectId);
-                        if($status->getId() <= 0){
+                        if($statusDAO->update($singleStatus) == 0){//não existe
                             $statusId = $statusDAO->insert($singleStatus);
                             $singleStatus->setId($statusId);
+                            
                         }
-                        else{
-                            $statusId = $statusDAO->update($singleStatus);
-                        }
+                        
                         $status[$key] = $singleStatus;
                 }	
         }
