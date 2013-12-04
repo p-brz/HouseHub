@@ -3,7 +3,13 @@ namespace househub\objects\home;
 
 class HomeObject{
 	
+    /**
+     * @var \househub\object\ObjectStructure
+     */
     private $structure;
+    /**
+     * @var \househub\object\ObjectVisualName
+     */
     private $visualName;
     private $visualIconpack;
     private $services;

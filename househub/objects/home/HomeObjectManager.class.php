@@ -103,11 +103,11 @@ class HomeObjectManager{
             $visuals = $visualDAO->listAll($criteria);
 
             foreach($visuals as $singleVisual){
-                    if($visualIconpack == null){
-                            $visualIconpack = $singleVisual;
-                    }else if($visualIconpack->getUserId() == 0 && $singleVisual->getUserId() > 0){
-                            $visualIconpack = $singleVisual;
-                    }
+                if($visualIconpack == null){
+                        $visualIconpack = $singleVisual;
+                }else if($visualIconpack->getUserId() == 0 && $singleVisual->getUserId() > 0){
+                        $visualIconpack = $singleVisual;
+                }
             }
 
             return $visualIconpack;
@@ -198,6 +198,10 @@ class HomeObjectManager{
         $savedStatus   = 
                 $this->saveStatus  ($savedStructure->getId(), $homeObject->getStatus()  , $driver);
 
+        if(!is_null($homeObject->getVisualName())){
+            
+        }
+        
         if(!$saveThisOnly){
             $savedSubobjects =
                 $this->saveSubobjects($savedStructure->getId(), $homeObject->getSubObjects(), $driver);
