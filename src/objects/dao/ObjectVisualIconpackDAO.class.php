@@ -28,27 +28,27 @@ class ObjectVisualIconpackDAO{
 	}
 	
 	public function load($identifier){
-		if(!is_numeric($identifier)){
-			return null;
-		}
-		
-		$iconpack = null;
-		
-		$select = new SelectQuery();
-		$select->addColumn('*');
-		$select->setEntity(ObjectVisualIconpackTable::TABLE_NAME);
-		
-		$criteria = new SqlCriteria();
-		$criteria->add(new SqlFilter(ObjectVisualIconpackTable::COLUMN_ID, '=', intval($identifier)));
-		$select->setCriteria($criteria);
-		
-		$statement = $this->driver->query($select->getInstruction());
-		$builder = new ObjectVisualIconpackBuilder();
-		while($rs = $statement->fetch(PDO::FETCH_ASSOC)){
-			$iconpack = $builder->build($rs);
-		}
-		
-		return $iconpack;
+            if(!is_numeric($identifier)){
+                    return null;
+            }
+
+            $iconpack = null;
+
+            $select = new SelectQuery();
+            $select->addColumn('*');
+            $select->setEntity(ObjectVisualIconpackTable::TABLE_NAME);
+
+            $criteria = new SqlCriteria();
+            $criteria->add(new SqlFilter(ObjectVisualIconpackTable::COLUMN_ID, '=', intval($identifier)));
+            $select->setCriteria($criteria);
+
+            $statement = $this->driver->query($select->getInstruction());
+            $builder = new ObjectVisualIconpackBuilder();
+            while($rs = $statement->fetch(PDO::FETCH_ASSOC)){
+                    $iconpack = $builder->build($rs);
+            }
+
+            return $iconpack;
 	}
 	
 	public function listAll(SqlCriteria $criteria){
