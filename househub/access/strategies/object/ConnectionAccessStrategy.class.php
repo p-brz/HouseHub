@@ -35,35 +35,37 @@ class ConnectionAccessStrategy extends AbstractAccessStrategy{
 		$answer = $this->initializeAnswer();
 		$driver = DatabaseConnector::getDriver();
 		
-		$addr = $_SERVER['REMOTE_ADDR'];
-		
-		$handler = new UrlHandler('http://'.$addr);
-		$handler->run();
-		
-		$objJson = $handler->getContent();
-		$objAssocArray = json_decode($objJson, true);
-		
-		if(is_array($objAssocArray)){
-			$objId = isset($objAssocArray['configs']['id']) ? $objAssocArray['configs']['id'] : null ;
-			
-			if($objId == 0){
-				$intentParser = new JsonToIntentParser();
-				$intent = $intentParser->parse($objAssocArray, $addr);
-				
-				$intentSaver = new HomeIntentManager();
-				$intentSaver->saveIntent($intent, $driver);
-				
-				$answer->setStatus(1);
-				$answer->setMessage('@success');
-			}else if($objId > 0){
-				$manager = new HomeObjectManager();
-				$structureDAO = new ObjectStructureDAO($driver);
-				$this->updateConnection($objId, $manager, $structureDAO, $driver);
-				
-				$answer->setStatus(1);
-				$answer->setMessage('@success');
-			}
-		}
+                if(isset($_SERVER['REMOTE_ADDR'])){
+                    $addr = $_SERVER['REMOTE_ADDR'];
+
+                    $handler = new UrlHandler('http://'.$addr);
+                    $handler->run();
+
+                    $objJson = $handler->getContent();
+                    $objAssocArray = json_decode($objJson, true);
+
+                    if(is_array($objAssocArray)){
+                            $objId = isset($objAssocArray['configs']['id']) ? $objAssocArray['configs']['id'] : null ;
+
+                            if($objId == 0){
+                                    $intentParser = new JsonToIntentParser();
+                                    $intent = $intentParser->parse($objAssocArray, $addr);
+
+                                    $intentSaver = new HomeIntentManager();
+                                    $intentSaver->saveIntent($intent, $driver);
+
+                                    $answer->setStatus(1);
+                                    $answer->setMessage('@success');
+                            }else if($objId > 0){
+                                    $manager = new HomeObjectManager();
+                                    $structureDAO = new ObjectStructureDAO($driver);
+                                    $this->updateConnection($objId, $manager, $structureDAO, $driver);
+
+                                    $answer->setStatus(1);
+                                    $answer->setMessage('@success');
+                            }
+                    }
+                }
 		
 		return $answer;
 	}

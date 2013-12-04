@@ -34,6 +34,8 @@ class Launcher{
 		$json = $this->parseAnswer($answer, $parser);
 		$json->addElement(new JsonData("method", $method));
 		echo $json->valueToString();
+                
+                return $answer;
 	}
 	
 	private function parseAnswer($answer, $parser){

@@ -1,28 +1,14 @@
 <?php
 
-namespace Core\Access\Strategies\Files;
+namespace househub\access\strategies\files;
 
+use househub\access\DatabaseConnector;
+use househub\access\strategies\AbstractAccessStrategy;
 use househub\images\dao\ImageStructureDAO;
-
 use househub\images\ImageStructure;
-
-use Core\Access\DatabaseConnector;
-
-use Core\Images\BlockImageDAO;
-
-use LightningHowl\Utils\StrOpers;
-
-use Core\Images\BlockImage;
-
-use LightningHowl\Utils\Sql\InsertQuery;
-
-use Core\User\SessionManager;
-
-use Core\Reader\SystemReader;
-
-use Core\Answer\JsonAnswerParser;
-
-use Core\Access\Strategies\AbstractAccessStrategy;
+use househub\readers\SystemReader;
+use househub\users\session\SessionManager;
+use lightninghowl\utils\StrOpers;
 
 class ImageUploadAccessStrategy extends AbstractAccessStrategy{
 	public function requestAccess($parameters){

@@ -2,7 +2,7 @@
 
 // Complete
 
-namespace Core\Access\Strategies\User;
+namespace househub\Access\Strategies\User;
 
 use househub\access\DatabaseConnector;
 use househub\access\strategies\AbstractAccessStrategy;
@@ -56,7 +56,7 @@ class GrantViewAccessStrategy extends AbstractAccessStrategy {
             }
         }
 
-        $this->parseAnswer($answer, $parser);
+        return $answer;
     }
 
 }

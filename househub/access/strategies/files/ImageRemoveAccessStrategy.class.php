@@ -2,15 +2,13 @@
 
 namespace househub\access\strategies\files;
 
-use househub\images\dao\ImageStructureDAO;
-
-use househub\readers\SystemReader;
-
-use househub\users\rights\UserImages;
-
-use househub\users\session\SessionManager;
-
 use househub\access\DatabaseConnector;
+use househub\access\strategies\AbstractAccessStrategy;
+use househub\images\dao\ImageStructureDAO;
+use househub\readers\SystemReader;
+use househub\users\rights\UserImages;
+use househub\users\session\SessionManager;
+use lightninghowl\utils\StrOpers;
 
 class ImageRemoveAccessStrategy extends AbstractAccessStrategy{
 	

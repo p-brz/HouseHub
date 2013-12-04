@@ -1,5 +1,7 @@
 <?php
 
+namespace househub\access\strategies\object;
+
 use househub\access\DatabaseConnector;
 use househub\access\strategies\AbstractAccessStrategy;
 use househub\objects\dao\ObjectVisualIconpackDAO;
@@ -8,10 +10,6 @@ use househub\objects\home\HomeObjectManager;
 use househub\objects\ObjectVisualName;
 use househub\users\rights\UserViews;
 use househub\users\session\SessionManager;
-
-// COMPLETE!
-
-namespace househub\access\strategies\object;
 
 class SetViewAccessStrategy extends AbstractAccessStrategy {
 
@@ -36,7 +34,9 @@ class SetViewAccessStrategy extends AbstractAccessStrategy {
     }
 
     protected function checkParameters($parameters, &$answer, $driver) {
-        if (!isset($parameters[OBJECT_ARG]) || (!isset($parameters[OBJNAME_ARG]) && !isset($parameters[ICONPACK_ARG]))) {
+        if (!isset($parameters[self::OBJECT_ARG]) || 
+                (!isset($parameters[self::OBJNAME_ARG]) && !isset($parameters[self::ICONPACK_ARG]))) 
+        {
             $answer->setMessage('@bad_parameters');
             return false;
         }

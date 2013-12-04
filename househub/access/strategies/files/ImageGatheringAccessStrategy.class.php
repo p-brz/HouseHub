@@ -1,19 +1,13 @@
 <?php
 namespace househub\access\strategies\files;
 
-use househub\json\JsonArray;
-
 use househub\access\DatabaseConnector;
-
 use househub\access\strategies\AbstractAccessStrategy;
-
 use househub\images\dao\ImageStructureDAO;
-
 use househub\images\parsers\ImageToJsonParser;
-
-use househub\users\session\SessionManager;
-
+use househub\json\JsonArray;
 use househub\users\rights\UserImages;
+use househub\users\session\SessionManager;
 
 
 class ImageGatheringAccessStrategy extends AbstractAccessStrategy{

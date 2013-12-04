@@ -253,8 +253,13 @@ class HomeObjectManager{
                 $statusDAO = new StatusStructureDAO($driver);
                 foreach($status as $key=>$singleStatus){
                         $singleStatus->setObjectId($objectId);
-                        $statusId = $statusDAO->insert($singleStatus);
-                        $singleStatus->setId($statusId);
+                        if($status->getId() <= 0){
+                            $statusId = $statusDAO->insert($singleStatus);
+                            $singleStatus->setId($statusId);
+                        }
+                        else{
+                            $statusId = $statusDAO->update($singleStatus);
+                        }
                         $status[$key] = $singleStatus;
                 }	
         }
