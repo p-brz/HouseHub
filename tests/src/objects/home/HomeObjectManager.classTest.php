@@ -132,8 +132,6 @@ class HomeObjectManagerTest extends \PHPUnit_Framework_TestCase {
         $this->object->saveServices($objId, $expectedServices, $this->pdo);
         $loadedServices = $this->object->loadServices($objId, $this->pdo);
         
-        var_dump($loadedServices);
-        
         $this->assertEquals($expectedServices,$loadedServices);
     }
 
@@ -170,8 +168,6 @@ class HomeObjectManagerTest extends \PHPUnit_Framework_TestCase {
         
         $this->object->saveStatus($objId, $expectedStatus, $this->pdo);
         $loadedStatus = $this->object->loadStatus($objId, $this->pdo);
-        
-        var_dump($loadedStatus);
         
         $this->assertEquals($expectedStatus,$loadedStatus);
     }

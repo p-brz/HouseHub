@@ -46,5 +46,3 @@ class SqlFilter extends SqlExpression{
 		return "{$this->variable} {$this->operator} ".$this->transform($this->value);
 	}
 }
-
-?>

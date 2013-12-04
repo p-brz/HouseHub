@@ -7,10 +7,6 @@ namespace househub\readers;
  */
 class LanguageReaderTest extends \PHPUnit_Framework_TestCase {
 
-    /**
-     * @covers househub\readers\LanguageReader::getInstance
-     * @todo   Implement testGetInstance().
-     */
     public function testGetInstance() {
         $this->assertTrue(LanguageReader::getInstance() instanceof LanguageReader);
     }

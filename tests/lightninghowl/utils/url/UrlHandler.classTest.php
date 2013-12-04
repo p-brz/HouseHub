@@ -86,7 +86,12 @@ class UrlHandlerTest extends \PHPUnit_Framework_TestCase {
     public function testAddField() {
         $this->object->addField('foo', 'bar');
         $url = $this->object->run();
-        $this->assertEquals('http://localhost?foo=bar', $url);
+        echo PHP_OS;
+        if(PHP_OS == 'WINNT'){
+            $this->assertEquals('http://localhost/?foo=bar', $url);
+        }else{
+            $this->assertEquals('http://localhost?foo=bar', $url);
+        }
     }
 
     /**

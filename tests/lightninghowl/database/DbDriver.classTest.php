@@ -2,7 +2,9 @@
 
 namespace lightninghowl\database;
 
-while(!file_exists(getcwd()."/.htroot")){chdir('..');}
+while (!file_exists(getcwd() . "/.htroot")) {
+    chdir('..');
+}
 require_once 'lightninghowl/utils/AutoLoader.class.php';
 
 /**
@@ -33,8 +35,8 @@ class DbDriverTest extends \PHPUnit_Framework_TestCase {
 //        $pdo = DbDriver::open($argument);
         $pdo = \househub\access\DatabaseConnector::getDriver(); //testa indiretamente o DbDriver::open
         $this->assertNotNull($pdo);
-        
-        $this->assertInstanceOf('PDO',$pdo);
+
+        $this->assertInstanceOf('PDO', $pdo);
     }
 
 }

@@ -36,10 +36,6 @@ class SelectQueryTest extends \PHPUnit_Framework_TestCase {
         
     }
 
-    /**
-     * @covers lightninghowl\utils\sql\SelectQuery::addColumn
-     * @todo   Implement testAddColumn().
-     */
     public function testAddColumn() {
         $this->object = new SelectQuery();
         $this->object->setEntity('table t');
@@ -54,12 +50,8 @@ class SelectQueryTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals('SELECT column,test FROM table t WHERE (t.id = 5) ORDER BY t.id LIMIT 1 OFFSET 1', $this->object->getInstruction());
     }
 
-    /**
-     * @covers lightninghowl\utils\sql\SelectQuery::addJoin
-     * @covers lightninghowl\utils\sql\SelectQuery::addColumn
-     */
     public function testAddJoin() {
-        
+
         $join = new InnerJoin();
         $join->setEntity('entity e');
         $criteria = new SqlCriteria();
@@ -70,10 +62,6 @@ class SelectQueryTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals($expect, $this->object->getInstruction());
     }
 
-    /**
-     * @covers lightninghowl\utils\sql\SelectQuery::getInstruction
-     * @todo   Implement testGetInstruction().
-     */
     public function testGetInstruction() {
         $this->assertEquals('SELECT column FROM table t WHERE (t.id = 5) ORDER BY t.id LIMIT 1 OFFSET 1', $this->object->getInstruction());
     }

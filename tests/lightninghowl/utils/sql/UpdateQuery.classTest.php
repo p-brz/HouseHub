@@ -32,19 +32,14 @@ class UpdateQueryTest extends \PHPUnit_Framework_TestCase {
         
     }
 
-    /**
-     * @covers lightninghowl\utils\sql\UpdateQuery::setRowData
-     * @todo   Implement testSetRowData().
-     */
     public function testSetRowData() {
         $this->object->setRowData('column', 'value');
-        $this->assertEquals('UPDATE table SET column = \'value\' WHERE (column = 1)', $this->object->getInstruction());
+        $this->object->setRowData('column2', TRUE);
+        $this->object->setRowData('column3', 1);
+        $this->object->setRowData('column4', NULL);
+        $this->assertEquals('UPDATE table SET column = \'value\', column2 = TRUE, column3 = 1 WHERE (column = 1)', $this->object->getInstruction());
     }
 
-    /**
-     * @covers lightninghowl\utils\sql\UpdateQuery::getInstruction
-     * @todo   Implement testGetInstruction().
-     */
     public function testGetInstruction() {
         $this->object->setRowData('column', 'value');
         $this->assertEquals('UPDATE table SET column = \'value\' WHERE (column = 1)', $this->object->getInstruction());

@@ -1,1 +1,1 @@
-{ "db_host" : "localhost", "db_user" : "app", "db_pass" : "123456abc", "db_name" : "househubtest", "db_port" : "3306", "db_type" : "mysql"}
+{ "db_host" : "localhost", "db_user" : "app", "db_pass" : "123456abc", "db_name" : "househubtest", "db_port" : 3306, "db_type" : "mysql"}
