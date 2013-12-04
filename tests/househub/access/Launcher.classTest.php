@@ -28,9 +28,9 @@ class LauncherTest extends \PHPUnit_Framework_TestCase {
         
     }
 
-    /**
+    /** househub\access\Launcher::launch
      * Testa se todas os access disponíveis no StrategyGuide estão válidos
-     *  househub\access\Launcher::launch
+     * @group cookie
      * @dataProvider provider
      */
     public function testLaunchStrategyGuide($strategyName) {
