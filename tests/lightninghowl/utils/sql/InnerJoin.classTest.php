@@ -40,4 +40,14 @@ class InnerJoinTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals('INNER JOIN table t ON (t.id = 1)', $this->object->dump());
     }
 
+    public function testGetEntity(){
+        $this->assertEquals('table t', $this->object->getEntity());
+    }
+    
+    public function testGetCriteria(){
+        $criteria = new SqlCriteria();
+        $criteria->add(new EntityFilter('t.id', '=', 1));
+        
+        $this->assertEquals($criteria, $this->object->getCriteria());
+    }
 }

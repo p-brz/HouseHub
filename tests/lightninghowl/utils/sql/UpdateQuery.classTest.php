@@ -44,5 +44,9 @@ class UpdateQueryTest extends \PHPUnit_Framework_TestCase {
         $this->object->setRowData('column', 'value');
         $this->assertEquals('UPDATE table SET column = \'value\' WHERE (column = 1)', $this->object->getInstruction());
     }
+    
+    public function testGetEntity(){
+        $this->assertEquals('table', $this->object->getEntity());
+    }
 
 }

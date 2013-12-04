@@ -179,10 +179,13 @@ class HomeObjectManager{
 
             //TODO: refatorar isto! Remover referencia a _SERVER
             $sysRes = SystemReader::getInstance();
-            $path  = $_SERVER['DOCUMENT_ROOT']; 
-            $path .= DIRECTORY_SEPARATOR.$sysRes->translate(SystemReader::INDEX_ROOTPATH);
+            
+            $path = '';
+            $path .= $sysRes->translate(SystemReader::INDEX_ROOTPATH);
             $path .= DIRECTORY_SEPARATOR.$sysRes->translate(SystemReader::INDEX_SCHEMES);
-
+            
+            echo 'Path: ' . $path;
+            
             //TODO: refatorar isto! criar ponto de acesso a um SchemeLoader estatico
             $jsonReader = new SchemeJsonFileReader(StrOpers::strFixPath($path));
             $scheme = $jsonReader->getScheme($structure->getSchemeName());
