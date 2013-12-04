@@ -1,6 +1,13 @@
 <?php
-// COMPLETE!
+
 namespace househub\access\strategies\object;
+
+use househub\access\DatabaseConnector;
+use househub\access\strategies\AbstractAccessStrategy;
+use househub\objects\home\HomeObjectJsonParser;
+use househub\objects\home\HomeObjectManager;
+use househub\users\rights\UserViews;
+use househub\users\session\SessionManager;
 
 /**
  * Acquires informations about objects
@@ -12,64 +19,71 @@ namespace househub\access\strategies\object;
  * @version 1.2.0
  *
  */
+class GatherObjectAccessStrategy extends AbstractAccessStrategy {
+    const OBJECT_ARG = 'object';
+    
+    public function requestAccess($parameters) {
+        $answer = $this->initializeAnswer();
+        $driver = DatabaseConnector::getDriver();
 
-use lightninghowl\utils\StrOpers;
+        if($this->checkParameters($parameters, $answer)){
+            $userId = $this->getUserId();
+            if($this->checkPermission($userId,$answer, $driver)){
+                $this->gatherObject($parameters, $userId, $answer, $driver);
+            }
+        }
+        
+        return $answer;
+    }
 
-use househub\users\rights\UserViews;
+    protected function checkParameters($parameters, $answer){
+        if (!isset($parameters[self::OBJECT_ARG])) {
+            $answer->setMessage("@gather_object_error_1");
+            return false;
+        }
+        return true;
+    }
+    
+    protected function getUserId(){
+        $sessManager = SessionManager::getInstance();
+        $sessManager->startSession();
+        $userId = $sessManager->getSessionVariable('user_id');
+        return $userId;
+    }
+    protected function checkPermission($userId, $answer,$driver){
+        
+        if (is_null($userId)) {
+            $answer->setMessage('@user_needs_login');
+            return false;
+        } 
+        else{
+            $permission = new UserViews($userId, $driver);
+            if (!$permission->verifyRights($parameters[self::OBJECT_ARG])) {
+                $answer->setMessage('@forbidden');
+            } 
+            return false;
+        }
+        return true;
+    }
 
-use househub\objects\home\HomeObjectJsonParser;
 
-use househub\objects\home\HomeObjectManager;
+    protected function gatherObject($parameters, $userId, &$answer, $driver) {
+        $objectId = $parameters[self::OBJECT_ARG];
 
-use househub\users\session\SessionManager;
+        $loader = new HomeObjectManager();
+        $object = $loader->loadObject($objectId, $userId, $driver);
+        if (!is_null($object)) {
+            $objectParser = new HomeObjectJsonParser();
+            $objectJson = $objectParser->parse($object, true);
 
-use househub\access\DatabaseConnector;
+            $answer->setStatus(1);
+            $answer->setMessage('@success');
+            $answer->setContent($objectJson);
+        } else {
+            $answer->setMessage('@gather_object_error_2');
+        }
+    }
 
-use househub\access\strategies\AbstractAccessStrategy;
-
-class GatherObjectAccessStrategy extends AbstractAccessStrategy{
-	
-	public function requestAccess($parameters){
-		$answer = $this->initializeAnswer();
-		$driver = DatabaseConnector::getDriver();
-		
-		$sessManager = SessionManager::getInstance();
-		$sessManager->startSession();
-		$userId = $sessManager->getSessionVariable('user_id');
-		if(is_null($userId)){
-			$answer->setMessage('@user_needs_login');
-			
-		}else{
-			$permission = new UserViews($userId, $driver);
-			if(!isset($parameters['object'])){
-				$answer->setMessage("@gather_object_error_1");
-				
-			}else if(!$permission->verifyRights($parameters['object'])){
-				$answer->setMessage('@forbidden');
-				
-			}else{
-				$objectId = $parameters['object'];
-				
-				$loader = new HomeObjectManager();
-				$object = $loader->loadObject($objectId, $userId, $driver);
-				if(!is_null($object)){
-					$objectParser = new HomeObjectJsonParser();
-					$objectJson = $objectParser->parse($object, true);
-					
-					$answer->setStatus(1);
-					$answer->setMessage('@success');
-					$answer->setContent($objectJson);
-					
-				}else{
-					$answer->setMessage('@gather_object_error_2');
-				}	
-			}
-		}
-		
-		return $answer;
-		
-	}
-	
 }
 
 ?>

@@ -10,20 +10,20 @@ namespace househub\access\strategies;
  * @author Alison Bento "Lykaios"
  * @version 1.0.1
  */
-
 use househub\answer\AnswerEntity;
 
-abstract class AbstractAccessStrategy{
-	
-	abstract public function requestAccess($parameters);
-	
-	protected function initializeAnswer(){
-		$answer = new AnswerEntity();
-		$answer->setStatus(0);
-		$answer->setMessage('@error');
-		
-		return $answer;
-	}
+abstract class AbstractAccessStrategy {
+
+    abstract public function requestAccess($parameters);
+
+    protected function initializeAnswer() {
+        $answer = new AnswerEntity();
+        $answer->setStatus(0);
+        $answer->setMessage('@error');
+
+        return $answer;
+    }
+
 }
 
 ?>
