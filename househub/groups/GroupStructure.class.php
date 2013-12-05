@@ -35,5 +35,3 @@ class GroupStructure{
 	public function setUserId($x) { $this->userId = $x; }
 	public function setRegistrationDate($x) { $this->registrationDate = $x; } 
 }
-
-?>

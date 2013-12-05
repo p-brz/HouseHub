@@ -1,2 +1,4 @@
-while(!file_exists(getcwd()."/.htroot")){chdir('..');}
-require_once 'Etc' . DIRECTORY_SEPARATOR . 'autoload.php';
+while (!file_exists(getcwd() . DIRECTORY_SEPARATOR . ".htroot")) {
+    chdir('..');
+}
+require_once 'etc' . DIRECTORY_SEPARATOR . 'autoload.php';
