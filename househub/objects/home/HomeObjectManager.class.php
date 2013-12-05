@@ -3,7 +3,6 @@
 namespace househub\objects\home;
 
 use househub\objects\dao\ObjectStructureDAO;
-use househub\objects\dao\ObjectVisualIconpackDAO;
 use househub\objects\dao\ObjectVisualNameDAO;
 use househub\objects\home\HomeObject;
 use househub\objects\ObjectStructure;
