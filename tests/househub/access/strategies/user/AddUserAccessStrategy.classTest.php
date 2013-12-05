@@ -3,9 +3,9 @@
 namespace househub\access\strategies\user;
 
 $d = DIRECTORY_SEPARATOR;
-require_once(realpath(__DIR__ . $d . ".." . $d . "session" .  $d . "LoginHelper.php"));
+require_once(__DIR__ . $d . ".." . $d  . "LoginHelper.class.php");
 
-use househub\access\strategies\session\LoginHelper;
+use tests\househub\access\strategies\LoginHelper;
 use househub\access\DatabaseConnector;
 
 /**
