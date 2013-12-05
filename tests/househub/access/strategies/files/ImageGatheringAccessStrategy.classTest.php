@@ -62,7 +62,7 @@ class ImageGatheringAccessStrategyTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @todo   Implement testRequestAccess().
+     * @group cookie
      */
     public function testRequestAccess() {
         $imageDAO = new \househub\images\dao\ImageStructureDAO($this->pdo);
