@@ -5,6 +5,7 @@ namespace tests\househub\access\strategies;
 use househub\objects\home\HomeObject;
 use househub\objects\home\HomeObjectManager;
 use househub\objects\ObjectStructure;
+use househub\services\ServiceStructure;
 
 /**
  * Description of ObjectMakerHelper
@@ -38,7 +39,7 @@ class ObjectMakerHelper {
     /**
      * @return ObjectStructure
      */
-    private static function makeStructure(){
+    public static function makeStructure(){
         $structure = new ObjectStructure();
         $structure->setAddress("http://192.168.0.100");
         $structure->setSchemeName("basicDoor");
@@ -46,5 +47,17 @@ class ObjectMakerHelper {
         $structure->setType("door");
         
         return $structure;
+    }
+    
+    public static function makeServices($objId = 1) {
+        $service1 = new ServiceStructure();
+        $service1->setName("travar");
+        $service1->setObjectId($objId);
+
+        $service2 = new ServiceStructure();
+        $service2->setName("destravar");
+        $service2->setObjectId($objId);
+
+        return array($service1, $service2);
     }
 }

@@ -29,7 +29,7 @@ class DictionaryTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers househub\readers\Dictionary::setSource
+     *  househub\readers\Dictionary::setSource
      * @todo   Implement testSetSource().
      */
     public function testSetSource() {
@@ -37,7 +37,7 @@ class DictionaryTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers househub\readers\Dictionary::translate
+     *  househub\readers\Dictionary::translate
      * @todo   Implement testTranslate().
      */
     public function testTranslate() {

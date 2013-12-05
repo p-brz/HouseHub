@@ -33,7 +33,7 @@ class StatusStructureTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers househub\status\StatusStructure::getId
+     *  househub\status\StatusStructure::getId
      * @todo   Implement testGetId().
      */
     public function testGetId() {
@@ -41,7 +41,7 @@ class StatusStructureTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers househub\status\StatusStructure::getObjectId
+     *  househub\status\StatusStructure::getObjectId
      * @todo   Implement testGetObjectId().
      */
     public function testGetObjectId() {
@@ -49,7 +49,7 @@ class StatusStructureTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers househub\status\StatusStructure::getName
+     *  househub\status\StatusStructure::getName
      * @todo   Implement testGetName().
      */
     public function testGetName() {
@@ -57,7 +57,7 @@ class StatusStructureTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers househub\status\StatusStructure::getValue
+     *  househub\status\StatusStructure::getValue
      * @todo   Implement testGetValue().
      */
     public function testGetValue() {
@@ -65,7 +65,7 @@ class StatusStructureTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers househub\status\StatusStructure::setId
+     *  househub\status\StatusStructure::setId
      * @todo   Implement testSetId().
      */
     public function testSetId() {
@@ -74,7 +74,7 @@ class StatusStructureTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers househub\status\StatusStructure::setObjectId
+     *  househub\status\StatusStructure::setObjectId
      * @todo   Implement testSetObjectId().
      */
     public function testSetObjectId() {
@@ -83,7 +83,7 @@ class StatusStructureTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers househub\status\StatusStructure::setName
+     *  househub\status\StatusStructure::setName
      * @todo   Implement testSetName().
      */
     public function testSetName() {

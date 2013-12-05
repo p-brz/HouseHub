@@ -32,7 +32,7 @@ class GroupStructureTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers househub\groups\GroupStructure::getId
+     *  househub\groups\GroupStructure::getId
      * @todo   Implement testGetId().
      */
     public function testGetId() {
@@ -40,7 +40,7 @@ class GroupStructureTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers househub\groups\GroupStructure::getUserId
+     *  househub\groups\GroupStructure::getUserId
      * @todo   Implement testGetUserId().
      */
     public function testGetUserId() {
@@ -48,7 +48,7 @@ class GroupStructureTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers househub\groups\GroupStructure::getRegistrationDate
+     *  househub\groups\GroupStructure::getRegistrationDate
      * @todo   Implement testGetRegistrationDate().
      */
     public function testGetRegistrationDate() {
@@ -56,7 +56,7 @@ class GroupStructureTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers househub\groups\GroupStructure::setId
+     *  househub\groups\GroupStructure::setId
      * @todo   Implement testSetId().
      */
     public function testSetId() {
@@ -65,7 +65,7 @@ class GroupStructureTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers househub\groups\GroupStructure::setUserId
+     *  househub\groups\GroupStructure::setUserId
      * @todo   Implement testSetUserId().
      */
     public function testSetUserId() {
@@ -74,7 +74,7 @@ class GroupStructureTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers househub\groups\GroupStructure::setRegistrationDate
+     *  househub\groups\GroupStructure::setRegistrationDate
      * @todo   Implement testSetRegistrationDate().
      */
     public function testSetRegistrationDate() {

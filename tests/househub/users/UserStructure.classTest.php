@@ -36,7 +36,7 @@ class UserStructureTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers househub\users\UserStructure::getId
+     *  househub\users\UserStructure::getId
      * @todo   Implement testGetId().
      */
     public function testGetId() {
@@ -44,7 +44,7 @@ class UserStructureTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers househub\users\UserStructure::getName
+     *  househub\users\UserStructure::getName
      * @todo   Implement testGetName().
      */
     public function testGetName() {
@@ -52,7 +52,7 @@ class UserStructureTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers househub\users\UserStructure::getNickname
+     *  househub\users\UserStructure::getNickname
      * @todo   Implement testGetNickname().
      */
     public function testGetNickname() {
@@ -60,7 +60,7 @@ class UserStructureTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers househub\users\UserStructure::getGender
+     *  househub\users\UserStructure::getGender
      * @todo   Implement testGetGender().
      */
     public function testGetGender() {
@@ -68,7 +68,7 @@ class UserStructureTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers househub\users\UserStructure::getUsername
+     *  househub\users\UserStructure::getUsername
      * @todo   Implement testGetUsername().
      */
     public function testGetUsername() {
@@ -76,7 +76,7 @@ class UserStructureTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers househub\users\UserStructure::getPassword
+     *  househub\users\UserStructure::getPassword
      * @todo   Implement testGetPassword().
      */
     public function testGetPassword() {
@@ -84,7 +84,7 @@ class UserStructureTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers househub\users\UserStructure::getRegistrationDate
+     *  househub\users\UserStructure::getRegistrationDate
      * @todo   Implement testGetRegistrationDate().
      */
     public function testGetRegistrationDate() {
@@ -92,7 +92,7 @@ class UserStructureTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers househub\users\UserStructure::setId
+     *  househub\users\UserStructure::setId
      * @todo   Implement testSetId().
      */
     public function testSetId() {
@@ -101,7 +101,7 @@ class UserStructureTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers househub\users\UserStructure::setName
+     *  househub\users\UserStructure::setName
      * @todo   Implement testSetName().
      */
     public function testSetName() {
@@ -110,7 +110,7 @@ class UserStructureTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers househub\users\UserStructure::setNickname
+     *  househub\users\UserStructure::setNickname
      * @todo   Implement testSetNickname().
      */
     public function testSetNickname() {
@@ -119,7 +119,7 @@ class UserStructureTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers househub\users\UserStructure::setGender
+     *  househub\users\UserStructure::setGender
      * @todo   Implement testSetGender().
      */
     public function testSetGender() {
@@ -128,7 +128,7 @@ class UserStructureTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers househub\users\UserStructure::setUsername
+     *  househub\users\UserStructure::setUsername
      * @todo   Implement testSetUsername().
      */
     public function testSetUsername() {
@@ -137,7 +137,7 @@ class UserStructureTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers househub\users\UserStructure::setPassword
+     *  househub\users\UserStructure::setPassword
      * @todo   Implement testSetPassword().
      */
     public function testSetPassword() {
@@ -146,7 +146,7 @@ class UserStructureTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers househub\users\UserStructure::setRegistrationDate
+     *  househub\users\UserStructure::setRegistrationDate
      * @todo   Implement testSetRegistrationDate().
      */
     public function testSetRegistrationDate() {

@@ -32,7 +32,7 @@ class ServiceStructureTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers househub\services\ServiceStructure::getId
+     *  househub\services\ServiceStructure::getId
      * @todo   Implement testGetId().
      */
     public function testGetId() {
@@ -40,7 +40,7 @@ class ServiceStructureTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers househub\services\ServiceStructure::getObjectId
+     *  househub\services\ServiceStructure::getObjectId
      * @todo   Implement testGetObjectId().
      */
     public function testGetObjectId() {
@@ -48,7 +48,7 @@ class ServiceStructureTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers househub\services\ServiceStructure::getName
+     *  househub\services\ServiceStructure::getName
      * @todo   Implement testGetName().
      */
     public function testGetName() {
@@ -56,7 +56,7 @@ class ServiceStructureTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers househub\services\ServiceStructure::setId
+     *  househub\services\ServiceStructure::setId
      * @todo   Implement testSetId().
      */
     public function testSetId() {
@@ -65,7 +65,7 @@ class ServiceStructureTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers househub\services\ServiceStructure::setObjectId
+     *  househub\services\ServiceStructure::setObjectId
      * @todo   Implement testSetObjectId().
      */
     public function testSetObjectId() {
@@ -74,7 +74,7 @@ class ServiceStructureTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers househub\services\ServiceStructure::setName
+     *  househub\services\ServiceStructure::setName
      * @todo   Implement testSetName().
      */
     public function testSetName() {

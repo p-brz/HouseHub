@@ -79,13 +79,13 @@ class HomeObjectManagerTest extends \PHPUnit_Framework_TestCase {
     }
 
     public function testLoadObjectB() {
-        while (!file_exists(getcwd() . DIRECTORY_SEPARATOR . ".htroot")) {
-            chdir('..');
-        }
-
-        $statement = file_get_contents(getcwd() . DIRECTORY_SEPARATOR . 'files' . DIRECTORY_SEPARATOR . 'test' . DIRECTORY_SEPARATOR . 'househubtest.sql');
-        
-        $this->pdo->query($statement);
+//        while (!file_exists(getcwd() . DIRECTORY_SEPARATOR . ".htroot")) {
+//            chdir('..');
+//        }
+//
+//        $statement = file_get_contents(getcwd() . DIRECTORY_SEPARATOR . 'files' . DIRECTORY_SEPARATOR . 'test' . DIRECTORY_SEPARATOR . 'househubtest.sql');
+//        
+//        $this->pdo->query($statement);
         $object = $this->object->loadObject(2, 0, $this->pdo);
         
         $this->assertTrue($object->getStructure() instanceof ObjectStructure);
@@ -190,12 +190,12 @@ class HomeObjectManagerTest extends \PHPUnit_Framework_TestCase {
      * @depends testSaveServices
      */
     public function testLoadServices($data) {
-        while (!file_exists(getcwd() . DIRECTORY_SEPARATOR . ".htroot")) {
-            chdir('..');
-        }
-
-        $statement = file_get_contents(getcwd() . DIRECTORY_SEPARATOR . 'files' . DIRECTORY_SEPARATOR . 'test' . DIRECTORY_SEPARATOR . 'househubtest.sql');
-        $this->pdo->query($statement);
+//        while (!file_exists(getcwd() . DIRECTORY_SEPARATOR . ".htroot")) {
+//            chdir('..');
+//        }
+//
+//        $statement = file_get_contents(getcwd() . DIRECTORY_SEPARATOR . 'files' . DIRECTORY_SEPARATOR . 'test' . DIRECTORY_SEPARATOR . 'househubtest.sql');
+//        $this->pdo->query($statement);
        
         $loadedServices = $this->object->loadServices(2, $this->pdo);
         foreach($loadedServices as $loadedService){
@@ -233,12 +233,12 @@ class HomeObjectManagerTest extends \PHPUnit_Framework_TestCase {
      * @depends testSaveStatus
      */
     public function testLoadStatus($data) {
-        while (!file_exists(getcwd() . DIRECTORY_SEPARATOR . ".htroot")) {
-            chdir('..');
-        }
-
-        $statement = file_get_contents(getcwd() . DIRECTORY_SEPARATOR . 'files' . DIRECTORY_SEPARATOR . 'test' . DIRECTORY_SEPARATOR . 'househubtest.sql');
-        $this->pdo->query($statement);
+//        while (!file_exists(getcwd() . DIRECTORY_SEPARATOR . ".htroot")) {
+//            chdir('..');
+//        }
+//
+//        $statement = file_get_contents(getcwd() . DIRECTORY_SEPARATOR . 'files' . DIRECTORY_SEPARATOR . 'test' . DIRECTORY_SEPARATOR . 'househubtest.sql');
+//        $this->pdo->query($statement);
         
         $loadedStatuses = $this->object->loadStatus(2, $this->pdo);
         foreach($loadedStatuses as $loadedStatus){
@@ -269,12 +269,12 @@ class HomeObjectManagerTest extends \PHPUnit_Framework_TestCase {
      * @todo   Implement testLoadSubObjects().
      */
     public function testLoadSubObjects() {
-        while (!file_exists(getcwd() . DIRECTORY_SEPARATOR . ".htroot")) {
-            chdir('..');
-        }
-
-        $statement = file_get_contents(getcwd() . DIRECTORY_SEPARATOR . 'files' . DIRECTORY_SEPARATOR . 'test' . DIRECTORY_SEPARATOR . 'househubtest.sql');
-        $this->pdo->query($statement);
+//        while (!file_exists(getcwd() . DIRECTORY_SEPARATOR . ".htroot")) {
+//            chdir('..');
+//        }
+//
+//        $statement = file_get_contents(getcwd() . DIRECTORY_SEPARATOR . 'files' . DIRECTORY_SEPARATOR . 'test' . DIRECTORY_SEPARATOR . 'househubtest.sql');
+//        $this->pdo->query($statement);
         
         $subObjs = $this->object->loadSubObjects(2, 0, $this->pdo);
         foreach($subObjs as $subObj){

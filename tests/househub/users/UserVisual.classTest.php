@@ -32,7 +32,7 @@ class UserVisualTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers househub\users\UserVisual::getId
+     *  househub\users\UserVisual::getId
      * @todo   Implement testGetId().
      */
     public function testGetId() {
@@ -40,7 +40,7 @@ class UserVisualTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers househub\users\UserVisual::getImageId
+     *  househub\users\UserVisual::getImageId
      * @todo   Implement testGetImageId().
      */
     public function testGetImageId() {
@@ -48,7 +48,7 @@ class UserVisualTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers househub\users\UserVisual::getSetDate
+     *  househub\users\UserVisual::getSetDate
      * @todo   Implement testGetSetDate().
      */
     public function testGetSetDate() {
@@ -56,7 +56,7 @@ class UserVisualTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers househub\users\UserVisual::setId
+     *  househub\users\UserVisual::setId
      * @todo   Implement testSetId().
      */
     public function testSetId() {
@@ -65,7 +65,7 @@ class UserVisualTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers househub\users\UserVisual::setImageId
+     *  househub\users\UserVisual::setImageId
      * @todo   Implement testSetImageId().
      */
     public function testSetImageId() {
@@ -74,7 +74,7 @@ class UserVisualTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers househub\users\UserVisual::setSetDate
+     *  househub\users\UserVisual::setSetDate
      * @todo   Implement testSetSetDate().
      */
     public function testSetSetDate() {

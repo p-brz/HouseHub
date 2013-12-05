@@ -51,16 +51,6 @@ class GroupMakerHelper {
         return $group;
     }
     
-    protected function addGroup($parameters, $userId, $answer) {
-        $driver = $this->dbDriver;
-        
-        $groupId = $this->saveGroupStructure($userId, $driver);
-        $this->saveGroupVisual($parameters, $userId, $groupId, $driver);
-        $this->saveGroupElements($parameters, $userId, $groupId, $driver);
-
-        $answer->setStatus(1);
-        $answer->setMessage('@success');
-    }
     public static function makeGroupStructure($userId=0) {
         $groupStructure = new GroupStructure();
         $groupStructure->setUserId($userId);
