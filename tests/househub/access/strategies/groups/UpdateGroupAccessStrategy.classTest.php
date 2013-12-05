@@ -41,6 +41,7 @@ class UpdateGroupAccessStrategyTest extends \PHPUnit_Framework_TestCase {
 
     /**
      * househub\access\strategies\groups\UpdateGroupAccessStrategy::requestAccess
+     * @group cookie
      */
     public function testRequestAccessNoLogin() {
         // Remove the following lines when you implement this test.
@@ -50,7 +51,7 @@ class UpdateGroupAccessStrategyTest extends \PHPUnit_Framework_TestCase {
     }
     /**
      * househub\access\strategies\groups\UpdateGroupAccessStrategy::requestAccess
-     * @cookie
+     * @group cookie
      */
     public function testRequestAccessBadParameters() {
         $this->loginHelper->doLogin();
@@ -60,7 +61,7 @@ class UpdateGroupAccessStrategyTest extends \PHPUnit_Framework_TestCase {
     }
     /**
      * househub\access\strategies\groups\UpdateGroupAccessStrategy::requestAccess
-     * @cookie
+     * @group cookie
      */
     public function testRequestAccessGroup() {
         $this->loginHelper->doLogin();
@@ -75,7 +76,7 @@ class UpdateGroupAccessStrategyTest extends \PHPUnit_Framework_TestCase {
     
     /**
      * househub\access\strategies\groups\UpdateGroupAccessStrategy::requestAccess
-     * @cookie
+     * @group cookie
      */
     public function testRequestAccess() {
         $homeGroup = GroupMakerHelper::insertNewHomeGroup($this->pdo);
