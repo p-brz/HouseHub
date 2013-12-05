@@ -14,7 +14,7 @@ class ListObjectsAccessStrategy extends AbstractAccessStrategy {
 
     private $dbDriver;
     
-    public function _construct($driver = null){
+    public function __construct($driver = null){
         $this->dbDriver = (!is_null($driver)? $driver : DatabaseConnector::getDriver());
     }
     
