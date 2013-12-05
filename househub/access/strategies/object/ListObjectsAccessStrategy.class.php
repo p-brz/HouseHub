@@ -1,54 +1,57 @@
 <?php
+
 namespace househub\access\strategies\object;
 
+use househub\access\DatabaseConnector;
+use househub\access\strategies\AbstractAccessStrategy;
 use househub\json\JsonArray;
-
-use househub\json\JsonObject;
-
-use househub\objects\home\HomeObjectManager;
-
 use househub\objects\home\HomeObjectJsonParser;
-
+use househub\objects\home\HomeObjectManager;
 use househub\users\rights\UserViews;
-
 use househub\users\session\SessionManager;
 
-use househub\access\DatabaseConnector;
+class ListObjectsAccessStrategy extends AbstractAccessStrategy {
 
-use househub\access\strategies\AbstractAccessStrategy;
+    private $dbDriver;
+    
+    public function _construct($driver = null){
+        $this->dbDriver = (!is_null($driver)? $driver : DatabaseConnector::getDriver());
+    }
+    
+    public function requestAccess($parameters) {
+        $answer = $this->initializeAnswer();
+        $driver = DatabaseConnector::getDriver();
 
-class ListObjectsAccessStrategy extends AbstractAccessStrategy{
-	
-	public function requestAccess($parameters){
-		$answer = $this->initializeAnswer();
-		$driver = DatabaseConnector::getDriver();
-		
-		$sessMan = SessionManager::getInstance();
-		$userId = $sessMan->getSessionVariable('user_id');
-		if(is_null($userId)){
-                    $answer->setMessage('@user_needs_login');
-		}else{
-                    $json = new JsonArray();
-                    $permissions = new UserViews($userId, $driver);
-                    $objects = $permissions->getRights();
+        $sessMan = SessionManager::getInstance();
+        $userId = $sessMan->getSessionVariable('user_id');
+        if (is_null($userId)) {
+            $answer->setMessage('@user_needs_login');
+        } else {
+            $this->listObjects($userId, $answer, $driver);
+        }
 
-                    $parser = new HomeObjectJsonParser();
-                    $manager = new HomeObjectManager();
-                    foreach($objects as $object){
-                            $homeObject = $manager->loadObject($object, $userId, $driver);
-                            $jsonObject = $parser->parse($homeObject);
+        return $answer;
+    }
 
-                            $json->addElement($jsonObject);
-                    }
+    protected  function listObjects($userId, $answer, $driver){
+        $json = new JsonArray();
+        $permissions = new UserViews($userId, $driver);
+        $objects = $permissions->getRights();
 
-                    $answer->setStatus(1);
-                    $answer->setMessage('@success');
-                    $answer->setContent($json);
-		}
-		
-		return $answer;
-	}
-	
+        $parser = new HomeObjectJsonParser();
+        $manager = new HomeObjectManager();
+        foreach ($objects as $object) {
+            $homeObject = $manager->loadObject($object, $userId, $driver);
+            $jsonObject = $parser->parse($homeObject);
+
+            $json->addElement($jsonObject);
+        }
+
+        $answer->setStatus(1);
+        $answer->setMessage('@success');
+        $answer->setContent($json);
+    }
+    
 }
 
 ?>
