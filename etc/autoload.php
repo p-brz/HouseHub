@@ -1,7 +1,7 @@
 <?php
 
 function file_autoload($className) {
-    while (!file_exists(getcwd() . "/.htroot")) {
+    while (!file_exists(getcwd() . DIRECTORY_SEPARATOR . ".htroot")) {
         chdir('..');
     }
 
