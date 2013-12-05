@@ -8,6 +8,7 @@ namespace househub\access\strategies\object;
 use househub\access\DatabaseConnector;
 use househub\objects\home\HomeObject;
 use househub\objects\home\HomeObjectManager;
+use househub\objects\ObjectStructure;
 use PDO;
 use tests\househub\access\strategies\LoginHelper;
 
@@ -41,6 +42,7 @@ class GatherObjectAccessStrategyTest extends \PHPUnit_Framework_TestCase {
 
     /**
      *  househub\access\strategies\object\GatherObjectAccessStrategy::requestAccess
+     * @group cookie
      */
     public function testRequestAccess() {
         $this->loginHelper->doLogin();
@@ -48,11 +50,8 @@ class GatherObjectAccessStrategyTest extends \PHPUnit_Framework_TestCase {
         $answer = $this->object->requestAccess(
                 array(GatherObjectAccessStrategy::OBJECT_ARG => $homeObject->getId())
         );
-        var_dump($answer);
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
+        
+        $this->assertEquals(1, $answer->getStatus());
     }
 
     public function insertNewObject(){
@@ -64,7 +63,20 @@ class GatherObjectAccessStrategyTest extends \PHPUnit_Framework_TestCase {
     
     public function makeObject(){
         $homeObj = new HomeObject();
-        
+        $homeObj->setStructure($this->makeStructure());
         return $homeObj;
+    }
+    
+    /**
+     * @return ObjectStructure
+     */
+    private function makeStructure(){
+        $structure = new ObjectStructure();
+        $structure->setAddress("http://192.168.0.100");
+        $structure->setSchemeName("basicDoor");
+        $structure->setConnected(false);
+        $structure->setType("door");
+        
+        return $structure;
     }
 }

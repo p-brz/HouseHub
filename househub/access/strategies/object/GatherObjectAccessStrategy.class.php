@@ -38,6 +38,7 @@ class GatherObjectAccessStrategy extends AbstractAccessStrategy {
 
         if($this->checkParameters($parameters, $answer)){
             $userId = $this->getUserId();
+            
             if($this->checkPermission($parameters,$userId,$answer)){
                 $this->gatherObject($parameters, $userId, $answer);
             }
@@ -61,7 +62,6 @@ class GatherObjectAccessStrategy extends AbstractAccessStrategy {
         return $userId;
     }
     protected function checkPermission($parameters, $userId, $answer){
-        
         if (is_null($userId)) {
             $answer->setMessage('@user_needs_login');
             return false;
@@ -70,8 +70,8 @@ class GatherObjectAccessStrategy extends AbstractAccessStrategy {
             $permission = new UserViews($userId, $this->dbDriver);
             if (!$permission->verifyRights($parameters[self::OBJECT_ARG])) {
                 $answer->setMessage('@forbidden');
+                return false;
             } 
-            return false;
         }
         return true;
     }
