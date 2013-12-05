@@ -2,6 +2,7 @@
 namespace househub\objects\home;
 
 use househub\objects\dao\ObjectStructureDAO;
+use househub\objects\dao\ObjectVisualIconpackDAO;
 use househub\objects\dao\ObjectVisualNameDAO;
 use househub\objects\home\HomeObject;
 use househub\objects\ObjectStructure;
@@ -9,7 +10,6 @@ use househub\objects\tables\ObjectStructureTable;
 use househub\objects\tables\ObjectVisualNameTable;
 use househub\readers\SystemReader;
 use househub\scheme\SchemeJsonFileReader;
-use househub\scheme\SchemeLoader;
 use househub\services\builders\ServiceStructureBuilder;
 use househub\services\dao\ServiceStructureDAO;
 use househub\services\tables\ServiceStructureTable;
@@ -29,7 +29,9 @@ class HomeObjectManager{
 
             $object->setStructure($this->loadStructure($identifier, $driver));
             $object->setVisualName($this->loadVisualName($identifier, $userId, $driver));
-            $object->setVisualIconpack($this->loadVisualIconpack($identifier, $userId, $driver));
+            if(!is_null($object->getVisualIconpack())){
+                $object->setVisualIconpack($this->loadVisualIconpack($identifier, $userId, $driver));
+            }
             $object->setServices($this->loadServices($identifier, $driver));
             $object->setStatus($this->loadStatus($identifier, $driver));
             $object->setSubObjects($this->loadSubObjects($identifier, $userId, $driver));
@@ -206,7 +208,7 @@ class HomeObjectManager{
             //TODO
         }
         
-        if(!$saveThisOnly){
+        if(!$saveThisOnly && !is_null($homeObject->getSubObjects())){
             $savedSubobjects =
                 $this->saveSubobjects($savedStructure->getId(), $homeObject->getSubObjects(), $driver);
         
@@ -266,9 +268,6 @@ class HomeObjectManager{
     }
     
     public function saveSubobjects($objectId, $subObjects, $driver){
-//        $objectId = $homeObject->getStructure()->getId();
-        
-//        $subObjects = $homeObject->getSubObjects();
         foreach($subObjects as $key=>$subObject){
                 $subObject->getStructure()->setParentId($objectId);
                 $subObject->getStructure()->setParentIndex($key);
