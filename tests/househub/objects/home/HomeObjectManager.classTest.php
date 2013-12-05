@@ -35,12 +35,12 @@ class HomeObjectManagerTest extends \PHPUnit_Framework_TestCase {
         $this->pdo = DatabaseConnector::getDriver();
         $this->pdo->beginTransaction();
 
-//        while (!file_exists(getcwd() . DIRECTORY_SEPARATOR . ".htroot")) {
-//            chdir('..');
-//        }
-//
-//        $statement = file_get_contents(getcwd() . DIRECTORY_SEPARATOR . 'files' . DIRECTORY_SEPARATOR . 'test' . DIRECTORY_SEPARATOR . 'househubtest.sql');
-//        $this->pdo->query($statement);
+        while (!file_exists(getcwd() . DIRECTORY_SEPARATOR . ".htroot")) {
+            chdir('..');
+        }
+
+        $statement = file_get_contents(getcwd() . DIRECTORY_SEPARATOR . 'files' . DIRECTORY_SEPARATOR . 'test' . DIRECTORY_SEPARATOR . 'househubtest.sql');
+        $this->pdo->query($statement);
     }
 
     protected function tearDown() {
@@ -79,7 +79,15 @@ class HomeObjectManagerTest extends \PHPUnit_Framework_TestCase {
     }
 
     public function testLoadObjectB() {
+        while (!file_exists(getcwd() . DIRECTORY_SEPARATOR . ".htroot")) {
+            chdir('..');
+        }
+
+        $statement = file_get_contents(getcwd() . DIRECTORY_SEPARATOR . 'files' . DIRECTORY_SEPARATOR . 'test' . DIRECTORY_SEPARATOR . 'househubtest.sql');
+        
+        $this->pdo->query($statement);
         $object = $this->object->loadObject(2, 0, $this->pdo);
+        
         $this->assertTrue($object->getStructure() instanceof ObjectStructure);
         $this->assertTrue($object->getScheme() instanceof \househub\scheme\Scheme);
 
@@ -182,13 +190,18 @@ class HomeObjectManagerTest extends \PHPUnit_Framework_TestCase {
      * @depends testSaveServices
      */
     public function testLoadServices($data) {
-        $objId = $data[0];
-        $expectedServices = $data[1];
+        while (!file_exists(getcwd() . DIRECTORY_SEPARATOR . ".htroot")) {
+            chdir('..');
+        }
 
-        $this->object->saveServices($objId, $expectedServices, $this->pdo);
-        $loadedServices = $this->object->loadServices($objId, $this->pdo);
+        $statement = file_get_contents(getcwd() . DIRECTORY_SEPARATOR . 'files' . DIRECTORY_SEPARATOR . 'test' . DIRECTORY_SEPARATOR . 'househubtest.sql');
+        $this->pdo->query($statement);
+       
+        $loadedServices = $this->object->loadServices(2, $this->pdo);
+        foreach($loadedServices as $loadedService){
+            $this->assertTrue($loadedService instanceof ServiceStructure);
+        }
 
-        $this->assertEquals($expectedServices, $loadedServices);
     }
 
     /**
@@ -220,13 +233,17 @@ class HomeObjectManagerTest extends \PHPUnit_Framework_TestCase {
      * @depends testSaveStatus
      */
     public function testLoadStatus($data) {
-        $objId = $data[0];
-        $expectedStatus = $data[1];
+        while (!file_exists(getcwd() . DIRECTORY_SEPARATOR . ".htroot")) {
+            chdir('..');
+        }
 
-        $savedStatus = $this->object->saveStatus($objId, $expectedStatus, $this->pdo);
-        $loadedStatus = $this->object->loadStatus($objId, $this->pdo);
-
-        $this->assertEquals($savedStatus, $loadedStatus);
+        $statement = file_get_contents(getcwd() . DIRECTORY_SEPARATOR . 'files' . DIRECTORY_SEPARATOR . 'test' . DIRECTORY_SEPARATOR . 'househubtest.sql');
+        $this->pdo->query($statement);
+        
+        $loadedStatuses = $this->object->loadStatus(2, $this->pdo);
+        foreach($loadedStatuses as $loadedStatus){
+            $this->assertTrue($loadedStatus instanceof StatusStructure);
+        }
     }
 
     protected function makeStatus() {
@@ -252,10 +269,17 @@ class HomeObjectManagerTest extends \PHPUnit_Framework_TestCase {
      * @todo   Implement testLoadSubObjects().
      */
     public function testLoadSubObjects() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
+        while (!file_exists(getcwd() . DIRECTORY_SEPARATOR . ".htroot")) {
+            chdir('..');
+        }
+
+        $statement = file_get_contents(getcwd() . DIRECTORY_SEPARATOR . 'files' . DIRECTORY_SEPARATOR . 'test' . DIRECTORY_SEPARATOR . 'househubtest.sql');
+        $this->pdo->query($statement);
+        
+        $subObjs = $this->object->loadSubObjects(2, 0, $this->pdo);
+        foreach($subObjs as $subObj){
+            $this->assertTrue($subObj instanceof HomeObject);
+        }
     }
 
     /**
