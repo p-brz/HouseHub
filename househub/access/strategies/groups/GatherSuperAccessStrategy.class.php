@@ -9,7 +9,11 @@ namespace househub\access\strategies\groups;
 
 use PDO;
 
-class GatherSuperAccessStrategy extends AbstractAccessStrategy{
+/**
+ * @todo Classe ainda não implementada completamente
+ * @codeCoverageIgnore
+ */
+class GatherSuperAccessStrategy extends \househub\access\strategies\AbstractAccessStrategy{
     public function requestAccess($parameters){
         $answer = $this->initializeAnswer();
         $driver = DatabaseConnector::getDriver();
@@ -24,26 +28,26 @@ class GatherSuperAccessStrategy extends AbstractAccessStrategy{
 
             // Para o grupo home
             if(isset($parameters['home'])){
-                $this->gatherHomeCategory($answer);
+                $this->gatherHomeCategory($userId,$answer, $driver);
             }
 
             // Para o grupo de appliances
             if(isset($parameters['appliances'])){
-                $this->gatherAppliancesCategory($answer);
+                $this->gatherAppliancesCategory($userId, $answer, $driver);
             }
 
             // Para o grupo others
             if(isset($parameters['others'])){
-                $this->gatherOtherCategory($answer);
+                $this->gatherOtherCategory($userId,$answer, $driver);
             }
 
             // Para os objetos pendentes de validação
             if(isset($parameters['blocked'])){
-                $this->gatherBlockedObjects($answer);
+                $this->gatherBlockedObjects($userId,$answer, $driver);
             }
 
             if(isset($parameters['validated'])){
-               $this->gatherValidatedObjects($answer);
+               $this->gatherValidatedObjects($userId,$answer, $driver);
             }
 
         }
@@ -52,7 +56,7 @@ class GatherSuperAccessStrategy extends AbstractAccessStrategy{
 
     }
 
-    protected function gatherHomeCategory(&$answer){
+    protected function gatherHomeCategory($userId,&$answer, $driver){
         $home = new JsonArray('home');
         $homeQuery = new SelectQuery();
         $homeQuery->addColumn('id');
@@ -82,12 +86,12 @@ class GatherSuperAccessStrategy extends AbstractAccessStrategy{
         }
     }
 
-    protected function gatherAppliancesCategory(&$answer){
+    protected function gatherAppliancesCategory($userId,&$answer, $driver){
         $appliances = new JsonArray('appliances');
         //TODO: 
     }
 
-    protected function gatherOtherCategory(&$answer){
+    protected function gatherOtherCategory($userId,&$answer, $driver){
         $others = new JsonArray('others');
 
         $othersQuery = new SelectQuery();
@@ -119,7 +123,7 @@ class GatherSuperAccessStrategy extends AbstractAccessStrategy{
         }
     }
 
-    protected function gatherBlockedObjects(&$answer){
+    protected function gatherBlockedObjects($userId,&$answer, $driver){
         if($userId != 0){
             $answer->setMessage('@forbidden');
 
@@ -152,7 +156,7 @@ class GatherSuperAccessStrategy extends AbstractAccessStrategy{
         }
     }
 
-    protected function gatherValidatedObjects(&$answer){
+    protected function gatherValidatedObjects($userId,&$answer, $driver){
         $jsonValidated = new JsonArray('validated');
         $objectArray = array();
         $loader = new ObjectLoader();

@@ -6,6 +6,7 @@ $d = DIRECTORY_SEPARATOR;
 require_once (__DIR__ . $d . "..".$d . "ObjectMakerHelper.class.php");
 
 use househub\access\DatabaseConnector;
+use househub\groups\home\HomeGroup;
 use PDO;
 use tests\househub\access\strategies\LoginHelper;
 use tests\househub\access\strategies\ObjectMakerHelper;
@@ -40,6 +41,7 @@ class AddGroupAccessStrategyTest extends \PHPUnit_Framework_TestCase {
 
     /**
      * househub\access\strategies\groups\AddGroupAccessStrategy::requestAccess
+     * @group cookie
      */
     public function testRequestAccess() {
         $objects = ObjectMakerHelper::makeManyObjects();
@@ -57,6 +59,34 @@ class AddGroupAccessStrategyTest extends \PHPUnit_Framework_TestCase {
         
         $answer = $this->object->requestAccess($parameters);
         $this->assertEquals(1, $answer->getStatus());
+    }
+    /**
+     * househub\access\strategies\groups\AddGroupAccessStrategy::requestAccess
+     * @group cookie
+     */
+    public function testRequestAccessBadParameters() {
+        $this->loginHelper->doLogin();
+        $parameters = array(    
+        );
+        
+        $answer = $this->object->requestAccess($parameters);
+        $this->assertEquals(0, $answer->getStatus());
+        $this->assertEquals('@add_category_bad_parameters', $answer->getMessage());
+    }
+    /**
+     * househub\access\strategies\groups\AddGroupAccessStrategy::requestAccess
+     * @group cookie
+     */
+    public function testRequestAccessIncorrectParameters() {
+        $this->loginHelper->doLogin();
+        $parameters = array(    
+            AddGroupAccessStrategy::GROUP_NAME_ARG => "grupoName" ,
+            AddGroupAccessStrategy::OBJECTS_ARG => new HomeGroup()
+        );
+        
+        $answer = $this->object->requestAccess($parameters);
+        $this->assertEquals(0, $answer->getStatus());
+        $this->assertEquals('@add_category_not_collection', $answer->getMessage());
     }
 
 }
