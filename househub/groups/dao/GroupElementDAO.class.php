@@ -2,22 +2,15 @@
 
 namespace househub\groups\dao;
 
-use lightninghowl\utils\sql\SelectQuery;
-
-use lightninghowl\utils\sql\InsertQuery;
-
-use lightninghowl\utils\sql\SqlFilter;
-
-use househub\groups\tables\GroupElementsTable;
-
-use lightninghowl\utils\sql\DeleteQuery;
-
 use househub\groups\builders\GroupElementBuilder;
-
-use lightninghowl\utils\sql\SqlCriteria;
-
 use househub\groups\GroupElement;
-
+use househub\groups\tables\GroupElementsTable;
+use lightninghowl\utils\sql\DeleteQuery;
+use lightninghowl\utils\sql\InsertQuery;
+use lightninghowl\utils\sql\SelectQuery;
+use lightninghowl\utils\sql\SqlCriteria;
+use lightninghowl\utils\sql\SqlFilter;
+use lightninghowl\utils\sql\UpdateQuery;
 use PDO;
 
 class GroupElementDAO{
@@ -54,6 +47,21 @@ class GroupElementDAO{
 		$insert->setRowData(GroupElementsTable::COLUMN_ELEMENT_ID, $element->getObjectId());
 		
 		$this->driver->exec($insert->getInstruction());
+		return $this->driver->lastInsertId();
+	}
+	public function update(GroupElement $element){
+		$update = new UpdateQuery();
+                
+		$update->setEntity(GroupElementsTable::TABLE_NAME);
+		
+		$update->setRowData(GroupElementsTable::COLUMN_GROUP_ID, $element->getGroupId());
+		$update->setRowData(GroupElementsTable::COLUMN_ELEMENT_ID, $element->getObjectId());
+		
+                $criteria = new SqlCriteria();
+		$criteria->add(new SqlFilter(GroupElementsTable::COLUMN_ID, '=', $element->getId()));
+		$update->setCriteria($criteria);
+                
+		$this->driver->exec($update->getInstruction());
 		return $this->driver->lastInsertId();
 	}
 	

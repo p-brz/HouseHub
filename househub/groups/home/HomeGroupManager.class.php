@@ -87,7 +87,7 @@ class HomeGroupManager {
         $savedStructure = $this->saveGroupStructure($homeGroup->getStructure(), $driver);
         $homeGroup->setStructure($savedStructure);
         
-        $groupId = $savedStructure;
+        $groupId = $savedStructure->getId();
         
         if(!is_null($homeGroup->getVisual())){
             $savedVisual = $this->saveGroupVisual($groupId,$homeGroup->getVisual(),$driver);
@@ -105,7 +105,7 @@ class HomeGroupManager {
         return $homeGroup;
     }
     
-    protected function saveGroupStructure($structure, $driver){
+    public function saveGroupStructure($structure, $driver){
         $groupDAO = new GroupStructureDAO($driver);
         
         if($groupDAO->update($structure) <= 0){
@@ -119,7 +119,7 @@ class HomeGroupManager {
         return $structure;
     }
 
-    protected function saveGroupVisual($groupId,$groupVisual, $driver){
+    public function saveGroupVisual($groupId,$groupVisual, $driver){
         $groupVisualDAO = new GroupVisualDAO($driver);
         $groupVisual->setGroupId($groupId);
         if($groupVisualDAO->update($groupVisual) <= 0){
@@ -133,7 +133,7 @@ class HomeGroupManager {
         return $groupVisual;
     }
     
-    protected function saveGroupElements($groupId, $userId, $groupElements, $driver){
+    public function saveGroupElements($groupId, $userId, $groupElements, $driver){
         $permissions = new UserViews($userId, $driver);
         $elementDAO = new GroupElementDAO($driver);
         
@@ -150,9 +150,15 @@ class HomeGroupManager {
         return $groupElements;
     }
 
-    private function saveElement($element, $elementDAO) {
+    public function saveElement($element, $driver) {
+        if(($driver instanceof PDO)){
+            $elementDAO = new GroupElementDAO($driver);
+        }
+        else if(($driver instanceof GroupElementDAO)){
+            $elementDAO = $driver;
+        }
         if($elementDAO->update($element) <= 0){
-            $insertedId = $elementDAO->insert($groupVisual);
+            $insertedId = $elementDAO->insert($element);
             if(!is_numeric($insertedId) || $insertedId <= 0){
                 return null;
             }

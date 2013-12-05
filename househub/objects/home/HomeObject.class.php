@@ -20,6 +20,9 @@ class HomeObject{
     public function getId(){
         return (!is_null($this->structure) ? $this->structure->getId() : null);
     }
+    /**
+     * @return ObjectStructure
+     */
     public function getStructure() { return $this->structure; } 
     public function getVisualName() { return $this->visualName; } 
     public function getVisualIconpack() { return $this->visualIconpack; } 

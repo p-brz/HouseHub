@@ -6,12 +6,10 @@ namespace househub\access\strategies\groups;
 
 use househub\access\DatabaseConnector;
 use househub\access\strategies\AbstractAccessStrategy;
-use househub\groups\dao\GroupElementDAO;
-use househub\groups\dao\GroupStructureDAO;
-use househub\groups\dao\GroupVisualDAO;
 use househub\groups\GroupElement;
 use househub\groups\GroupStructure;
 use househub\groups\GroupVisual;
+use househub\groups\home\HomeGroupManager;
 use househub\users\rights\UserViews;
 use househub\users\session\SessionManager;
 
@@ -42,29 +40,30 @@ class AddGroupAccessStrategy extends AbstractAccessStrategy {
         return $answer;
     }
 
-    protected function addGroup($parameters, $userId, $answer) {
-        $driver = $this->dbDriver;
+    protected function addGroup($parameters, $userId, $answer) {                
+        $structure = $this->saveGroupStructure($userId, $this->dbDriver);
+        $groupId = $structure->getId();
+        $this->saveGroupVisual($parameters, $userId, $groupId, $this->dbDriver);
+        $this->saveGroupElements($parameters, $userId, $groupId, $this->dbDriver);
         
-        $groupId = $this->saveGroupStructure($userId, $driver);
-        $this->saveGroupVisual($parameters, $userId, $groupId, $driver);
-        $this->saveGroupElements($parameters, $userId, $groupId, $driver);
-
+        
         $answer->setStatus(1);
         $answer->setMessage('@success');
     }
     
     protected function  saveGroupStructure($userId, $driver){
-        $groupDAO = new GroupStructureDAO($driver);
-        $group = new GroupStructure();
-        $group->setUserId($userId);
-        $groupId = $groupDAO->insert($group);
+        $manager = new HomeGroupManager();
+        $structure = new GroupStructure();
+        $structure->setUserId($userId);
+        $structure = $manager->saveGroupStructure($structure, $driver);
         
-        return $groupId;
+        return $structure;
     }
 
 
     protected function saveGroupVisual($parameters, $userId, $groupId, $driver){
-        $groupVisualDAO = new GroupVisualDAO($driver);
+        $manager = new HomeGroupManager();
+//        $groupVisualDAO = new GroupVisualDAO($driver);
         $groupVisual = new GroupVisual();
         $groupVisual->setUserId($userId);
         $groupVisual->setGroupId($groupId);
@@ -74,31 +73,27 @@ class AddGroupAccessStrategy extends AbstractAccessStrategy {
 
         $groupImage = isset($parameters['group_image']) ? $parameters['group_image'] : 0;
         $groupVisual->setGroupImageId($groupImage);
-        $groupVisualDAO->insert($groupVisual);
+//        $groupVisualDAO->insert($groupVisual);
+        $manager->saveGroupVisual($groupId, $groupVisual, $driver);
     }
     
     protected function saveGroupElements($parameters, $userId, $groupId, $driver){
+        $manager = new HomeGroupManager();
+        
         $permissions = new UserViews($userId, $driver);
-        $elementDAO = new GroupElementDAO($driver);
+//        $elementDAO = new GroupElementDAO($driver);
         foreach ($parameters[self::OBJECTS_ARG] as $objectId) {
             if ($permissions->verifyRights($objectId)) {
                 $element = new GroupElement();
                 $element->setGroupId($groupId);
                 $element->setObjectId($objectId);
 
-                $elementDAO->insert($element);
+//                $elementDAO->insert($element);
+                $manager->saveElement($element, $this->dbDriver);
             }
         }
     }
 
-//	private function querifyObject($groupId, $objectId){
-//		$insertQuery = new InsertQuery();
-//		$insertQuery->setEntity('groups_elements');
-//		$insertQuery->setRowData('group_id', intval($groupId));
-//		$insertQuery->setRowData('object_id', intval($objectId));
-//		
-//		return $insertQuery;
-//	}
 }
 
 ?>
