@@ -10,8 +10,9 @@ $d = DIRECTORY_SEPARATOR;
 require_once getcwd() . $d . 'tests' . $d .'househub' . $d .'access' . $d .'strategies' 
             . $d .'ObjectMakerHelper.class.php';
 
-use househub\access\DatabaseConnector;
 use househub\services\tables\ServiceStructureTable;
+use lightninghowl\database\arguments\MySQLArgument;
+use lightninghowl\database\DbDriver;
 use lightninghowl\utils\sql\SqlCriteria;
 use PDO;
 use tests\househub\access\strategies\ObjectMakerHelper;
@@ -33,7 +34,18 @@ class ServiceStructureDAOTest extends \PHPUnit_Framework_TestCase {
     protected $services;
     
     protected function setUp() {
-        $this->pdo = DatabaseConnector::getDriver();
+//        $this->pdo = DatabaseConnector::getDriver();
+        
+        //FIXME: passar isto para classe auxiliar
+        $argument = new MySQLArgument();
+        $argument->setHost($GLOBALS["DB_HOST"] );
+        $argument->setPort($GLOBALS["DB_PORT"]);
+        $argument->setDbName($GLOBALS["DB_NAME"]);
+        $argument->setDbUser($GLOBALS["DB_USER"]);
+        $argument->setDbPass($GLOBALS["DB_PASS"]);
+
+        $this->pdo = DbDriver::open($argument);
+        
         $this->pdo->beginTransaction();
         
         $this->object = new ServiceStructureDAO($this->pdo);

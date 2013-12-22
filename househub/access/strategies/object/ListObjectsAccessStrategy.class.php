@@ -34,7 +34,7 @@ class ListObjectsAccessStrategy extends AbstractAccessStrategy {
     }
 
     protected  function listObjects($userId, $answer, $driver){
-        $json = new JsonArray();
+        $listObjectsJson = new JsonArray("content");
         $permissions = new UserViews($userId, $driver);
         $objects = $permissions->getRights();
 
@@ -44,12 +44,12 @@ class ListObjectsAccessStrategy extends AbstractAccessStrategy {
             $homeObject = $manager->loadObject($object, $userId, $driver);
             $jsonObject = $parser->parse($homeObject);
 
-            $json->addElement($jsonObject);
+            $listObjectsJson->addElement($jsonObject);
         }
 
         $answer->setStatus(1);
         $answer->setMessage('@success');
-        $answer->setContent($json);
+        $answer->setContent($listObjectsJson);
     }
     
 }

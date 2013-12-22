@@ -82,7 +82,6 @@ class JsonArrayTest extends \PHPUnit_Framework_TestCase {
 
     /**
      *  househub\json\JsonArray::valueToString
-     * @todo   Implement testValueToString().
      */
     public function testValueToStringJsonData() {
         $this->object->addElement(new JsonData("elemento1", "valor1"));
@@ -91,6 +90,19 @@ class JsonArrayTest extends \PHPUnit_Framework_TestCase {
         $expected = json_encode(array("valor1","valor2"));
                 
         $this->assertJsonStringEqualsJsonString($expected, $this->object->valueToString());
+    }
+    /**
+     *  househub\json\JsonArray::valueToString
+     */
+    public function testToString() {
+        $this->object->setName("content");
+        $this->object->addElement(new JsonData("elemento1", "valor1"));
+        $this->object->addElement(new JsonData("elemento2", "valor2"));
+        
+        $expected = json_encode(array("content" => array("valor1","valor2")));
+                echo $expected;
+                echo "{" . $this->object->toString()."}";
+        $this->assertJsonStringEqualsJsonString($expected, "{" . $this->object->toString()."}");
     }
     /**
      *  househub\json\JsonArray::valueToString

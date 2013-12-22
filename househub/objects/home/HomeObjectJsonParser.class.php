@@ -31,6 +31,27 @@ class HomeObjectJsonParser extends AbstractHomeJsonParser {
         return $this->json;
     }
 
+
+//    protected function parseObjectStructure($object, $jsonParent) {
+//        // Loading the object structure and adding it to the json
+//        $structure = $object->getStructure();
+//        $structureParser = new ObjectStructureJsonParser();
+//        $structureJson = $structureParser->parse($structure);
+//        $jsonParent->addElement($structureJson);
+//        $jsonParent->addElement(new JsonData("schemeName", $structure->getSchemeName()));
+//    }
+    protected function parseObjectStructure($object, $jsonParent) {
+        // Loading the object structure and adding it to the json
+        $structure = $object->getStructure();
+        $structureParser = new ObjectStructureJsonParser();
+        $structureJson = $structureParser->parse($structure);
+        //Add elementos da structure ao jsonParent
+        foreach($structureJson->getElements() as $element){
+            $jsonParent->addElement($element);
+        }
+        $jsonParent->addElement(new JsonData("schemeName", $structure->getSchemeName()));
+    }
+    
     protected function parseObjectVisual($object, $jsonParent) {
         // Now to the visual aspects
         $visualJson = new JsonObject("visual");
@@ -70,15 +91,6 @@ class HomeObjectJsonParser extends AbstractHomeJsonParser {
         $serviceParser = new ServiceStructureJsonParser();
         $serviceJsonArray = $this->buildJsonArray("services", $services, $serviceParser);
         $jsonParent->addElement($serviceJsonArray);
-    }
-
-    protected function parseObjectStructure($object, $jsonParent) {
-        // Loading the object structure and adding it to the json
-        $structure = $object->getStructure();
-        $structureParser = new ObjectStructureJsonParser();
-        $structureJson = $structureParser->parse($structure);
-        $jsonParent->addElement($structureJson);
-        $jsonParent->addElement(new JsonData("schemeName", $structure->getSchemeName()));
     }
 
     protected function parseCurrentCondition($object, $parentJson, $currentCondition) {

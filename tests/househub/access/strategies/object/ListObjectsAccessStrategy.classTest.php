@@ -3,6 +3,7 @@
 namespace househub\access\strategies\object;
 
 use househub\access\DatabaseConnector;
+use househub\answer\JsonAnswerParser;
 use househub\objects\home\HomeObject;
 use househub\objects\home\HomeObjectManager;
 use househub\objects\ObjectStructure;
@@ -52,6 +53,14 @@ class ListObjectsAccessStrategyTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals(1, $answer->getStatus());
         $this->assertEquals("@success", $answer->getMessage());
         $this->assertNotNull($answer->getContent());
+        
+        
+        $parser = new JsonAnswerParser();
+        $json = $parser->answerToJson($answer);
+        echo $json->toString() . "\n";
+        echo $answer->getContent()->toString() . "\n";
+        echo get_class($answer->getContent()) . "\n";
+                
     }
 
     public function insertNewObject(){

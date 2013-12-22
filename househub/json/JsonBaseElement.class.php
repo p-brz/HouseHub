@@ -19,8 +19,8 @@ abstract class JsonBaseElement extends JsonElement{
 		
 		if(!empty($this->name) && $this->name != ''){
 			$stringJson = "\"".$this->name."\"";
-            $stringJson .= " : ";
-            $stringJson .= $this->valueToString();
+                        $stringJson .= " : ";
+                        $stringJson .= $this->valueToString();
 		}
 		
 		return $stringJson;

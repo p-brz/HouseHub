@@ -2,13 +2,17 @@
 
 namespace househub\objects\home;
 
-use househub\access\DatabaseConnector;
+use househub\conditions\ObjectCondition;
 use househub\objects\dao\ObjectStructureDAO;
 use househub\objects\ObjectStructure;
+use househub\objects\ObjectVisualName;
+use househub\scheme\Scheme;
 use househub\services\dao\ServiceStructureDAO;
 use househub\services\ServiceStructure;
 use househub\status\dao\StatusStructureDAO;
 use househub\status\StatusStructure;
+use lightninghowl\database\arguments\MySQLArgument;
+use lightninghowl\database\DbDriver;
 use PDO;
 
 /**
@@ -25,22 +29,43 @@ class HomeObjectManagerTest extends \PHPUnit_Framework_TestCase {
      * @var PDO
      */
     protected $pdo;
+    
+    
+    protected static $statement;
+    
+    public static function setUpBeforeClass()
+    {
+        while (!file_exists(getcwd() . DIRECTORY_SEPARATOR . ".htroot")) {
+            chdir('..');
+        }
 
+        self::$statement = file_get_contents(getcwd() . DIRECTORY_SEPARATOR . 'files' . DIRECTORY_SEPARATOR . 'test' . DIRECTORY_SEPARATOR . 'househubtest.sql');
+        
+        
+    }
+    
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
     protected function setUp() {
         $this->object = new HomeObjectManager();
-        $this->pdo = DatabaseConnector::getDriver();
+        
+        $argument = new MySQLArgument();
+
+        $argument->setHost($GLOBALS["DB_HOST"] );
+        $argument->setPort($GLOBALS["DB_PORT"]);
+        $argument->setDbName($GLOBALS["DB_NAME"]);
+        $argument->setDbUser($GLOBALS["DB_USER"]);
+        $argument->setDbPass($GLOBALS["DB_PASS"]);
+
+        $this->pdo = DbDriver::open($argument);
+//        $this->pdo = DatabaseConnector::getDriver();
+            
         $this->pdo->beginTransaction();
-
-        while (!file_exists(getcwd() . DIRECTORY_SEPARATOR . ".htroot")) {
-            chdir('..');
-        }
-
-        $statement = file_get_contents(getcwd() . DIRECTORY_SEPARATOR . 'files' . DIRECTORY_SEPARATOR . 'test' . DIRECTORY_SEPARATOR . 'househubtest.sql');
-        $this->pdo->query($statement);
+        
+//        $this->pdo->query($statement);
+        $this->pdo->exec(self::$statement);
     }
 
     protected function tearDown() {
@@ -89,7 +114,7 @@ class HomeObjectManagerTest extends \PHPUnit_Framework_TestCase {
         $object = $this->object->loadObject(2, 0, $this->pdo);
         
         $this->assertTrue($object->getStructure() instanceof ObjectStructure);
-        $this->assertTrue($object->getScheme() instanceof \househub\scheme\Scheme);
+        $this->assertTrue($object->getScheme() instanceof Scheme);
 
         $services = $object->getServices();
         if (!empty($services)) {
@@ -115,10 +140,10 @@ class HomeObjectManagerTest extends \PHPUnit_Framework_TestCase {
         $conditions = $object->getValidConditions();
         if (!empty($conditions)) {
             foreach ($conditions as $condition) {
-                $this->assertTrue($condition instanceof \househub\conditions\ObjectCondition);
+                $this->assertTrue($condition instanceof ObjectCondition);
             }
         }
-        $this->assertTrue($object->getVisualName() instanceof \househub\objects\ObjectVisualName);
+        $this->assertTrue($object->getVisualName() instanceof ObjectVisualName);
     }
 
     /**
